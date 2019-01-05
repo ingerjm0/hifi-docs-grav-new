@@ -1,0 +1,57 @@
+/* Set fonts */
+@font-face{
+	font-family: 'Cairo';
+	src: url('../fonts/Cairo-Bold.ttf') format('truetype');
+}
+
+@font-face{
+	font-family: 'proxima-nova';
+	src: url('../fonts/proximanova-regular.otf') format('opentype');
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Cairo", Helvetica, sans-serif;
+}
+
+
+/* Hides the sub-menu item if parent not active */
+.dd-item .dd-item ul li {
+    display: none;
+}
+
+.dd-item .dd-item.active ul li,
+.dd-item.parent > ul > li {
+    display: block;
+}
+
+/* Hides the sub-sub-menu menu-item if parent not active */
+.dd-item.parent > ul > li.dd-item.active > ul > li > ul > li {
+    display: none;
+}
+
+.dd-item.parent > ul > li.dd-item.active > ul > li {
+    display: block;
+}
+
+/* Change headings in TOC to upppercase */
+#sidebar ul.topics > li > a {
+	 text-transform: uppercase;
+}
+
+/* Change color of TOC backgrounds */
+#header {
+	background: #00B4EF;
+}
+
+#sidebar {
+	background: #3A3F3E;
+}
+
+/* Search styles */
+form {
+	margin-top: 20px;
+}
+
+input {
+	color: #3A3F3E;
+}

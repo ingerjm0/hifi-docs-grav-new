@@ -1,0 +1,30 @@
+name: Hifi
+version: 1.0.0
+description: "HiFi is a Grav documentation theme for High Fidelity Documentation; Extends the learn2 theme"
+icon: book
+author:
+  name: Jenna Ingersoll
+  email: jenna@highfidelity.io
+  url: http://www.highfidelity.com
+
+form:
+  validation: loose
+  fields:
+    top_level_version:
+        type: toggle
+        label: Top Level Version
+        highlight: 1
+        default: 0
+        options:
+          1: Enabled
+          0: Disabled
+        validate:
+          type: bool
+
+    home_url:
+        type: text
+        label: Home URL
+        placeholder: http://www.highfidelity.com
+        validate:
+          type: text
+
