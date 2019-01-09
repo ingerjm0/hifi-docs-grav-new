@@ -68,8 +68,12 @@ ol, ul {
 	margin-top: -10px;
 }
 
+ol ul, ul ul, ol ol, ul ol {
+	padding-top: 5px;
+}
+
 li {
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 }
 
 /***********************************/
