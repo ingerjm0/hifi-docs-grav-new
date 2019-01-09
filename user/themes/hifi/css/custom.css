@@ -1,4 +1,7 @@
-/* Set fonts */
+/***********************************/
+/*********** Font styles ***********/
+/***********************************/
+
 @font-face{
 	font-family: 'Cairo';
 	src: url('../fonts/Cairo-Bold.ttf') format('truetype');
@@ -13,7 +16,14 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Cairo", Helvetica, sans-serif;
 }
 
+body {
+	font-size: 1.03rem;
+	line-height: 1.5;
+}
 
+/***********************************/
+/********* Sidebar styles **********/
+/***********************************/
 /* Hides the sub-menu item if parent not active */
 .dd-item .dd-item ul li {
     display: none;
@@ -47,7 +57,73 @@ h1, h2, h3, h4, h5, h6 {
 	background: #3A3F3E;
 }
 
-/* Search styles */
+#sidebar ul.topics > li.parent, #sidebar ul.topics > li.active {
+	background: #3A3F3E;
+}
+
+/***********************************/
+/********** List styles ************/
+/***********************************/
+ol, ul {
+	margin-top: -10px;
+}
+
+li {
+	padding-bottom: 3px;
+}
+
+/***********************************/
+/********** Table styles ***********/
+/***********************************/
+table {
+	border: solid #c7cccb 1px;
+	margin: auto;
+	width: 90%;
+}
+
+th {
+	background: #e2e4e4 ;
+}
+
+td {
+	border: solid #c7cccb 1px;
+}
+
+
+/***********************************/
+/******** Headings styles **********/
+/***********************************/
+h2 {
+	border-top: solid #c7cccb 1px;
+	padding-top: 10px;
+}
+
+h3 {
+	font-size: 28px;
+}
+
+h4 {
+	font-size: 20px;
+}
+
+h5 {
+	font-size: 16px;
+}
+
+/***********************************/
+/****** Breadcrumbs styles *********/
+/***********************************/
+#breadcrumbs {
+	font-size: 14px;
+}
+
+#top-bar {
+	background: none;
+}
+
+/***********************************/
+/********* Search styles ***********/
+/***********************************/
 form {
 	margin-top: 20px;
 }
@@ -55,3 +131,4 @@ form {
 input {
 	color: #3A3F3E;
 }
+
