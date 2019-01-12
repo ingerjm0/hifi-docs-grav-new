@@ -17,7 +17,6 @@
         {% do assets.addCss('theme://css/custom.css',100) %}
         {% do assets.addCss('theme://css/font-awesome.min.css',100) %}
         {% do assets.addCss('theme://css/featherlight.min.css') %}
-        {% do assets.addCss('theme://css/jquery-ui.css') %}
 
         {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
             {% do assets.addCss('theme://css/nucleus-ie9.css') %}
@@ -34,30 +33,20 @@
         {% do assets.addJs('theme://js/featherlight.min.js') %}
         {% do assets.addJs('theme://js/clipboard.min.js') %}
         {% do assets.addJs('theme://js/jquery.scrollbar.min.js') %}
-        {% do assets.addJs('theme://js/jquery-ui.js') %}
-        {% do assets.addJs('theme://js/bootstrap.js') %}
-        {% do assets.addJs('theme://js/bootstrap/collapse.js') %}
         {% do assets.addJs('theme://js/learn.js') %}
         {{ assets.js() }}
     {% endblock %}
-
-    {% block alexa_certification %}
-        {% if theme_config.alexa_certified_account and theme_config.alexa_domain %}
-        {% include 'partials/alexa_certified.html.twig' %}
-        {% endif %}
-    {% endblock %}    
 
     {% endblock %}
 </head>
 <body class="searchbox-hidden {{ page.header.body_classes }}" data-url="{{ page.route }}">
     {% block sidebar %}
     <nav id="sidebar">
-        <div id="header-wrapper">                                                       
+        <div id="header-wrapper">
             <div id="header">
-                <a id="logo" href="https://highfidelity.com/">{% include 'partials/logo.html.twig' %}</a>
-                <div class="searchbox">
-                    {% include 'partials/simplesearch_searchbox.html.twig' %}
-                    <!-- <span data-search-clear><i class="fa fa-close"></i></span> -->
+                <a id="logo" href="{{ theme_config.home_url ?: base_url_absolute }}">{% include 'partials/logo.html.twig' %}</a>
+									   
+                {% include 'partials/simplesearch_searchbox.html.twig' %}
                 </div>
             </div>
         </div>
