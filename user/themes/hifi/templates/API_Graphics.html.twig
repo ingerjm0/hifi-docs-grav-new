@@ -1,0 +1,639 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The experimental Graphics API <em>(experimental)</em> lets you query and manage certain graphics-related structures (like underlying meshes and textures) from scripting.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.canUpdateModel">canUpdateModel</a></div>
+    <div><a href="#.exportModelToOBJ">exportModelToOBJ</a></div>
+    <div><a href="#.getModel">getModel</a></div>
+    <div><a href="#.newMesh">newMesh</a></div>
+    <div><a href="#.newModel">newModel</a></div>
+    <div><a href="#.updateModel">updateModel</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.IFSData">IFSData</a></div>
+    <div><a href="#.Material">Material</a></div>
+    <div><a href="#.MaterialLayer">MaterialLayer</a></div>
+    <div><a href="#.Mesh">Mesh</a></div>
+    <div><a href="#.MeshPart">MeshPart</a></div>
+    <div><a href="#.Model">Model</a></div>
+    <div><a href="#.Topology">Topology</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".canUpdateModel"> canUpdateModel<span class="signature">(id, meshIndex<span class="signature-attributes">opt</span>, partNumber<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>meshIndex</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> -1</td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>partNumber</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> -1</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".exportModelToOBJ"> exportModelToOBJ<span class="signature">(model)</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>model</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".getModel"> getModel<span class="signature">(entityID)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a>}</span></h5>
+  <div class="description"> Returns a model reference object associated with the specified UUID (EntityID, OverlayID, or AvatarID).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type">UUID</span></td>
+        <td class="description last">The objectID of the model whose meshes are to be retrieved.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> the resulting Model object</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a></dt></dl>
+  <h5 class="name" id=".newMesh"> newMesh<span class="signature">(ifsMeshData)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/graphics#.Mesh">Graphics.Mesh</a>}</span></h5>
+  <div class="description"> Create a new Mesh / Mesh Part with the specified data buffers.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>ifsMeshData</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/graphics#.IFSData">Graphics.IFSData</a></span></td>
+        <td class="description last">Index-Faced Set (IFS) arrays used to create the new mesh.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> the resulting Mesh / Mesh Part object</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/graphics#.Mesh">Graphics.Mesh</a></dt></dl>
+  <h5 class="name" id=".newModel"> newModel<span class="signature">(meshes)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a>}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>meshes</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/graphics#.Mesh">Graphics.Mesh</a>&gt;</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a></dt></dl>
+  <h5 class="name" id=".updateModel"> updateModel<span class="signature">(id, model)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>model</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/graphics#.Model">Graphics.Model</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".IFSData">IFSData</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">mesh name (useful for debugging / debug prints).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>topology</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>indices</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;number&gt;</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">vertex indices to use for the mesh faces.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>vertices</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">vertex positions (model space)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>normals</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> []</td>
+        <td class="description last">vertex normals (normalized)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>colors</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> []</td>
+        <td class="description last">vertex colors (normalized)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>texCoords0</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec2">Vec2</a>&gt;</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> []</td>
+        <td class="description last">vertex texture coordinates (normalized)</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Material">Material</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>model</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>opacity</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>roughness</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>metallic</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scattering</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>unlit</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>emissiveMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>albedoMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>opacityMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>metallicMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>specularMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>roughnessMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>glossMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>normalMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>bumpMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>occlusionMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>lightmapMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scatteringMap</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".MaterialLayer">MaterialLayer</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>material</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/graphics#.Material">Graphics.Material</a></span></td>
+        <td class="description last">This layer&apos;s material.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>priority</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The priority of this layer. If multiple materials are applied to a mesh part, only the highest priority layer is used.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Mesh">Mesh</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>parts</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/graphics#.MeshPart">Graphics.MeshPart</a>&gt;</span></td>
+        <td class="description last">Array of submesh part references.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>attributeNames</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="description last">Vertex attribute names (color, normal, etc.)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numParts</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The number of parts contained in the mesh.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numIndices</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Total number of vertex indices in the mesh.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numVertices</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Total number of vertices in the Mesh.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numAttributes</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Number of currently defined vertex attributes.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>valid</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>strong</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>extents</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>bufferFormats</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".MeshPart">MeshPart</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>valid</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>partIndex</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The part index (within the containing Mesh).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>firstVertexIndex</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>baseVertexIndex</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>lastVertexIndex</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>topology</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/graphics#.Topology">Graphics.Topology</a></span></td>
+        <td class="description last">element interpretation (currently only &apos;triangles&apos; is supported).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>attributeNames</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="description last">Vertex attribute names (color, normal, etc.)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numIndices</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Number of vertex indices that this mesh part refers to.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numVerticesPerFace</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Number of vertices per face (eg: 3 when topology is &apos;triangles&apos;).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numFaces</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Number of faces represented by the mesh part (numIndices / numVerticesPerFace).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numVertices</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Total number of vertices in the containing Mesh.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numAttributes</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Number of currently defined vertex attributes.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>extents</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>bufferFormats</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Model">Model</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>objectID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">UUID of corresponding inworld object (if model is associated)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>numMeshes</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The number of submeshes contained in the model.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>meshes</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/graphics#.Mesh">Graphics.Mesh</a>&gt;</span></td>
+        <td class="description last">Array of submesh references.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>materialLayers</code></td>
+        <td class="type"> <span class="param-type">Object.&lt;string, Array.&lt;<a href="/api-reference/namespaces/graphics#.MaterialLayer">Graphics.MaterialLayer</a>&gt;&gt;</span></td>
+        <td class="description last">Map of materials layer lists. You can look up a material layer list by mesh part number or by material name.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>materialNames</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="description last">Array of all the material names used by the mesh parts of this model, in order (e.g. materialNames[0] is the name of the first mesh part&apos;s material).</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Topology">Topology</h5>
+  <div class="description">
+    <table>
+      <thead>
+        <tr>
+          <th>Value</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>0</code></td>
+          <td>Points.</td>
+        </tr>
+        <tr>
+          <td><code>1</code></td>
+          <td>Lines.</td>
+        </tr>
+        <tr>
+          <td><code>2</code></td>
+          <td>Line strip.</td>
+        </tr>
+        <tr>
+          <td><code>3</code></td>
+          <td>Triangles.</td>
+        </tr>
+        <tr>
+          <td><code>4</code></td>
+          <td>Triangle strip.</td>
+        </tr>
+        <tr>
+          <td><code>5</code></td>
+          <td>Quads.</td>
+        </tr>
+        <tr>
+          <td><code>6</code></td>
+          <td>Quad strip.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <dl><dt>Type: <span class="param-type">number</span></dl></dt>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

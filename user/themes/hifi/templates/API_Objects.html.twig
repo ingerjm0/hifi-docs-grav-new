@@ -1,0 +1,84 @@
+    {% extends 'partials/base_noGit.html.twig' %}
+    {% set tags = page.taxonomy.tag %}
+    {% if tags %}
+        {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+    {% else %}
+        {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+    {% endif %}
+    
+    {% block navigation %}
+        <div id="navigation">
+        {% if not progress.isFirst(page.path) %}
+            <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+        {% endif %}
+    
+        {% if not progress.isLast(page.path) %}
+            <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+        {% endif %}
+        </div>
+    {% endblock %}
+    
+    {% block content %}
+        <div id="api-specific">
+            <div id="body-inner">
+                <h1>{{ page.title }}</h1>
+                <div>
+<a href="/api-reference/objects/animationobject/">AnimationObject</a>
+</div>
+<div>
+<a href="/api-reference/objects/audioeffectoptions/">AudioEffectOptions</a>
+</div>
+<div>
+<a href="/api-reference/objects/audioinjector/">AudioInjector</a>
+</div>
+<div>
+<a href="/api-reference/objects/audiostreamstats/">AudioStreamStats</a>
+</div>
+<div>
+<a href="/api-reference/objects/interactivewindow/">InteractiveWindow</a>
+</div>
+<div>
+<a href="/api-reference/objects/mappingobject/">MappingObject</a>
+</div>
+<div>
+<a href="/api-reference/objects/meshproxy/">MeshProxy</a>
+</div>
+<div>
+<a href="/api-reference/objects/overlaywebwindow/">OverlayWebWindow</a>
+</div>
+<div>
+<a href="/api-reference/objects/overlaywindow/">OverlayWindow</a>
+</div>
+<div>
+<a href="/api-reference/objects/resourceobject/">ResourceObject</a>
+</div>
+<div>
+<a href="/api-reference/objects/routeobject/">RouteObject</a>
+</div>
+<div>
+<a href="/api-reference/objects/stage/">Stage</a>
+</div>
+<div>
+<a href="/api-reference/objects/scriptsmodel/">ScriptsModel</a>
+</div>
+<div>
+<a href="/api-reference/objects/scriptsmodelfilter/">ScriptsModelFilter</a>
+</div>
+<div>
+<a href="/api-reference/objects/soundobject/">SoundObject</a>
+</div>
+<div>
+<a href="/api-reference/objects/tabletbuttonproxy/">TabletButtonProxy</a>
+</div>
+<div>
+<a href="/api-reference/objects/tabletproxy/">TabletProxy</a>
+</div>
+<div>
+<a href="/api-reference/objects/toolbarbuttonproxy/">ToolbarButtonProxy</a>
+</div>
+<div>
+<a href="/api-reference/objects/toolbarproxy/">ToolbarProxy</a>
+</div>
+            </div>
+        </div>
+    {% endblock %}

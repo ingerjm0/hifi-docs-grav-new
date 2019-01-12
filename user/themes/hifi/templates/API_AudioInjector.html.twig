@@ -1,0 +1,244 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>Plays &#x2014; &quot;injects&quot; &#x2014; the content of an audio file. Used in the <a href="/api-reference/namespaces/audio">Audio</a> API.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getLoudness">getLoudness</a></div>
+    <div><a href="#.getOptions">getOptions</a></div>
+    <div><a href="#.isPlaying">isPlaying</a></div>
+    <div><a href="#.restart">restart</a></div>
+    <div><a href="#.setOptions">setOptions</a></div>
+    <div><a href="#.stop">stop</a></div>
+    <div><a href="#.stopInjectorImmediately">stopInjectorImmediately</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.finished">finished</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.AudioInjectorOptions">AudioInjectorOptions</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>playing</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the audio is currently playing, otherwise <code>false</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>loudness</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The loudness in the last frame of audio, range <code>0.0</code> &#x2013; <code>1.0</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>options</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a></span></td>
+          <td class="description last">Configures how the injector plays the audio.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getLoudness"> getLoudness<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Get the loudness of the most recent frame of audio played.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The loudness of the most recent frame of audio played, range <code>0.0</code> &#x2013; <code>1.0</code>.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getOptions"> getOptions<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a>}</span></h5>
+  <div class="description"> Get the current configuration of the audio injector.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> Configuration of how the injector plays the audio.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a></dt></dl>
+  <h5 class="name" id=".isPlaying"> isPlaying<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Get whether or not the audio is currently playing.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the audio is currently playing, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">See if a sound is playing.</p><pre><code>var sound = SoundCache.getSound(Script.resourcesPath() + &quot;sounds/sample.wav&quot;);
+var injector;
+var injectorOptions = {
+  position: MyAvatar.position
+};
+
+Script.setTimeout(function () { // Give the sound time to load.
+  injector = Audio.playSound(sound, injectorOptions);
+}, 1000);
+
+Script.setTimeout(function () {
+  print(&quot;Sound is playing: &quot; + injector.isPlaying());
+}, 2000);</code></pre>
+  <h5 class="name" id=".restart"> restart<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Stop current playback, if any, and start playing from the beginning.</div>
+  <h5 class="name" id=".setOptions"> setOptions<span class="signature">(options)</span><span class="type-signature"></span></h5>
+  <div class="description"> Configure how the injector plays the audio.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>options</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a></span></td>
+        <td class="description last">Configuration of how the injector plays the audio.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".stop"> stop<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Stop audio playback.</div>
+  <h5>Example</h5>
+  <p class="code-caption">Stop playing a sound before it finishes.</p><pre><code>var sound = SoundCache.getSound(Script.resourcesPath() + &quot;sounds/sample.wav&quot;);
+var injector;
+var injectorOptions = {
+  position: MyAvatar.position
+};
+
+Script.setTimeout(function () { // Give the sound time to load.
+  injector = Audio.playSound(sound, injectorOptions);
+}, 1000);
+
+Script.setTimeout(function () {
+  injector.stop();
+}, 2000);</code></pre>
+  <h5 class="name" id=".stopInjectorImmediately"> stopInjectorImmediately<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Stop audio playback. (Synonym of <a href="/api-reference/objects/audioinjector#.stop">stop</a>.)</div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".finished"> finished<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the audio has finished playing.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report when a sound has finished playing.</p><pre><code>var sound = SoundCache.getSound(Script.resourcesPath() + &quot;sounds/sample.wav&quot;);
+var injector;
+var injectorOptions = {
+  position: MyAvatar.position
+};
+
+Script.setTimeout(function () { // Give the sound time to load.
+  injector = Audio.playSound(sound, injectorOptions);
+  injector.finished.connect(function () {
+      print(&quot;Finished playing sound&quot;);
+  });
+}, 1000);</code></pre>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".AudioInjectorOptions">AudioInjectorOptions</h5>
+  <div class="description"> Configures how an audio injector plays its audio.</div>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="default"> Vec3.ZERO</td>
+        <td class="description last">The position in the domain to play the sound.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>orientation</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="default"> Quat.IDENTITY</td>
+        <td class="description last">The orientation in the domain to play the sound in.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>volume</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 1.0</td>
+        <td class="description last">Playback volume, between <code>0.0</code> and <code>1.0</code>.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>pitch</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 1.0</td>
+        <td class="description last">Alter the pitch of the sound, within +/- 2 octaves. The value is the relative sample rate to resample the sound at, range <code>0.0625</code> &#x2013; <code>16.0</code>. A value of <code>0.0625</code> lowers the pitch by 2 octaves; <code>1.0</code> is no change in pitch; <code>16.0</code> raises the pitch by 2 octaves.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>loop</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="default"> false</td>
+        <td class="description last">If <code>true</code>, the sound is played repeatedly until playback is stopped.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>secondOffset</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 0</td>
+        <td class="description last">Starts playback from a specified time (seconds) within the sound file, &#x2265; <code>0</code>.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>localOnly</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="default"> false</td>
+        <td class="description last">IF <code>true</code>, the sound is played back locally on the client rather than to others via the audio mixer.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>ignorePenumbra</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="default"> false</td>
+        <td class="description last"><strong>Deprecated:</strong> This property is deprecated and will be removed.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

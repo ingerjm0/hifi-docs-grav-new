@@ -1,0 +1,477 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.dropCountChanged">dropCountChanged</a></div>
+    <div><a href="#.framesAvailableAvgChanged">framesAvailableAvgChanged</a></div>
+    <div><a href="#.framesAvailableChanged">framesAvailableChanged</a></div>
+    <div><a href="#.framesDesiredChanged">framesDesiredChanged</a></div>
+    <div><a href="#.lastStarveDurationCountChanged">lastStarveDurationCountChanged</a></div>
+    <div><a href="#.lossCountChanged">lossCountChanged</a></div>
+    <div><a href="#.lossCountWindowChanged">lossCountWindowChanged</a></div>
+    <div><a href="#.lossRateChanged">lossRateChanged</a></div>
+    <div><a href="#.lossRateWindowChanged">lossRateWindowChanged</a></div>
+    <div><a href="#.overflowCountChanged">overflowCountChanged</a></div>
+    <div><a href="#.starveCountChanged">starveCountChanged</a></div>
+    <div><a href="#.timegapMsAvgChanged">timegapMsAvgChanged</a></div>
+    <div><a href="#.timegapMsAvgWindowChanged">timegapMsAvgWindowChanged</a></div>
+    <div><a href="#.timegapMsMaxChanged">timegapMsMaxChanged</a></div>
+    <div><a href="#.timegapMsMaxWindowChanged">timegapMsMaxWindowChanged</a></div>
+    <div><a href="#.unplayedMsMaxChanged">unplayedMsMaxChanged</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>lossRate</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>lossCount</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>lossRateWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>lossCountWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>framesDesired</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>framesAvailable</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>framesAvailableAvg</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>unplayedMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>starveCount</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>lastStarveDurationCount</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>dropCount</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>overflowCount</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>timegapMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>timegapMsAvg</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>timegapMsMaxWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>timegapMsAvgWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".dropCountChanged"> dropCountChanged<span class="signature">(dropCount)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>dropCount</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".framesAvailableAvgChanged"> framesAvailableAvgChanged<span class="signature">(framesAvailableAvg)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>framesAvailableAvg</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".framesAvailableChanged"> framesAvailableChanged<span class="signature">(framesAvailable)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>framesAvailable</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".framesDesiredChanged"> framesDesiredChanged<span class="signature">(framesDesired)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>framesDesired</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".lastStarveDurationCountChanged"> lastStarveDurationCountChanged<span class="signature">(lastStarveDurationCount)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>lastStarveDurationCount</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".lossCountChanged"> lossCountChanged<span class="signature">(lossCount)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>lossCount</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".lossCountWindowChanged"> lossCountWindowChanged<span class="signature">(lossCountWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>lossCountWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".lossRateChanged"> lossRateChanged<span class="signature">(lossRate)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>lossRate</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".lossRateWindowChanged"> lossRateWindowChanged<span class="signature">(lossRateWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>lossRateWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".overflowCountChanged"> overflowCountChanged<span class="signature">(overflowCount)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>overflowCount</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".starveCountChanged"> starveCountChanged<span class="signature">(starveCount)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>starveCount</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".timegapMsAvgChanged"> timegapMsAvgChanged<span class="signature">(timegapMsAvg)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timegapMsAvg</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".timegapMsAvgWindowChanged"> timegapMsAvgWindowChanged<span class="signature">(timegapMsAvgWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timegapMsAvgWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".timegapMsMaxChanged"> timegapMsMaxChanged<span class="signature">(timegapMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timegapMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".timegapMsMaxWindowChanged"> timegapMsMaxWindowChanged<span class="signature">(timegapMsMaxWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timegapMsMaxWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".unplayedMsMaxChanged"> unplayedMsMaxChanged<span class="signature">(unplayedMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>unplayedMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

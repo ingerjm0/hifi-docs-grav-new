@@ -1,0 +1,523 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The <code>Selection</code> API provides a means of grouping together avatars, entities, and overlays in named lists.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.addToSelectedItemsList">addToSelectedItemsList</a></div>
+    <div><a href="#.clearSelectedItemsList">clearSelectedItemsList</a></div>
+    <div><a href="#.disableListHighlight">disableListHighlight</a></div>
+    <div><a href="#.disableListToScene">disableListToScene</a></div>
+    <div><a href="#.enableListHighlight">enableListHighlight</a></div>
+    <div><a href="#.enableListToScene">enableListToScene</a></div>
+    <div><a href="#.getHighlightedListNames">getHighlightedListNames</a></div>
+    <div><a href="#.getListHighlightStyle">getListHighlightStyle</a></div>
+    <div><a href="#.getListNames">getListNames</a></div>
+    <div><a href="#.getSelectedItemsList">getSelectedItemsList</a></div>
+    <div><a href="#.printList">printList</a></div>
+    <div><a href="#.removeFromSelectedItemsList">removeFromSelectedItemsList</a></div>
+    <div><a href="#.removeListFromMap">removeListFromMap</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.selectedItemsListChanged">selectedItemsListChanged</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.HighlightStyle">HighlightStyle</a></div>
+    <div><a href="#.ItemType">ItemType</a></div>
+    <div><a href="#.SelectedItemsList">SelectedItemsList</a></div><br>
+    <h3>Example</h3>
+    <p class="code-caption">Outline an entity when it is grabbed by a controller.</p><pre><code>// Create a box and copy the following text into the entity&apos;s &quot;Script URL&quot; field.
+(function () {
+  print(&quot;Starting highlight script...............&quot;);
+  var _this = this;
+  var prevID = 0;
+  var listName = &quot;contextOverlayHighlightList&quot;;
+  var listType = &quot;entity&quot;;
+
+  _this.startNearGrab = function(entityID){
+      if (prevID !== entityID) {
+          Selection.addToSelectedItemsList(listName, listType, entityID);
+          prevID = entityID;
+      }
+  };
+
+  _this.releaseGrab = function(entityID){
+      if (prevID !== 0) {
+          Selection.removeFromSelectedItemsList(&quot;contextOverlayHighlightList&quot;, listType, prevID);
+          prevID = 0;
+      }
+  };
+
+  var cleanup = function(){
+      Entities.findEntities(MyAvatar.position, 1000).forEach(function(entity) {
+          try {
+              Selection.removeListFromMap(listName);
+          } catch (e) {
+              print(&quot;Error cleaning up.&quot;);
+          }
+      });
+  };
+
+  Script.scriptEnding.connect(cleanup);
+});</code></pre>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".addToSelectedItemsList"> addToSelectedItemsList<span class="signature">(listName, itemType, id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Add an item to a selection list.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list to add the item to.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>itemType</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/selection#.ItemType">Selection.ItemType</a></span></td>
+        <td class="description last">The type of the item being added.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The ID of the item to add to the selection.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the item was successfully added, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".clearSelectedItemsList"> clearSelectedItemsList<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Remove all items from a selection.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the item was successfully cleared, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".disableListHighlight"> disableListHighlight<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Disable highlighting for the selection list. If the selection list doesn&apos;t exist or wasn&apos;t enabled for highlighting then nothing happens and <code>false</code> is returned.<br> Note: This function implicitly calls <a href="/api-reference/namespaces/selection#.disableListToScene">Selection.disableListToScene</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the selection was successfully disabled for highlight, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".disableListToScene"> disableListToScene<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Disable scene selection for the named selection. If the selection list doesn&apos;t exist or wasn&apos;t enabled on the scene then nothing happens and <code>false</code> is returned.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> true if the selection was successfully disabled on the scene, false otherwise.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".enableListHighlight"> enableListHighlight<span class="signature">(listName, highlightStyle)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Enable highlighting for a selection list. If the selection list doesn&apos;t exist, it will be created. All objects in the list will be displayed with the highlight effect specified. The function can be called several times with different values in the style to modify it.<br> Note: This function implicitly calls <a href="/api-reference/namespaces/selection#.enableListToScene">Selection.enableListToScene</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>highlightStyle</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/selection#.HighlightStyle">Selection.HighlightStyle</a></span></td>
+        <td class="description last">The highlight style.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> true if the selection was successfully enabled for highlight.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".enableListToScene"> enableListToScene<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Enable scene selection for the selection list. If the Selection doesn&apos;t exist, it will be created. All objects in the list will be sent to a scene selection.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the selection was successfully enabled on the scene, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getHighlightedListNames"> getHighlightedListNames<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;string&gt;}</span></h5>
+  <div class="description"> Get the names of the highlighted selection lists.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> An array of names of the selection list currently highlight enabled.</div>
+  <dl><dt> Type: Array.&lt;string&gt;</dt></dl>
+  <h5 class="name" id=".getListHighlightStyle"> getListHighlightStyle<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/selection#.HighlightStyle">Selection.HighlightStyle</a>}</span></h5>
+  <div class="description"> Get the highlight style values for the a selection list. If the selection doesn&apos;t exist or hasn&apos;t been highlight enabled yet, an empty object is returned.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> highlight style</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/selection#.HighlightStyle">Selection.HighlightStyle</a></dt></dl>
+  <h5 class="name" id=".getListNames"> getListNames<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;list&gt;}</span></h5>
+  <div class="description"> Get the names of all the selection lists.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> An array of names of all the selection lists.</div>
+  <dl><dt> Type: Array.&lt;list&gt;</dt></dl>
+  <h5 class="name" id=".getSelectedItemsList"> getSelectedItemsList<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/selection#.SelectedItemsList">Selection.SelectedItemsList</a>}</span></h5>
+  <div class="description"> Get the list of avatars, entities, and overlays stored in a selection list.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The content of a selection list. If the list name doesn&apos;t exist, the function returns an empty object with no properties.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/selection#.SelectedItemsList">Selection.SelectedItemsList</a></dt></dl>
+  <h5 class="name" id=".printList"> printList<span class="signature">(listName)</span><span class="type-signature"></span></h5>
+  <div class="description"> Print out the list of avatars, entities, and overlays in a selection to the <em>debug log</em> (not the script log).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".removeFromSelectedItemsList"> removeFromSelectedItemsList<span class="signature">(listName, itemType, id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Remove an item from a selection list.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list to remove the item from.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>itemType</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/selection#.ItemType">Selection.ItemType</a></span></td>
+        <td class="description last">The type of the item being removed.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The ID of the item to remove.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the item was successfully removed, otherwise <code>false</code>.<codefalse< code=""> is returned if the list doesn&apos;t contain any data.</codefalse<>
+  </div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".removeListFromMap"> removeListFromMap<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Delete a named selection list.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the selection existed and was successfully removed, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".selectedItemsListChanged"> selectedItemsListChanged<span class="signature">(listName)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when a list&apos;s content changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>listName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the selection list that changed.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".HighlightStyle">HighlightStyle</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>outlineUnoccludedColor</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Color">Color</a></span></td>
+        <td class="description last">Color of the specified highlight region.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>outlineOccludedColor</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Color">Color</a></span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>fillUnoccludedColor-</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Color">Color</a></span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>fillOccludedColor-</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Color">Color</a></span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>outlineUnoccludedAlpha</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Alpha value ranging from <code>0.0</code> (not visible) to <code>1.0</code> (fully opaque) for the specified highlight region.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>outlineOccludedAlpha</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>fillUnoccludedAlpha</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>fillOccludedAlpha</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">&quot;&quot;</td>
+      </tr>
+      <tr>
+        <td class="name"><code>outlineWidth</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Width of the outline, in pixels.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isOutlineSmooth</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> to enable outline smooth fall-off.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".ItemType">ItemType</h5>
+  <div class="description">
+    <table>
+      <thead>
+        <tr>
+          <th>Value</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&quot;avatar&quot;</code></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>&quot;entity&quot;</code></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><code>&quot;overlay&quot;</code></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <dl><dt>Type: <span class="param-type">string</span></dl></dt>
+  <h5 class="name" id=".SelectedItemsList">SelectedItemsList</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>avatars</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+        <td class="description last">The IDs of the avatars in the selection.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>entities</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+        <td class="description last">The IDs of the entities in the selection.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>overlays</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+        <td class="description last">The IDs of the overlays in the selection.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

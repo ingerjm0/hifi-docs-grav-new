@@ -1,0 +1,836 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Vec3 API facilities for generating and manipulating 3-dimensional vectors. High Fidelity uses a right-handed Cartesian coordinate system where the y-axis is the &quot;up&quot; and the negative z-axis is the &quot;front&quot; direction. <img alt="High Fidelity coordinate system" src="https://docs.highfidelity.com/images/opengl-coord-system.jpg">
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.cross">cross</a></div>
+    <div><a href="#.distance">distance</a></div>
+    <div><a href="#.dot">dot</a></div>
+    <div><a href="#.equal">equal</a></div>
+    <div><a href="#.fromPolar">fromPolar</a></div>
+    <div><a href="#.fromPolar">fromPolar</a></div>
+    <div><a href="#.getAngle">getAngle</a></div>
+    <div><a href="#.length">length</a></div>
+    <div><a href="#.mix">mix</a></div>
+    <div><a href="#.multiply">multiply</a></div>
+    <div><a href="#.multiply">multiply</a></div>
+    <div><a href="#.multiplyQbyV">multiplyQbyV</a></div>
+    <div><a href="#.multiplyVbyV">multiplyVbyV</a></div>
+    <div><a href="#.normalize">normalize</a></div>
+    <div><a href="#.orientedAngle">orientedAngle</a></div>
+    <div><a href="#.print">print</a></div>
+    <div><a href="#.reflect">reflect</a></div>
+    <div><a href="#.subtract">subtract</a></div>
+    <div><a href="#.sum">sum</a></div>
+    <div><a href="#.toPolar">toPolar</a></div>
+    <div><a href="#.withinEpsilon">withinEpsilon</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>UNIT_X</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 1, y: 0, z: 0 }</code> : Unit vector in the x-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_Y</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 1, z: 0 }</code> : Unit vector in the y-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_Z</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 0, z: 1 }</code> : Unit vector in the z-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_NEG_X</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: -1, y: 0, z: 0 }</code> : Unit vector in the negative x-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_NEG_Y</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: -1, z: 0 }</code> : Unit vector in the negative y-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_NEG_Z</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 0, z: -1 }</code> : Unit vector in the negative z-axis direction. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_XY</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0.707107, y: 0.707107, z: 0 }</code> : Unit vector in the direction of the diagonal between the x and y axes. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_XZ</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0.707107, y: 0, z: 0.707107 }</code> : Unit vector in the direction of the diagonal between the x and z axes. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_YZ</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 0.707107, z: 0.707107 }</code> : Unit vector in the direction of the diagonal between the y and z axes. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UNIT_XYZ</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0.577350, y: 0.577350, z: 0.577350 }</code> : Unit vector in the direction of the diagonal between the x, y, and z axes. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>FLOAT_MAX</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 3.402823e+38, y: 3.402823e+38, z: 3.402823e+38 }</code> : Vector with all axis values set to the maximum floating point value. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>FLOAT_MIN</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: -3.402823e+38, y: -3.402823e+38, z: -3.402823e+38 }</code> : Vector with all axis values set to the negative of the maximum floating point value. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>ZERO</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 0, z: 0 }</code> : Vector with all axis values set to <code>0</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>ONE</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 1, y: 1, z: 1 }</code> : Vector with all axis values set to <code>1</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>TWO</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 2, y: 2, z: 2 }</code> : Vector with all axis values set to <code>2</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>HALF</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0.5, y: 0.5, z: 0.5 }</code> : Vector with all axis values set to <code>0.5</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>RIGHT</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 1, y: 0, z: 0 }</code> : Unit vector in the &quot;right&quot; direction. Synonym for <code>UNIT_X</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>UP</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 1, z: 0 }</code> : Unit vector in the &quot;up&quot; direction. Synonym for <code>UNIT_Y</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>FRONT</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last"><code>{ x: 0, y: 0, z: -1 }</code> : Unit vector in the &quot;front&quot; direction. Synonym for <code>UNIT_NEG_Z</code>. <em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".cross"> cross<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the cross product of two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The cross product of <code>v1</code> and <code>v2</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">The cross product of x and y unit vectors is the z unit vector.</p><pre><code>var v1 = { x: 1, y: 0, z: 0 };
+var v2 = { x: 0, y: 1, z: 0 };
+var crossProduct = Vec3.cross(v1, v2);
+print(JSON.stringify(crossProduct)); // {&quot;x&quot;:0,&quot;y&quot;:0,&quot;z&quot;:1}</code></pre>
+  <h5 class="name" id=".distance"> distance<span class="signature">(p1, p2)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Calculate the distance between two points.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>p1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first point.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>p2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second point.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The distance between the two points.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">The distance between two points is aways positive.</p><pre><code>var p1 = { x: 0, y: 0, z: 0 };
+var p2 = { x: 0, y: 0, z: 10 };
+var distance = Vec3.distance(p1, p2);
+print(distance); // 10
+
+p2 = { x: 0, y: 0, z: -10 };
+distance = Vec3.distance(p1, p2);
+print(distance); // 10</code></pre>
+  <h5 class="name" id=".dot"> dot<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Calculate the dot product of two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The dot product of <code>v1</code> and <code>v2</code>.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">The dot product of vectors at right angles is <code>0</code>.</p><pre><code>var v1 = { x: 1, y: 0, z: 0 };
+var v2 = { x: 0, y: 1, z: 0 };
+var dotProduct = Vec3.dot(v1, v2);
+print(dotProduct); // 0</code></pre>
+  <h5 class="name" id=".equal"> equal<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Test whether two vectors are equal. <strong>Note:</strong> The vectors must be exactly equal in order for <code>true</code> to be returned; it is often better to use <a href="/api-reference/namespaces/vec3#.withinEpsilon">withinEpsilon</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the two vectors are exactly equal, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption"> Vectors are only equal if exactly the same.</p><pre><code>var v1 = { x: 10, y: 10, z: 10 };
+var v2 = { x: 10, y: 10, z: 10 };
+var equal = Vec3.equal(v1, v2);
+print(equal);  // true
+
+v2 = { x: 10, y: 10, z: 10.0005 };
+equal = Vec3.equal(v1, v2);
+print(equal);  // false</code></pre>
+  <h5 class="name" id=".fromPolar"> fromPolar<span class="signature">(polar)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the coordinates of a point from polar coordinate transformation of the unit z-axis vector.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>polar</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The polar coordinates of a point: <code>x</code> elevation rotation about the x-axis in radians, <code>y</code> azimuth rotation about the y-axis in radians, and <code>z</code> scale.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The coordinates of the point.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Polar coordinates to Cartesian.</p><pre><code>var polar = { x: -19.471 * Math.PI / 180, y: 45 * Math.PI / 180, z: 7.5 };
+var p = Vec3.fromPolar(polar);
+print(JSON.stringify(p));  // {&quot;x&quot;:5,&quot;y&quot;:2.5,&quot;z&quot;:5}</code></pre>
+  <h5 class="name" id=".fromPolar"> fromPolar<span class="signature">(elevation, azimuth)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the unit vector corresponding to polar coordinates elevation and azimuth transformation of the unit z-axis vector.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>elevation</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Rotation about the x-axis, in radians.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>azimuth</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Rotation about the y-axis, in radians.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> Unit vector for the direction specified by <code>elevation</code> and <code>azimuth</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Polar coordinates to Cartesian.</p><pre><code>var elevation = -19.471 * Math.PI / 180;
+var rotation = 45 * Math.PI / 180;
+var p = Vec3.fromPolar(elevation, rotation);
+print(JSON.stringify(p));  // {&quot;x&quot;:0.667,&quot;y&quot;:0.333,&quot;z&quot;:0.667}
+
+p = Vec3.multiply(7.5, p);
+print(JSON.stringify(p));  // {&quot;x&quot;:5,&quot;y&quot;:2.5,&quot;z&quot;:5}</code></pre>
+  <h5 class="name" id=".getAngle"> getAngle<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Calculate the angle between two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The angle between the two vectors, in radians.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Calculate the angle between two vectors.</p><pre><code>var v1 = { x: 10, y: 0, z: 0 };
+var v2 = { x: 0, y: 0, z: 10 };
+var angle = Vec3.getAngle(v1, v2);
+print(angle * 180 / Math.PI);  // 90
+   </code></pre>
+  <h5 class="name" id=".length"> length<span class="signature">(v)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Calculate the length of a vector</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The length of the vector.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".mix"> mix<span class="signature">(v1, v2, factor)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate a linear interpolation between two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>factor</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The interpolation factor in the range <code>0.0</code> to <code>1.0</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The linear interpolation between the two vectors: <code>(1 - factor) * v1 + factor * v2</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Linear interpolation between two vectors.</p><pre><code>var v1 = { x: 10, y: 0, z: 0 };
+var v2 = { x: 0, y: 10, z: 0 };
+var interpolated = Vec3.mix(v1, v2, 0.75);  // 1/4 of v1 and 3/4 of v2.
+print(JSON.stringify(interpolated));  // {&quot;x&quot;:2.5,&quot;y&quot;:7.5&quot;,&quot;z&quot;:0}</code></pre>
+  <h5 class="name" id=".multiply"> multiply<span class="signature">(scale, v)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Multiply a vector by a scale factor.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>scale</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The scale factor.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The vector with each ordinate value multiplied by the <code>scale</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5 class="name" id=".multiply"> multiply<span class="signature">(v, scale)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Multiply a vector by a scale factor.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>scale</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The scale factor.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The vector with each ordinate value multiplied by the <code>scale</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5 class="name" id=".multiplyQbyV"> multiplyQbyV<span class="signature">(q, v)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Rotate a vector.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>q</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="description last">The rotation to apply.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector to rotate.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>v</code> rotated by <code>q</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Rotate the negative z-axis by 90 degrees about the x-axis.</p><pre><code>var v = Vec3.UNIT_NEG_Z;
+var q = Quat.fromPitchYawRollDegrees(90, 0, 0);
+var result = Vec3.multiplyQbyV(q, v);
+print(JSON.stringify(result));  // {&quot;x&quot;:0,&quot;y&quot;:1.000,&quot;z&quot;:1.19e-7}</code></pre>
+  <h5 class="name" id=".multiplyVbyV"> multiplyVbyV<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Multiply two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A vector formed by multiplying the ordinates of two vectors: <code>{ x: v1.x * v2.x, y: v1.y * v2.y, z: v1.z * v2.z }</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Multiply two vectors.</p><pre><code>var v1 = { x: 1, y: 2, z: 3 };
+var v2 = { x: 1, y: 2, z: 3 };
+var multiplied = Vec3.multiplyVbyV(v1, v2);
+print(JSON.stringify(multiplied));  // {&quot;x&quot;:1,&quot;y&quot;:4,&quot;z&quot;:9}</code></pre>
+  <h5 class="name" id=".normalize"> normalize<span class="signature">(v)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Normalize a vector so that its length is <code>1</code>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector to normalize.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The vector normalized to have a length of <code>1</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Normalize a vector.</p><pre><code>var v = { x: 10, y: 10, z: 0 };
+var normalized = Vec3.normalize(v);
+print(JSON.stringify(normalized));  // {&quot;x&quot;:0.7071,&quot;y&quot;:0.7071,&quot;z&quot;:0}
+print(Vec3.length(normalized));  // 1</code></pre>
+  <h5 class="name" id=".orientedAngle"> orientedAngle<span class="signature">(v1, v2, ref)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Calculate the angle of rotation from one vector onto another, with the sign depending on a reference vector.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>ref</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">Reference vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The angle of rotation from the first vector to the second, in degrees, with a positive sign if the rotation axis aligns with the reference vector (has a positive dot product) otherwise a negative sign.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Compare <code>Vec3.angle()</code> and <code>Vec3.orientedAngle()</code>.</p><pre><code>var v1 = { x: 5, y: 0, z: 0 };
+var v2 = { x: 5, y: 0, z: 5 };
+var angle = Vec3.getAngle(v1, v2);
+print(angle * 180 / Math.PI);  // 45
+
+print(Vec3.orientedAngle(v1, v2, Vec3.UNIT_Y));  // -45
+print(Vec3.orientedAngle(v1, v2, Vec3.UNIT_NEG_Y));  // 45
+print(Vec3.orientedAngle(v1, v2, { x: 1, y: 2, z: -1 }));  // -45
+print(Vec3.orientedAngle(v1, v2, { x: 1, y: -2, z: -1 }));  // 45</code></pre>
+  <h5 class="name" id=".print"> print<span class="signature">(label, v)</span><span class="type-signature"></span></h5>
+  <div class="description"> Print to the program log a text label followed by a vector value.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>label</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The label to print.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector value to print.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Two ways of printing a label and vector value.</p><pre><code>var v = { x: 1, y: 2, z: 3 };
+Vec3.print(&quot;Vector: &quot;, v);  // dvec3(1.000000, 2.000000, 3.000000)
+print(&quot;Vector: &quot; + JSON.stringify(v));  // {&quot;x&quot;:1,&quot;y&quot;:2,&quot;z&quot;:3}</code></pre>
+  <h5 class="name" id=".reflect"> reflect<span class="signature">(v, normal)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the reflection of a vector in a plane.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The vector to reflect.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>normal</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The normal of the plane.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The vector reflected in the plane given by the normal.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Reflect a vector in the x-z plane.</p><pre><code>var v = { x: 1, y: 2, z: 3 };
+var normal = Vec3.UNIT_Y;
+var reflected = Vec3.reflect(v, normal);
+print(JSON.stringify(reflected));  // {&quot;x&quot;:1,&quot;y&quot;:-2,&quot;z&quot;:3}</code></pre>
+  <h5 class="name" id=".subtract"> subtract<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate one vector subtracted from another.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The second vector subtracted from the first.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5 class="name" id=".sum"> sum<span class="signature">(v1, v2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the sum of two vectors.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The sum of the two vectors.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5 class="name" id=".toPolar"> toPolar<span class="signature">(p)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate polar coordinates (elevation, azimuth, radius) that transform the unit z-axis vector onto a point.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>p</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The point to calculate the polar coordinates for.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> Vector of polar coordinates for the point: <code>x</code> elevation rotation about the x-axis in radians, <code>y</code> azimuth rotation about the y-axis in radians, and <code>z</code> scale.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Polar coordinates for a point.</p><pre><code>var v = { x: 5, y: 2.5, z: 5 };
+var polar = Vec3.toPolar(v);
+print(&quot;Elevation: &quot; + polar.x * 180 / Math.PI);  // -19.471
+print(&quot;Azimuth: &quot; + polar.y * 180 / Math.PI);  // 45
+print(&quot;Radius: &quot; + polar.z);  // 7.5</code></pre>
+  <h5 class="name" id=".withinEpsilon"> withinEpsilon<span class="signature">(v1, v2, epsilon)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Test whether two vectors are equal within a tolerance. <strong>Note:</strong> It is often better to use this function than <a href="/api-reference/namespaces/vec3#.equal">equal</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>v1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The first vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>v2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The second vector.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>epsilon</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The maximum distance between the two vectors.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the distance between the points represented by the vectors is less than or equal to the <code>epsilon</code>, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Testing vectors for near equality.</p><pre><code>var v1 = { x: 10, y: 10, z: 10 };
+var v2 = { x: 10, y: 10, z: 10.0005 };
+var equal = Vec3.equal(v1, v2);
+print(equal);  // false
+
+equal = Vec3.withinEpsilon(v1, v2, 0.001);
+print(equal);  // true</code></pre>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

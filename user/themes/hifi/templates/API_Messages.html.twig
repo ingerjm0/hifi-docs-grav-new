@@ -1,0 +1,335 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+      <p>The Messages API enables text and data to be sent between scripts over named &quot;channels&quot;. A channel can have an arbitrary name to help separate messaging between different sets of scripts.</p>
+      <p><strong>Note:</strong> If you want to call a function in another script, you should use one of the following rather than sending a message:</p>
+      <ul>
+        <li><a href="/api-reference/namespaces/entities#.callEntityClientMethod">Entities.callEntityClientMethod</a></li>
+        <li><a href="/api-reference/namespaces/entities#.callEntityMethod">Entities.callEntityMethod</a></li>
+        <li><a href="/api-reference/namespaces/entities#.callEntityServerMethod">Entities.callEntityServerMethod</a></li>
+        <li><a href="/api-reference/namespaces/script#.callEntityScriptMethod">Script.callEntityScriptMethod</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.sendData">sendData</a></div>
+    <div><a href="#.sendLocalMessage">sendLocalMessage</a></div>
+    <div><a href="#.sendMessage">sendMessage</a></div>
+    <div><a href="#.subscribe">subscribe</a></div>
+    <div><a href="#.unsubscribe">unsubscribe</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.dataReceived">dataReceived</a></div>
+    <div><a href="#.messageReceived">messageReceived</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".sendData"> sendData<span class="signature">(channel, data, localOnly<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Send a data message on a channel.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The channel to send the data on.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>data</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The data to send. The data is handled as a byte stream, for example as may be provided via a JavaScript <code>Int8Array</code> object.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>localOnly</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">If <code>false</code> then the message is sent to all Interface, client entity, server entity, and assignment client scripts in the domain.<br> If <code>true</code> then: if sent from an Interface or client entity script it is received by all Interface and client entity scripts; if sent from a server entity script it is received by all entity server scripts; and if sent from an assignment client script it is received only by that same assignment client script.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Send and receive data.</p><pre><code>// Receiving script.
+var channelName = &quot;com.highfidelity.example.messages-example&quot;;
+
+function onDataReceived(channel, data, sender, localOnly) {
+  var int8data = new Int8Array(data);
+  var dataAsString = &quot;&quot;;
+  for (var i = 0; i &lt; int8data.length; i++) {
+      if (i &gt; 0) {
+          dataAsString += &quot;, &quot;;
+      }
+      dataAsString += int8data[i];
+  }
+  print(&quot;Data received:&quot;);
+  print(&quot;- channel: &quot; + channel);
+  print(&quot;- data: &quot; + dataAsString);
+  print(&quot;- sender: &quot; + sender);
+  print(&quot;- localOnly: &quot; + localOnly);
+}
+
+Messages.subscribe(channelName);
+Messages.dataReceived.connect(onDataReceived);
+
+Script.scriptEnding.connect(function () {
+  Messages.dataReceived.disconnect(onDataReceived);
+  Messages.unsubscribe(channelName);
+});
+
+
+// Sending script.
+var channelName = &quot;com.highfidelity.example.messages-example&quot;;
+var int8data = new Int8Array([1, 1, 2, 3, 5, 8, 13]);
+Messages.sendData(channelName, int8data.buffer);</code></pre>
+  <h5 class="name" id=".sendLocalMessage"> sendLocalMessage<span class="signature">(channel, message)</span><span class="type-signature"></span></h5>
+  <div class="description"> Send a text message locally on a channel. This is the same as calling <a href="/api-reference/namespaces/messages#.sendMessage">sendMessage</a> with <code>localOnly</code> set to <code>true</code>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The channel to send the message on.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The message to send.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".sendMessage"> sendMessage<span class="signature">(channel, message, localOnly<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Send a text message on a channel.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The channel to send the message on.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The message to send.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>localOnly</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">If <code>false</code> then the message is sent to all Interface, client entity, server entity, and assignment client scripts in the domain.<br> If <code>true</code> then: if sent from an Interface or client entity script it is received by all Interface and client entity scripts; if sent from a server entity script it is received by all entity server scripts; and if sent from an assignment client script it is received only by that same assignment client script.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Send and receive a message.</p><pre><code>// Receiving script.
+var channelName = &quot;com.highfidelity.example.messages-example&quot;;
+
+function onMessageReceived(channel, message, sender, localOnly) {
+  print(&quot;Message received:&quot;);
+  print(&quot;- channel: &quot; + channel);
+  print(&quot;- message: &quot; + message);
+  print(&quot;- sender: &quot; + sender);
+  print(&quot;- localOnly: &quot; + localOnly);
+}
+
+Messages.subscribe(channelName);
+Messages.messageReceived.connect(onMessageReceived);
+
+Script.scriptEnding.connect(function () {
+  Messages.messageReceived.disconnect(onMessageReceived);
+  Messages.unsubscribe(channelName);
+});
+
+
+// Sending script.
+var channelName = &quot;com.highfidelity.example.messages-example&quot;;
+var message = &quot;Hello&quot;;
+Messages.sendMessage(channelName, message);</code></pre>
+  <h5 class="name" id=".subscribe"> subscribe<span class="signature">(channel)</span><span class="type-signature"></span></h5>
+  <div class="description"> Subscribe the scripting environment &#x2014; Interface, the entity script server, or assignment client instance &#x2014; to receive messages on a specific channel. Note that, for example, if there are two Interface scripts that subscribe to different channels, both scripts will receive messages on both channels.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The channel to subscribe to.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".unsubscribe"> unsubscribe<span class="signature">(channel)</span><span class="type-signature"></span></h5>
+  <div class="description"> Unsubscribe the scripting environment from receiving messages on a specific channel.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The channel to unsubscribe from.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".dataReceived"> dataReceived<span class="signature">(channel, data, senderID, localOnly)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when a data message is received.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The channel that the message was sent on. You can use this to filter out messages not relevant to your script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>data</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last">The data received. The data is handled as a byte stream, for example as may be used by a JavaScript <code>Int8Array</code> object.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>senderID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The UUID of the sender: the user&apos;s session UUID if sent by an Interface or client entity script, the UUID of the entity script server if sent by a server entity script, or the UUID of the assignment client script, the UUID of the entity script server if sent by a server entity script, or the UUID of the assignment client instance if sent by an assignment client script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>localOnly</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the message was sent with <code>localOnly = true</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".messageReceived"> messageReceived<span class="signature">(channel, message, senderID, localOnly)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the a text message is received.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The channel that the message was sent on. You can use this to filter out messages not relevant to your script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The message received.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>senderID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The UUID of the sender: the user&apos;s session UUID if sent by an Interface or client entity script, the UUID of the entity script server if sent by a server entity script, or the UUID of the assignment client instance if sent by an assignment client script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>localOnly</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the message was sent with <code>localOnly = true</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

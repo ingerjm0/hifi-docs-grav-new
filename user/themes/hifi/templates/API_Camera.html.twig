@@ -1,0 +1,368 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Camera API provides access to the &quot;camera&quot; that defines your view in desktop and HMD display modes.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.computePickRay">computePickRay</a></div>
+    <div><a href="#.getCameraEntity">getCameraEntity</a></div>
+    <div><a href="#.getModeString">getModeString</a></div>
+    <div><a href="#.getOrientation">getOrientation</a></div>
+    <div><a href="#.getPosition">getPosition</a></div>
+    <div><a href="#.keepLookingAt">keepLookingAt</a></div>
+    <div><a href="#.lookAt">lookAt</a></div>
+    <div><a href="#.setCameraEntity">setCameraEntity</a></div>
+    <div><a href="#.setModeString">setModeString</a></div>
+    <div><a href="#.setOrientation">setOrientation</a></div>
+    <div><a href="#.setPosition">setPosition</a></div>
+    <div><a href="#.stopLookingAt">stopLookingAt</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.modeUpdated">modeUpdated</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.Mode">Mode</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="description last">The position of the camera. You can set this value only when the camera is in independent mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>orientation</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+          <td class="description last">The orientation of the camera. You can set this value only when the camera is in independent mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>mode</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/camera#.Mode">Camera.Mode</a></span></td>
+          <td class="description last">The camera mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>frustum</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#ViewFrustum">ViewFrustum</a></span></td>
+          <td class="description last">The camera frustum.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>cameraEntity</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="description last">The ID of the entity that is used for the camera position and orientation when the camera is in entity mode.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".computePickRay"> computePickRay<span class="signature">(x, y)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#PickRay">PickRay</a>}</span></h5>
+  <div class="description"> Compute a <a href="/api-reference/globals#PickRay">PickRay</a> based on the current camera configuration and the specified <code>x, y</code> position on the screen. The <a href="/api-reference/globals#PickRay">PickRay</a> can be used in functions such as <a href="/api-reference/namespaces/entities#.findRayIntersection">Entities.findRayIntersection</a> and <a href="/api-reference/namespaces/overlays#.findRayIntersection">Overlays.findRayIntersection</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>x</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">X-coordinate on screen.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>y</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Y-coordinate on screen.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The computed <a href="/api-reference/globals#PickRay">PickRay</a>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#PickRay">PickRay</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Use a PickRay to detect mouse clicks on entities.</p><pre><code>function onMousePressEvent(event) {
+  var pickRay = Camera.computePickRay(event.x, event.y);
+  var intersection = Entities.findRayIntersection(pickRay);
+  if (intersection.intersects) {
+      print (&quot;You clicked on entity &quot; + intersection.entityID);
+  }
+}
+
+Controller.mousePressEvent.connect(onMousePressEvent);</code></pre>
+  <h5 class="name" id=".getCameraEntity"> getCameraEntity<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/uuid">Uuid</a>}</span></h5>
+  <div class="description"> Get the ID of the entity that the camera is set to use the position and orientation from when it&apos;s in entity mode. You can also get the entity ID using the <code>Camera.cameraEntity</code> property.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The ID of the entity that the camera is set to follow when in entity mode; <code>null</code> if no camera entity has been set.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/uuid">Uuid</a></dt></dl>
+  <h5 class="name" id=".getModeString"> getModeString<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/camera#.Mode">Camera.Mode</a>}</span></h5>
+  <div class="description"> Get the current camera mode. You can also get the mode using the <code>Camera.mode</code> property.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The current camera mode.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/camera#.Mode">Camera.Mode</a></dt></dl>
+  <h5 class="name" id=".getOrientation"> getOrientation<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Quat">Quat</a>}</span></h5>
+  <div class="description"> Get the current camera orientation. You can also get the orientation using the <code>Camera.orientation</code> property.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The current camera orientation.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Quat">Quat</a></dt></dl>
+  <h5 class="name" id=".getPosition"> getPosition<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Get the current camera position. You can also get the position using the <code>Camera.position</code> property.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The current camera position.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5 class="name" id=".keepLookingAt"> keepLookingAt<span class="signature">(position)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set the camera to continue looking at the specified <code>position</code> even while the camera moves. Only works if the camera is in independent mode.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">Position to keep looking at.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".lookAt"> lookAt<span class="signature">(position)</span><span class="type-signature"></span></h5>
+  <div class="description"> Rotate the camera to look at the specified <code>position</code>. Only works if the camera is in independent mode.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">Position to look at.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Rotate your camera to look at entities as you click on them with your mouse.</p><pre><code>function onMousePressEvent(event) {
+  var pickRay = Camera.computePickRay(event.x, event.y);
+  var intersection = Entities.findRayIntersection(pickRay);
+  if (intersection.intersects) {
+      // Switch to independent mode.
+      Camera.mode = &quot;independent&quot;;
+      // Look at the entity that was clicked.
+      var properties = Entities.getEntityProperties(intersection.entityID, &quot;position&quot;);
+      Camera.lookAt(properties.position);
+  }
+}
+
+Controller.mousePressEvent.connect(onMousePressEvent);</code></pre>
+  <h5 class="name" id=".setCameraEntity"> setCameraEntity<span class="signature">(entityID)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set the entity that the camera should use the position and orientation from when it&apos;s in entity mode. You can also set the entity using the <code>Camera.cameraEntity</code> property.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The entity that the camera should follow when it&apos;s in entity mode.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Move your camera to the position and orientation of the closest entity.</p><pre><code>Camera.setModeString(&quot;entity&quot;);
+var entity = Entities.findClosestEntity(MyAvatar.position, 100.0);
+Camera.setCameraEntity(entity);
+  </code></pre>
+  <h5 class="name" id=".setModeString"> setModeString<span class="signature">(mode)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set the camera mode. You can also set the mode using the <code>Camera.mode</code> property.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>mode</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/camera#.Mode">Camera.Mode</a></span></td>
+        <td class="description last">The mode to set the camera to.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setOrientation"> setOrientation<span class="signature">(orientation)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set the camera orientation. You can also set the orientation using the <code>Camera.orientation</code> property. Only works if the camera is in independent mode.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>orientation</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="description last">The orientation to set the camera to.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPosition"> setPosition<span class="signature">(position)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set the camera position. You can also set the position using the <code>Camera.position</code> property. Only works if the camera is in independent mode.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The position to set the camera at.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".stopLookingAt"> stopLookingAt<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Stops the camera from continually looking at the position that was set with <code>Camera.keepLookingAt</code>.</div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".modeUpdated"> modeUpdated<span class="signature">(newMode)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the camera mode changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>newMode</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/camera#.Mode">Camera.Mode</a></span></td>
+        <td class="description last">The new camera mode.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report camera mode changes.</p><pre><code>function onCameraModeUpdated(newMode) {
+  print(&quot;The camera mode has changed to &quot; + newMode);
+}
+
+Camera.modeUpdated.connect(onCameraModeUpdated);
+   </code></pre>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".Mode">Mode</h5>
+  <div class="description">
+    <p>Camera modes affect the position of the camera and the controls for camera movement. The camera can be in one of the following modes:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>String</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>First&#xA0;Person</strong></td>
+          <td><code>&quot;first&#xA0;person&quot;</code></td>
+          <td>The camera is positioned such that you have the same view as your avatar. The camera moves and rotates with your avatar.</td>
+        </tr>
+        <tr>
+          <td><strong>Third&#xA0;Person</strong></td>
+          <td><code>&quot;third&#xA0;person&quot;</code></td>
+          <td>The camera is positioned such that you have a view from just behind your avatar. The camera moves and rotates with your avatar.</td>
+        </tr>
+        <tr>
+          <td><strong>Mirror</strong></td>
+          <td><code>&quot;mirror&quot;</code></td>
+          <td>The camera is positioned such that you are looking directly at your avatar. The camera moves and rotates with your avatar.</td>
+        </tr>
+        <tr>
+          <td><strong>Independent</strong></td>
+          <td><code>&quot;independent&quot;</code></td>
+          <td>The camera&apos;s position and orientation don&apos;t change with your avatar movement. Instead, they can be set via scripting.</td>
+        </tr>
+        <tr>
+          <td><strong>Entity</strong></td>
+          <td><code>&quot;entity&quot;</code></td>
+          <td>The camera&apos;s position and orientation are set to be the same as a specified entity&apos;s, and move with the entity as it moves.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <dl><dt>Type: <span class="param-type">string</span></dl></dt>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

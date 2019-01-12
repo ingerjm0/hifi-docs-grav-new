@@ -1,0 +1,67 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Paths API provides absolute paths to the scripts and resources directories.
+    </div>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>defaultScripts</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last">The path to the scripts directory. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>resources</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last">The path to the resources directory. <em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+    <dl class="details"><em><strong><dt class="important tag-deprecated">Deprecated:</dt></strong><div>The Paths API is deprecated. Use <a href="/api-reference/namespaces/script#.resolvePath">Script.resolvePath</a> and <a href="/api-reference/namespaces/script#.resourcesPath">Script.resourcesPath</a> instead.</li></div></em></dl>
+  </div>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

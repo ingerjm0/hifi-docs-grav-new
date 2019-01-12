@@ -1,0 +1,1435 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#._requireResolve">_requireResolve</a></div>
+    <div><a href="#.addEventHandler">addEventHandler</a></div>
+    <div><a href="#.beginProfileRange">beginProfileRange</a></div>
+    <div><a href="#.callAnimationStateHandler">callAnimationStateHandler</a></div>
+    <div><a href="#.callEntityScriptMethod">callEntityScriptMethod</a></div>
+    <div><a href="#.callEntityScriptMethod">callEntityScriptMethod</a></div>
+    <div><a href="#.callEntityScriptMethod">callEntityScriptMethod</a></div>
+    <div><a href="#.clearInterval">clearInterval</a></div>
+    <div><a href="#.clearTimeout">clearTimeout</a></div>
+    <div><a href="#.endProfileRange">endProfileRange</a></div>
+    <div><a href="#.entityScriptContentAvailable">entityScriptContentAvailable</a></div>
+    <div><a href="#.evaluate">evaluate</a></div>
+    <div><a href="#.evaluateInClosure">evaluateInClosure</a></div>
+    <div><a href="#.executeOnScriptThread">executeOnScriptThread</a></div>
+    <div><a href="#.generateUUID">generateUUID</a></div>
+    <div><a href="#.getContext">getContext</a></div>
+    <div><a href="#.include">include</a></div>
+    <div><a href="#.include">include</a></div>
+    <div><a href="#.isAgentScript">isAgentScript</a></div>
+    <div><a href="#.isClientScript">isClientScript</a></div>
+    <div><a href="#.isDebugMode">isDebugMode</a></div>
+    <div><a href="#.isEntityClientScript">isEntityClientScript</a></div>
+    <div><a href="#.isEntityScriptRunning">isEntityScriptRunning</a></div>
+    <div><a href="#.isEntityServerScript">isEntityServerScript</a></div>
+    <div><a href="#.load">load</a></div>
+    <div><a href="#.loadEntityScript">loadEntityScript</a></div>
+    <div><a href="#.print">print</a></div>
+    <div><a href="#.registerFunction">registerFunction</a></div>
+    <div><a href="#.registerFunction">registerFunction</a></div>
+    <div><a href="#.registerGetterSetter">registerGetterSetter</a></div>
+    <div><a href="#.registerGlobalObject">registerGlobalObject</a></div>
+    <div><a href="#.registerValue">registerValue</a></div>
+    <div><a href="#.removeEventHandler">removeEventHandler</a></div>
+    <div><a href="#.requestGarbageCollection">requestGarbageCollection</a></div>
+    <div><a href="#.require">require</a></div>
+    <div><a href="#.resetModuleCache">resetModuleCache</a></div>
+    <div><a href="#.resolvePath">resolvePath</a></div>
+    <div><a href="#.resourcesPath">resourcesPath</a></div>
+    <div><a href="#.setInterval">setInterval</a></div>
+    <div><a href="#.setTimeout">setTimeout</a></div>
+    <div><a href="#.stop">stop</a></div>
+    <div><a href="#.unloadAllEntityScripts">unloadAllEntityScripts</a></div>
+    <div><a href="#.unloadEntityScript">unloadEntityScript</a></div>
+    <div><a href="#.updateMemoryCost">updateMemoryCost</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.cleanupMenuItem">cleanupMenuItem</a></div>
+    <div><a href="#.clearDebugWindow">clearDebugWindow</a></div>
+    <div><a href="#.doneRunning">doneRunning</a></div>
+    <div><a href="#.entityScriptDetailsUpdated">entityScriptDetailsUpdated</a></div>
+    <div><a href="#.entityScriptPreloadFinished">entityScriptPreloadFinished</a></div>
+    <div><a href="#.errorLoadingScript">errorLoadingScript</a></div>
+    <div><a href="#.errorMessage">errorMessage</a></div>
+    <div><a href="#.finished">finished</a></div>
+    <div><a href="#.infoMessage">infoMessage</a></div>
+    <div><a href="#.loadScript">loadScript</a></div>
+    <div><a href="#.printedMessage">printedMessage</a></div>
+    <div><a href="#.reloadScript">reloadScript</a></div>
+    <div><a href="#.runningStateChanged">runningStateChanged</a></div>
+    <div><a href="#.scriptEnding">scriptEnding</a></div>
+    <div><a href="#.scriptLoaded">scriptLoaded</a></div>
+    <div><a href="#.update">update</a></div>
+    <div><a href="#.warningMessage">warningMessage</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>context</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id="._requireResolve"> _requireResolve<span class="signature">(module, relativeTo<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>module</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>relativeTo</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".addEventHandler"> addEventHandler<span class="signature">(entityID, eventName, handler)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>eventName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>handler</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".beginProfileRange"> beginProfileRange<span class="signature">(label)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>label</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".callAnimationStateHandler"> callAnimationStateHandler<span class="signature">(callback, parameters, names, useNames, resultHandler)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>callback</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>parameters</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>names</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>useNames</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>resultHandler</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".callEntityScriptMethod"> callEntityScriptMethod<span class="signature">(entityID, methodName, otherID, collision)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>methodName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>otherID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>collision</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Collision">Collision</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".callEntityScriptMethod"> callEntityScriptMethod<span class="signature">(entityID, methodName, event)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>methodName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>event</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#PointerEvent">PointerEvent</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".callEntityScriptMethod"> callEntityScriptMethod<span class="signature">(entityID, methodName, parameters, remoteCallerID<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>methodName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>parameters</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>remoteCallerID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> Uuid.NULL</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".clearInterval"> clearInterval<span class="signature">(timer)</span><span class="type-signature"></span></h5>
+  <div class="description"> Stop an interval timer set by <a href="/api-reference/namespaces/script#.setInterval">setInterval</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timer</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last">The interval timer to clear.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Stop an interval timer.</p><pre><code>// Print a message every second.
+var timer = Script.setInterval(function () {
+  print(&quot;Timer fired&quot;);
+}, 1000);
+
+// Stop the timer after 10 seconds.
+Script.setTimeout(function () {
+  print(&quot;Stop timer&quot;);
+  Script.clearInterval(timer);
+}, 10000);</code></pre>
+  <h5 class="name" id=".clearTimeout"> clearTimeout<span class="signature">(timer)</span><span class="type-signature"></span></h5>
+  <div class="description"> Clear a timeout timer set by <a href="/api-reference/namespaces/script#.setTimeout">setTimeout</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>timer</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last">The timeout timer to clear.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Stop a timeout timer.</p><pre><code>// Print a message after two seconds.
+var timer = Script.setTimeout(function () {
+  print(&quot;Timer fired&quot;);
+}, 2000);
+
+// Uncomment the following line to stop the timer from firing.
+//Script.clearTimeout(timer);</code></pre>
+  <h5 class="name" id=".endProfileRange"> endProfileRange<span class="signature">(label)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>label</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".entityScriptContentAvailable"> entityScriptContentAvailable<span class="signature">(entityID, scriptOrURL, contents, isURL, success, status)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scriptOrURL</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>contents</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isURL</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>success</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>status</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".evaluate"> evaluate<span class="signature">(program, filename, lineNumber<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>program</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>lineNumber</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> -1</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id=".evaluateInClosure"> evaluateInClosure<span class="signature">(locals, program)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>locals</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>program</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id=".executeOnScriptThread"> executeOnScriptThread<span class="signature">(function, type<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>function</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>type</code></td>
+        <td class="type"> <span class="param-type">ConnectionType</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> 2</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".generateUUID"> generateUUID<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/uuid">Uuid</a>}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/namespaces/uuid">Uuid</a></dt></dl>
+  <h5 class="name" id=".getContext"> getContext<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".include"> include<span class="signature">(filenames, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Include JavaScript from other files in the current script. If a callback is specified the files are loaded and included asynchronously, otherwise they are included synchronously (i.e., script execution blocks while the files are included).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filenames</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The URLs of the scripts to include. Each can be relative to the current script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>callback</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> null</td>
+        <td class="description last">The function to call back when the scripts have been included. Can be an in-line function or the name of a function.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".include"> include<span class="signature">(filename, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Include JavaScript from another file in the current script. If a callback is specified the file is loaded and included asynchronously, otherwise it is included synchronously (i.e., script execution blocks while the file is included).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The URL of the script to include. Can be relative to the current script.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>callback</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> null</td>
+        <td class="description last">The function to call back when the script has been included. Can be an in-line function or the name of a function.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Include a script file asynchronously.</p><pre><code>// First file: scriptA.js
+print(&quot;This is script A&quot;);
+
+// Second file: scriptB.js
+print(&quot;This is script B&quot;);
+Script.include(&quot;scriptA.js&quot;, function () {
+  print(&quot;Script A has been included&quot;);
+});
+
+// If you run scriptB.js you should see only scriptB.js in the running scripts list.
+// And you should see the following output:
+// This is script B
+// This is script A
+// Script A has been included</code></pre>
+  <h5 class="name" id=".isAgentScript"> isAgentScript<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isClientScript"> isClientScript<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isDebugMode"> isDebugMode<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isEntityClientScript"> isEntityClientScript<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isEntityScriptRunning"> isEntityScriptRunning<span class="signature">(entityID)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isEntityServerScript"> isEntityServerScript<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".load"> load<span class="signature">(filename)</span><span class="type-signature"></span></h5>
+  <div class="description"> Start a new Interface or entity script.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The URL of the script to load. Can be relative to the current script.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Load a script from another script.</p><pre><code>// First file: scriptA.js
+print(&quot;This is script A&quot;);
+
+// Second file: scriptB.js
+print(&quot;This is script B&quot;);
+Script.load(&quot;scriptA.js&quot;);
+
+// If you run scriptB.js you should see both scripts in the running scripts list.
+// And you should see the following output:
+// This is script B
+// This is script A</code></pre>
+  <h5 class="name" id=".loadEntityScript"> loadEntityScript<span class="signature">(entityID, script, forceRedownload)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>script</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>forceRedownload</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".print"> print<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".registerFunction"> registerFunction<span class="signature">(parent, name, function, numArguments<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>parent</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>function</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>numArguments</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> -1</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".registerFunction"> registerFunction<span class="signature">(name, function, numArguments<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>function</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>numArguments</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> -1</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".registerGetterSetter"> registerGetterSetter<span class="signature">(name, getter, setter, parent<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>getter</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>setter</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>parent</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".registerGlobalObject"> registerGlobalObject<span class="signature">(name, object)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>object</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".registerValue"> registerValue<span class="signature">(name, value)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>value</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".removeEventHandler"> removeEventHandler<span class="signature">(entityID, eventName, handler)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>eventName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>handler</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".requestGarbageCollection"> requestGarbageCollection<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".require"> require<span class="signature">(module)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>module</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".resetModuleCache"> resetModuleCache<span class="signature">(deleteScriptCache<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>deleteScriptCache</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".resolvePath"> resolvePath<span class="signature">(path)</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <div class="description"> Resolve a relative path to an absolute path.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The relative path to resolve.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The absolute path.</div>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".resourcesPath"> resourcesPath<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".setInterval"> setInterval<span class="signature">(function, interval)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <div class="description"> Call a function at a set interval.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>function</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last">The function to call. Can be an in-line function or the name of a function.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>interval</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The interval at which to call the function, in ms.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A handle to the interval timer. Can be used by <a href="/api-reference/namespaces/script#.clearInterval">Script.clearInterval</a>.</div>
+  <dl><dt> Type: object</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Print a message every second.</p><pre><code>Script.setInterval(function () {
+  print(&quot;Timer fired&quot;);
+}, 1000);</code></pre>
+  <h5 class="name" id=".setTimeout"> setTimeout<span class="signature">(function, timeout)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <div class="description"> Call a function after a delay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>function</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last">The function to call. Can be an in-line function or the name of a function.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>timeout</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The delay after which to call the function, in ms.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A handle to the timeout timer. Can be used by <a href="/api-reference/namespaces/script#.clearTimeout">Script.clearTimeout</a>.</div>
+  <dl><dt> Type: object</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Print a message after a second.</p><pre><code>Script.setTimeout(function () {
+  print(&quot;Timer fired&quot;);
+}, 1000);</code></pre>
+  <h5 class="name" id=".stop"> stop<span class="signature">(marshal<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Stop the current script.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>marshal</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".unloadAllEntityScripts"> unloadAllEntityScripts<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".unloadEntityScript"> unloadEntityScript<span class="signature">(entityID, shouldRemoveFromMap<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>entityID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>shouldRemoveFromMap</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".updateMemoryCost"> updateMemoryCost<span class="signature">(deltaSize)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>deltaSize</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".cleanupMenuItem"> cleanupMenuItem<span class="signature">(menuItem)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".clearDebugWindow"> clearDebugWindow<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".doneRunning"> doneRunning<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".entityScriptDetailsUpdated"> entityScriptDetailsUpdated<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".entityScriptPreloadFinished"> entityScriptPreloadFinished<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".errorLoadingScript"> errorLoadingScript<span class="signature">(filename)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".errorMessage"> errorMessage<span class="signature">(message, scriptName)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".finished"> finished<span class="signature">(filename, engine)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>engine</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".infoMessage"> infoMessage<span class="signature">(message, scriptName)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".loadScript"> loadScript<span class="signature">(scriptName, isUserLoaded)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isUserLoaded</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".printedMessage"> printedMessage<span class="signature">(message, scriptName)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".reloadScript"> reloadScript<span class="signature">(scriptName, isUserLoaded)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isUserLoaded</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".runningStateChanged"> runningStateChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".scriptEnding"> scriptEnding<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the script is ending.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Connect to the <code>scriptEnding</code> signal.</p><pre><code>print(&quot;Script started&quot;);
+
+Script.scriptEnding.connect(function () {
+  print(&quot;Script ending&quot;);
+});
+
+Script.setTimeout(function () {
+  print(&quot;Stopping script&quot;);
+  Script.stop();
+}, 1000);</code></pre>
+  <h5 class="name" id=".scriptLoaded"> scriptLoaded<span class="signature">(filename)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".update"> update<span class="signature">(deltaTime)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered regularly at a system-determined frequency.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>deltaTime</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The time since the last update, in s.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".warningMessage"> warningMessage<span class="signature">(message, scriptName)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>scriptName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

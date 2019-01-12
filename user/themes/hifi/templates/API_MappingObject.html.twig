@@ -1,0 +1,210 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+      <p>A <a href="/api-reference/namespaces/controller">Controller</a> mapping object that can contain a set of routes that map:</p>
+      <ul>
+        <li><a href="/api-reference/namespaces/controller#.Standard">Controller.Standard</a> outputs to <a href="/api-reference/namespaces/controller#.Actions">Controller.Actions</a> actions or script functions.</li>
+        <li><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a> outputs to <a href="/api-reference/namespaces/controller#.Standard">Controller.Standard</a> outputs, <a href="/api-reference/namespaces/controller#.Actions">Controller.Actions</a> actions, or script functions.</li>
+      </ul>
+      <p>Create by one of the following methods:</p>
+      <ul>
+        <li>Use <a href="/api-reference/namespaces/controller#.newMapping">Controller.newMapping</a> to create the mapping object, add routes using <a href="/api-reference/objects/mappingobject#from">from</a> or <a href="/api-reference/objects/mappingobject#makeAxis">makeAxis</a>, and map the routes to actions or functions using <a href="/api-reference/objects/routeobject">RouteObject</a> methods.</li>
+        <li>Use <a href="/api-reference/namespaces/controller#.parseMapping">Controller.parseMapping</a> or <a href="/api-reference/namespaces/controller#.loadMapping">Controller.loadMapping</a> to load a <a href="/api-reference/namespaces/controller#.MappingJSON">Controller.MappingJSON</a>.</li>
+      </ul>
+      <p>Enable the mapping using <a href="/api-reference/objects/mappingobject#enable">enable</a> or <a href="/api-reference/namespaces/controller#.enableMapping">Controller.enableMapping</a> for it to take effect.</p>
+      <p>Mappings and their routes are applied according to the following rules:</p>
+      <ul>
+        <li>One read per output: after a controller output has been read, it can&apos;t be read again. Exception: You can use <a href="/api-reference/objects/routeobject#peek">RouteObject#peek</a> to read a value without marking that output as having been read.</li>
+        <li>Existing mapping routes take precedence over new mapping routes: within a mapping, if a route is added for a control output that already has a route the new route is ignored.</li>
+        <li>New mappings override previous mappings: each output is processed using the route in the most recently enabled mapping that contains that output.</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#disable">disable</a></div>
+    <div><a href="#enable">enable</a></div>
+    <div><a href="#from">from</a></div>
+    <div><a href="#fromQml">fromQml</a></div>
+    <div><a href="#makeAxis">makeAxis</a></div>
+    <div><a href="#makeAxisQml">makeAxisQml</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/mappingobject">MappingObject</a>}</span></h5>
+  <div class="description"> Disable the mapping. When disabled, the routes in the mapping have no effect.<br> Synonymous with <a href="/api-reference/namespaces/controller#.disableMapping">Controller.disableMapping</a>.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The mapping object, so that further routes can be added.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/mappingobject">MappingObject</a></dt></dl>
+  <h5 class="name" id="enable"><span class="type-signature"></span>enable<span class="signature">(enable)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/mappingobject">MappingObject</a>}</span></h5>
+  <div class="description"> Enable or disable the mapping. When enabled, the routes in the mapping take effect.<br> Synonymous with <a href="/api-reference/namespaces/controller#.enableMapping">Controller.enableMapping</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="default"> true</td>
+        <td class="description last">If <code>true</code> then the mapping is enabled, otherwise it is disabled.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The mapping object, so that further routes can be added.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/mappingobject">MappingObject</a></dt></dl>
+  <h5 class="name" id="from"><span class="type-signature"></span>from<span class="signature">(source)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/routeobject">RouteObject</a>}</span></h5>
+  <div class="description"> Create a new <a href="/api-reference/objects/routeobject">RouteObject</a> from a controller output, ready to be mapped to a standard control, action, or function.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>source</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Standard">Controller.Standard</a></span> | <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span> | <span class="param-type">function</span></td>
+        <td class="description last">The controller output or function that is the source of the route data. If a function, it must return a number or a <a href="/api-reference/globals#Pose">Pose</a> value as the route data.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A route ready for mapping to an action or function using <a href="/api-reference/objects/routeobject">RouteObject</a> methods.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/routeobject">RouteObject</a></dt></dl>
+  <h5 class="name" id="fromQml"><span class="type-signature"></span>fromQml<span class="signature">(source)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/routeobject">RouteObject</a>}</span></h5>
+  <div class="description"> Create a new <a href="/api-reference/objects/routeobject">RouteObject</a> from a controller output, ready to be mapped to a standard control, action, or function.<br> This is a QML-specific version of <a href="/api-reference/objects/mappingobject#from">from</a>: use this version in QML files.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>source</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Standard">Controller.Standard</a></span> | <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span> | <span class="param-type">function</span></td>
+        <td class="description last">The controller output or function that is the source of the route data. If a function, it must return a number or a <a href="/api-reference/globals#Pose">Pose</a> value as the route data.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A route ready for mapping to an action or function using <a href="/api-reference/objects/routeobject">RouteObject</a> methods.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/routeobject">RouteObject</a></dt></dl>
+  <h5 class="name" id="makeAxis"><span class="type-signature"></span>makeAxis<span class="signature">(source1, source2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/routeobject">RouteObject</a>}</span></h5>
+  <div class="description"> Create a new <a href="/api-reference/objects/routeobject">RouteObject</a> from two numeric <a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a> outputs, one applied in the negative direction and the other in the positive direction, ready to be mapped to a standard control, action, or function.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>source1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span></td>
+        <td class="description last">The first, negative-direction controller output.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>source2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span></td>
+        <td class="description last">The second, positive-direction controller output.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A route ready for mapping to an action or function using <a href="/api-reference/objects/routeobject">RouteObject</a> methods. The data value passed to the route is the combined value of <code>source2 - source1</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/routeobject">RouteObject</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Make the Oculus Touch triggers move your avatar up and down.</p><pre><code>var MAPPING_NAME = &quot;com.highfidelity.controllers.example.newMapping&quot;;
+var mapping = Controller.newMapping(MAPPING_NAME);
+mapping
+  .makeAxis(Controller.Hardware.OculusTouch.LT, Controller.Hardware.OculusTouch.RT)
+  .to(Controller.Actions.Up);
+Controller.enableMapping(MAPPING_NAME);
+
+Script.scriptEnding.connect(function () {
+  Controller.disableMapping(MAPPING_NAME);
+});</code></pre>
+  <h5 class="name" id="makeAxisQml"><span class="type-signature"></span>makeAxisQml<span class="signature">(source1, source2)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/routeobject">RouteObject</a>}</span></h5>
+  <div class="description"> Create a new <a href="/api-reference/objects/routeobject">RouteObject</a> from two numeric <a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a> outputs, one applied in the negative direction and the other in the positive direction, ready to be mapped to a standard control, action, or function.<br> This is a QML-specific version of <a href="/api-reference/objects/mappingobject#makeAxis">makeAxis</a>: use this version in QML files.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>source1</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span></td>
+        <td class="description last">The first, negative-direction controller output.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>source2</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Hardware">Controller.Hardware</a></span></td>
+        <td class="description last">The second, positive-direction controller output.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A route ready for mapping to an action or function using <a href="/api-reference/objects/routeobject">RouteObject</a> methods. The data value passed to the route is the combined value of <code>source2 - source1</code>.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/routeobject">RouteObject</a></dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

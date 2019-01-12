@@ -1,0 +1,409 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>Synonym for <a href="/api-reference/namespaces/picks">Picks</a> as used for ray picks. Deprecated.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.createRayPick">createRayPick</a></div>
+    <div><a href="#.disableRayPick">disableRayPick</a></div>
+    <div><a href="#.enableRayPick">enableRayPick</a></div>
+    <div><a href="#.getPrevRayPickResult">getPrevRayPickResult</a></div>
+    <div><a href="#.INTERSECTED_AVATAR">INTERSECTED_AVATAR</a></div>
+    <div><a href="#.INTERSECTED_ENTITY">INTERSECTED_ENTITY</a></div>
+    <div><a href="#.INTERSECTED_HUD">INTERSECTED_HUD</a></div>
+    <div><a href="#.INTERSECTED_NONE">INTERSECTED_NONE</a></div>
+    <div><a href="#.INTERSECTED_OVERLAY">INTERSECTED_OVERLAY</a></div>
+    <div><a href="#.isLeftHand">isLeftHand</a></div>
+    <div><a href="#.isMouse">isMouse</a></div>
+    <div><a href="#.isRightHand">isRightHand</a></div>
+    <div><a href="#.PICK_ALL_INTERSECTIONS">PICK_ALL_INTERSECTIONS</a></div>
+    <div><a href="#.PICK_AVATARS">PICK_AVATARS</a></div>
+    <div><a href="#.PICK_COARSE">PICK_COARSE</a></div>
+    <div><a href="#.PICK_ENTITIES">PICK_ENTITIES</a></div>
+    <div><a href="#.PICK_HUD">PICK_HUD</a></div>
+    <div><a href="#.PICK_INCLUDE_INVISIBLE">PICK_INCLUDE_INVISIBLE</a></div>
+    <div><a href="#.PICK_INCLUDE_NONCOLLIDABLE">PICK_INCLUDE_NONCOLLIDABLE</a></div>
+    <div><a href="#.PICK_OVERLAYS">PICK_OVERLAYS</a></div>
+    <div><a href="#.removeRayPick">removeRayPick</a></div>
+    <div><a href="#.setIgnoreItems">setIgnoreItems</a></div>
+    <div><a href="#.setIncludeItems">setIncludeItems</a></div>
+    <div><a href="#.setPrecisionPicking">setPrecisionPicking</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>PICK_ENTITIES</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_OVERLAYS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_AVATARS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_HUD</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_COARSE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_INVISIBLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_NONCOLLIDABLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_ALL_INTERSECTIONS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_NONE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_ENTITY</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_OVERLAY</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_AVATAR</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_HUD</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".createRayPick"> createRayPick<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/picks#.RayPickProperties">Picks.RayPickProperties</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".disableRayPick"> disableRayPick<span class="signature">(id)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".enableRayPick"> enableRayPick<span class="signature">(id)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".getPrevRayPickResult"> getPrevRayPickResult<span class="signature">(id)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#RayPickResult">RayPickResult</a>}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/globals#RayPickResult">RayPickResult</a></dt></dl>
+  <h5 class="name" id=".INTERSECTED_AVATAR"> INTERSECTED_AVATAR<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".INTERSECTED_ENTITY"> INTERSECTED_ENTITY<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".INTERSECTED_HUD"> INTERSECTED_HUD<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".INTERSECTED_NONE"> INTERSECTED_NONE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".INTERSECTED_OVERLAY"> INTERSECTED_OVERLAY<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".isLeftHand"> isLeftHand<span class="signature">(id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isMouse"> isMouse<span class="signature">(id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isRightHand"> isRightHand<span class="signature">(id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".PICK_ALL_INTERSECTIONS"> PICK_ALL_INTERSECTIONS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_AVATARS"> PICK_AVATARS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_COARSE"> PICK_COARSE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_ENTITIES"> PICK_ENTITIES<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_HUD"> PICK_HUD<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_INCLUDE_INVISIBLE"> PICK_INCLUDE_INVISIBLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_INCLUDE_NONCOLLIDABLE"> PICK_INCLUDE_NONCOLLIDABLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".PICK_OVERLAYS"> PICK_OVERLAYS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".removeRayPick"> removeRayPick<span class="signature">(id)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setIgnoreItems"> setIgnoreItems<span class="signature">(id, {Uuid[]))</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>{Uuid[])</code></td>
+        <td class="type"></td>
+        <td class="description last">ignoreEntities</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setIncludeItems"> setIncludeItems<span class="signature">(id, {Uuid[]))</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>{Uuid[])</code></td>
+        <td class="type"></td>
+        <td class="description last">includeEntities</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPrecisionPicking"> setPrecisionPicking<span class="signature">(id, precisionPicking)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>precisionPicking</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,1592 @@
+       {% extends 'partials/base_noGit.html.twig' %}
+       {% set tags = page.taxonomy.tag %}
+       {% if tags %}
+           {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+       {% else %}
+           {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+       {% endif %}
+       
+       {% block navigation %}
+           <div id="navigation">
+           {% if not progress.isFirst(page.path) %}
+               <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+           {% endif %}
+       
+           {% if not progress.isLast(page.path) %}
+               <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+           {% endif %}
+           </div>
+       {% endblock %}
+       
+       {% block content %}
+           <div id="api-specific">
+               <div id="body-inner">
+                   <h1>{{ page.title }}</h1>
+                   <section>
+ <article>
+   <div class="container-overview">
+     <div class="description">
+       <table>
+         <tbody>
+           <tr>
+             <th>Available in:</th>
+             <td>Assignment Client Scripts</td>
+           </tr>
+         </tbody>
+       </table><br>The <code>Avatar</code> API is used to manipulate scriptable avatars on the domain. This API is a subset of the <a href="/api-reference/namespaces/myavatar">MyAvatar</a> API.<p><strong>Note:</strong> In the examples, use &quot;<code>Avatar</code>&quot; instead of &quot;<code>MyAvatar</code>&quot;.</p>
+     </div>
+     <div>
+       <h5>Methods</h5>
+     </div>
+     <div><a href="#.attach">attach</a></div>
+     <div><a href="#.clearAvatarEntity">clearAvatarEntity</a></div>
+     <div><a href="#.clearJointData">clearJointData</a></div>
+     <div><a href="#.clearJointData">clearJointData</a></div>
+     <div><a href="#.clearJointsData">clearJointsData</a></div>
+     <div><a href="#.detachAll">detachAll</a></div>
+     <div><a href="#.detachOne">detachOne</a></div>
+     <div><a href="#.getAbsoluteJointRotationInObjectFrame">getAbsoluteJointRotationInObjectFrame</a></div>
+     <div><a href="#.getAbsoluteJointTranslationInObjectFrame">getAbsoluteJointTranslationInObjectFrame</a></div>
+     <div><a href="#.getAnimationDetails">getAnimationDetails</a></div>
+     <div><a href="#.getAttachmentData">getAttachmentData</a></div>
+     <div><a href="#.getAttachmentsVariant">getAttachmentsVariant</a></div>
+     <div><a href="#.getAvatarEntityData">getAvatarEntityData</a></div>
+     <div><a href="#.getAvatarEntityData">getAvatarEntityData</a></div>
+     <div><a href="#.getControllerLeftHandMatrix">getControllerLeftHandMatrix</a></div>
+     <div><a href="#.getControllerRightHandMatrix">getControllerRightHandMatrix</a></div>
+     <div><a href="#.getDataRate">getDataRate</a></div>
+     <div><a href="#.getDomainMaxScale">getDomainMaxScale</a></div>
+     <div><a href="#.getDomainMinScale">getDomainMinScale</a></div>
+     <div><a href="#.getEyeHeight">getEyeHeight</a></div>
+     <div><a href="#.getHandState">getHandState</a></div>
+     <div><a href="#.getHeight">getHeight</a></div>
+     <div><a href="#.getJointIndex">getJointIndex</a></div>
+     <div><a href="#.getJointIndex">getJointIndex</a></div>
+     <div><a href="#.getJointNames">getJointNames</a></div>
+     <div><a href="#.getJointNames">getJointNames</a></div>
+     <div><a href="#.getJointRotation">getJointRotation</a></div>
+     <div><a href="#.getJointRotation">getJointRotation</a></div>
+     <div><a href="#.getJointRotations">getJointRotations</a></div>
+     <div><a href="#.getJointTranslation">getJointTranslation</a></div>
+     <div><a href="#.getJointTranslation">getJointTranslation</a></div>
+     <div><a href="#.getJointTranslations">getJointTranslations</a></div>
+     <div><a href="#.getSensorToWorldMatrix">getSensorToWorldMatrix</a></div>
+     <div><a href="#.getSensorToWorldScale">getSensorToWorldScale</a></div>
+     <div><a href="#.getTargetScale">getTargetScale</a></div>
+     <div><a href="#.getUpdateRate">getUpdateRate</a></div>
+     <div><a href="#.isJointDataValid">isJointDataValid</a></div>
+     <div><a href="#.isJointDataValid">isJointDataValid</a></div>
+     <div><a href="#.resetLastSent">resetLastSent</a></div>
+     <div><a href="#.sendAvatarDataPacket">sendAvatarDataPacket</a></div>
+     <div><a href="#.sendIdentityPacket">sendIdentityPacket</a></div>
+     <div><a href="#.setAbsoluteJointRotationInObjectFrame">setAbsoluteJointRotationInObjectFrame</a></div>
+     <div><a href="#.setAbsoluteJointTranslationInObjectFrame">setAbsoluteJointTranslationInObjectFrame</a></div>
+     <div><a href="#.setAttachmentData">setAttachmentData</a></div>
+     <div><a href="#.setAttachmentsVariant">setAttachmentsVariant</a></div>
+     <div><a href="#.setAvatarEntityData">setAvatarEntityData</a></div>
+     <div><a href="#.setAvatarEntityData">setAvatarEntityData</a></div>
+     <div><a href="#.setBlendshape">setBlendshape</a></div>
+     <div><a href="#.setForceFaceTrackerConnected">setForceFaceTrackerConnected</a></div>
+     <div><a href="#.setHandState">setHandState</a></div>
+     <div><a href="#.setJointData">setJointData</a></div>
+     <div><a href="#.setJointData">setJointData</a></div>
+     <div><a href="#.setJointMappingsFromNetworkReply">setJointMappingsFromNetworkReply</a></div>
+     <div><a href="#.setJointRotation">setJointRotation</a></div>
+     <div><a href="#.setJointRotation">setJointRotation</a></div>
+     <div><a href="#.setJointRotations">setJointRotations</a></div>
+     <div><a href="#.setJointTranslation">setJointTranslation</a></div>
+     <div><a href="#.setJointTranslation">setJointTranslation</a></div>
+     <div><a href="#.setJointTranslations">setJointTranslations</a></div>
+     <div><a href="#.setRawJointData">setRawJointData</a></div>
+     <div><a href="#.setSessionUUID">setSessionUUID</a></div>
+     <div><a href="#.startAnimation">startAnimation</a></div>
+     <div><a href="#.stopAnimation">stopAnimation</a></div>
+     <div><a href="#.updateAvatarEntity">updateAvatarEntity</a></div>
+     <div><a href="#.updateAvatarEntity">updateAvatarEntity</a></div><br>
+     <div>
+       <h5>Signals</h5>
+     </div>
+     <div><a href="#.displayNameChanged">displayNameChanged</a></div>
+     <div><a href="#.lookAtSnappingChanged">lookAtSnappingChanged</a></div>
+     <div><a href="#.sessionDisplayNameChanged">sessionDisplayNameChanged</a></div>
+     <div><a href="#.sessionUUIDChanged">sessionUUIDChanged</a></div>
+     <div><a href="#.skeletonModelURLChanged">skeletonModelURLChanged</a></div><br>
+     <div>
+       <h5>Type Definitions</h5>
+     </div>
+     <div><a href="#.AnimationDetails">AnimationDetails</a></div><br>
+     <h5 class="subsection-title">Properties:</h5>
+     <table class="props">
+       <thead>
+         <tr>
+           <th>Name</th>
+           <th>Type</th>
+           <th class="last">Description</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td class="name"><code>position</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>scale</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>density</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>handPosition</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>bodyYaw</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation left or right about an axis running from the head to the feet of the avatar. Yaw is sometimes called &quot;heading&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>bodyPitch</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation about an axis running from shoulder to shoulder of the avatar. Pitch is sometimes called &quot;elevation&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>bodyRoll</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation about an axis running from the chest to the back of the avatar. Roll is sometimes called &quot;bank&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>orientation</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>headOrientation</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+           <td class="description last">The orientation of the avatar&apos;s head.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>headPitch</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation about an axis running from ear to ear of the avatar&apos;s head. Pitch is sometimes called &quot;elevation&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>headYaw</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation left or right about an axis running from the base to the crown of the avatar&apos;s head. Yaw is sometimes called &quot;heading&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>headRoll</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last">The rotation about an axis running from the nose to the back of the avatar&apos;s head. Roll is sometimes called &quot;bank&quot;.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>velocity</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>angularVelocity</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>audioLoudness</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>audioAverageLoudness</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>displayName</code></td>
+           <td class="type"> <span class="param-type">string</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>sessionDisplayName</code></td>
+           <td class="type"> <span class="param-type">string</span></td>
+           <td class="description last">Sanitized, defaulted version displayName that is defined by the AvatarMixer rather than by Interface clients. The result is unique among all avatars present at the time.</td>
+         </tr>
+         <tr>
+           <td class="name"><code>lookAtSnappingEnabled</code></td>
+           <td class="type"> <span class="param-type">boolean</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>skeletonModelURL</code></td>
+           <td class="type"> <span class="param-type">string</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>attachmentData</code></td>
+           <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#AttachmentData">AttachmentData</a>&gt;</span></td>
+           <td class="description last"></td>
+         </tr>
+         <tr>
+           <td class="name"><code>jointNames</code></td>
+           <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+           <td class="description last">The list of joints in the current avatar model. <em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>sessionUUID</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>sensorToWorldMatrix</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/mat4">Mat4</a></span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>controllerLeftHandMatrix</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/mat4">Mat4</a></span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>controllerRightHandMatrix</code></td>
+           <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/mat4">Mat4</a></span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+         <tr>
+           <td class="name"><code>sensorToWorldScale</code></td>
+           <td class="type"> <span class="param-type">number</span></td>
+           <td class="description last"><em>Read-only.</em></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+   <h4 class="subsection-title">Methods</h4>
+   <h5 class="name" id=".attach"> attach<span class="signature">(modelURL, jointName<span class="signature-attributes">opt</span>, translation<span class="signature-attributes">opt</span>, rotation<span class="signature-attributes">opt</span>, scale<span class="signature-attributes">opt</span>, isSoft<span class="signature-attributes">opt</span>, allowDuplicates<span class="signature-attributes">opt</span>, useSaved<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+   <div class="description"> Attach a model to your avatar. For example, you can give your avatar a hat to wear, a guitar to hold, or a surfboard to stand on.<p>Note: Attached models are models only; they are not entities and can not be manipulated using the <a href="/api-reference/namespaces/entities">Entities</a> API. Nor can you use this function to attach an entity (such as a sphere or a box) to your avatar.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>modelURL</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"></td>
+         <td class="default"></td>
+         <td class="description last">The URL of the model to attach. Models can be .FBX or .OBJ format.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>jointName</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> &quot;&quot;</td>
+         <td class="description last">The name of the avatar joint (see <a href="/api-reference/namespaces/myavatar#.getJointNames">MyAvatar.getJointNames</a> or <a href="/api-reference/namespaces/avatar#.getJointNames">Avatar.getJointNames</a>) to attach the model to.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> Vec3.ZERO</td>
+         <td class="description last">The offset to apply to the model relative to the joint position.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> Quat.IDENTITY</td>
+         <td class="description last">The rotation to apply to the model relative to the joint orientation.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>scale</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> 1.0</td>
+         <td class="description last">The scale to apply to the model.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>isSoft</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> false</td>
+         <td class="description last">If the model has a skeleton, set this to <code>true</code> so that the bones of the attached model&apos;s skeleton are be rotated to fit the avatar&apos;s current pose. <code>isSoft</code> is used, for example, to have clothing that moves with the avatar.<br> If <code>true</code>, the <code>translation</code>, <code>rotation</code>, and <code>scale</code> parameters are ignored.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>allowDuplicates</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> false</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>useSaved</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> true</td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Attach a cowboy hat to your avatar&apos;s head.</p><pre><code>var attachment = {
+   modelURL: &quot;https://s3.amazonaws.com/hifi-public/tony/cowboy-hat.fbx&quot;,
+   jointName: &quot;Head&quot;,
+   translation: {&quot;x&quot;: 0, &quot;y&quot;: 0.25, &quot;z&quot;: 0},
+   rotation: {&quot;x&quot;: 0, &quot;y&quot;: 0, &quot;z&quot;: 0, &quot;w&quot;: 1},
+   scale: 1,
+   isSoft: false
+};
+
+MyAvatar.attach(attachment.modelURL,
+                attachment.jointName,
+                attachment.translation,
+                attachment.rotation,
+                attachment.scale,
+                attachment.isSoft);</code></pre>
+   <h5 class="name" id=".clearAvatarEntity"> clearAvatarEntity<span class="signature">(entityID)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>entityID</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".clearJointData"> clearJointData<span class="signature">(name)</span><span class="type-signature"></span></h5>
+   <div class="description"> Clear joint translations and rotations set by script for a specific joint. This restores all motion from the default animation system including inverse kinematics for that joint.<p>Note: This is slightly slower than the function variation that specifies the joint index.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Offset and restore the position of your avatar&apos;s head.</p><pre><code>// Move your avatar&apos;s head up by 25cm from where it should be.
+MyAvatar.setJointTranslation(&quot;Neck&quot;, { x: 0, y: 0.25, z: 0 });
+
+// Restore your avatar&apos;s head to its default position after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointData(&quot;Neck&quot;);
+}, 5000);</code></pre>
+   <h5 class="name" id=".clearJointData"> clearJointData<span class="signature">(index)</span><span class="type-signature"></span></h5>
+   <div class="description"> Clear joint translations and rotations set by script for a specific joint. This restores all motion from the default animation system including inverse kinematics for that joint.<p>Note: This is slightly faster than the function variation that specifies the joint name.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".clearJointsData"> clearJointsData<span class="signature">()</span><span class="type-signature"></span></h5>
+   <div class="description"> Clear all joint translations and rotations that have been set by script. This restores all motion from the default animation system including inverse kinematics for all joints.</div>
+   <h5>Example</h5>
+   <p class="code-caption">Set your avatar to it&apos;s default T-pose for a while.</p><pre><code>// Set all joint translations and rotations to defaults.
+var i, length, rotation, translation;
+for (i = 0, length = MyAvatar.getJointNames().length; i &lt; length; i++) {
+   rotation = MyAvatar.getDefaultJointRotation(i);
+   translation = MyAvatar.getDefaultJointTranslation(i);
+   MyAvatar.setJointData(i, rotation, translation);
+}
+
+// Restore your avatar&apos;s motion after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointsData();
+}, 5000);</code></pre>
+   <h5 class="name" id=".detachAll"> detachAll<span class="signature">(modelURL, jointName<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+   <div class="description"> Detach all instances of a particular model from either a specific joint or all joints.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>modelURL</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"></td>
+         <td class="default"></td>
+         <td class="description last">The URL of the model to detach.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>jointName</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> &quot;&quot;</td>
+         <td class="description last">The name of the joint to detach the model from. If <code>&quot;&quot;</code>, then the model is detached from all joints.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".detachOne"> detachOne<span class="signature">(modelURL, jointName<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+   <div class="description"> Detach the most recently attached instance of a particular model from either a specific joint or any joint.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>modelURL</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"></td>
+         <td class="default"></td>
+         <td class="description last">The URL of the model to detach.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>jointName</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> &quot;&quot;</td>
+         <td class="description last">The name of the joint to detach the model from. If <code>&quot;&quot;</code>, then the most recently attached model is removed from which ever joint it was attached to.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".getAbsoluteJointRotationInObjectFrame"> getAbsoluteJointRotationInObjectFrame<span class="signature">(index)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Quat">Quat</a>}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/globals#Quat">Quat</a></dt></dl>
+   <h5 class="name" id=".getAbsoluteJointTranslationInObjectFrame"> getAbsoluteJointTranslationInObjectFrame<span class="signature">(index)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+   <h5 class="name" id=".getAnimationDetails"> getAnimationDetails<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/avatar#.AnimationDetails">Avatar.AnimationDetails</a>}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/namespaces/avatar#.AnimationDetails">Avatar.AnimationDetails</a></dt></dl>
+   <h5 class="name" id=".getAttachmentData"> getAttachmentData<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;<a href="/api-reference/globals#AttachmentData">AttachmentData</a>&gt;}</span></h5>
+   <div class="description"> Get information about all models currently attached to your avatar.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> Information about all models attached to your avatar.</div>
+   <dl><dt> Type: Array.&lt;<a href="/api-reference/globals#AttachmentData">AttachmentData</a>&gt;</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the URLs of all current attachments.</p><pre><code>var attachments = MyAvatar.getaAttachmentData();
+for (var i = 0; i &lt; attachments.length; i++) {
+   print (attachments[i].modelURL);
+}</code></pre>
+   <h5 class="name" id=".getAttachmentsVariant"> getAttachmentsVariant<span class="signature">()</span> <span class="type-signature">&#x2192; {object}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: object</dt></dl>
+   <h5 class="name" id=".getAvatarEntityData"> getAvatarEntityData<span class="signature">()</span> <span class="type-signature">&#x2192; {object}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: object</dt></dl>
+   <h5 class="name" id=".getAvatarEntityData"> getAvatarEntityData<span class="signature">()</span> <span class="type-signature">&#x2192; {object}</span></h5>
+   <div class="description"> Potentially Very Expensive. Do not use.</div>
+   <h6>Returns:</h6>
+   <dl><dt> Type: object</dt></dl>
+   <h5 class="name" id=".getControllerLeftHandMatrix"> getControllerLeftHandMatrix<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/mat4">Mat4</a>}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/namespaces/mat4">Mat4</a></dt></dl>
+   <h5 class="name" id=".getControllerRightHandMatrix"> getControllerRightHandMatrix<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/mat4">Mat4</a>}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/namespaces/mat4">Mat4</a></dt></dl>
+   <h5 class="name" id=".getDataRate"> getDataRate<span class="signature">(rateName<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>rateName</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> &quot;&quot;</td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getDomainMaxScale"> getDomainMaxScale<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Returns the maximum scale allowed for this avatar in the current domain. This value can change as the user changes avatars or when changing domains.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> maximum scale allowed for this avatar in the current domain.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getDomainMinScale"> getDomainMinScale<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Returns the minimum scale allowed for this avatar in the current domain. This value can change as the user changes avatars or when changing domains.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> minimum scale allowed for this avatar in the current domain.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getEyeHeight"> getEyeHeight<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Provides read only access to the current eye height of the avatar. This height is only an estimate and might be incorrect for avatars that are missing standard joints.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> Eye height of avatar in meters.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getHandState"> getHandState<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: string</dt></dl>
+   <h5 class="name" id=".getHeight"> getHeight<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Provides read only access to the current height of the avatar. This height is only an estimate and might be incorrect for avatars that are missing standard joints.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> Height of avatar in meters.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getJointIndex"> getJointIndex<span class="signature">(name)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Get the joint index for a named joint. The joint index value is the position of the joint in the array returned by <a href="/api-reference/namespaces/myavatar#.getJointNames">MyAvatar.getJointNames</a> or <a href="/api-reference/namespaces/avatar#.getJointNames">Avatar.getJointNames</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The index of the joint.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the index of your avatar&apos;s left arm joint.</p><pre><code>print(JSON.stringify(MyAvatar.getJointIndex(&quot;LeftArm&quot;));</code></pre>
+   <h5 class="name" id=".getJointIndex"> getJointIndex<span class="signature">(name)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <div class="description"> Get the joint index for a named joint. The joint index value is the position of the joint in the array returned by <a href="/api-reference/namespaces/myavatar#.getJointNames">MyAvatar.getJointNames</a> or <a href="/api-reference/namespaces/avatar#.getJointNames">Avatar.getJointNames</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The index of the joint.</div>
+   <dl><dt> Type: number</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the index of your avatar&apos;s left arm joint.</p><pre><code>print(JSON.stringify(MyAvatar.getJointIndex(&quot;LeftArm&quot;));</code></pre>
+   <h5 class="name" id=".getJointNames"> getJointNames<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;string&gt;}</span></h5>
+   <div class="description"> Get the names of all the joints in the current avatar.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The joint names.</div>
+   <dl><dt> Type: Array.&lt;string&gt;</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the names of all the joints in your current avatar.</p><pre><code>print(JSON.stringify(MyAvatar.getJointNames()));</code></pre>
+   <h5 class="name" id=".getJointNames"> getJointNames<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;string&gt;}</span></h5>
+   <div class="description"> Get the names of all the joints in the current avatar.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The joint names.</div>
+   <dl><dt> Type: Array.&lt;string&gt;</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the names of all the joints in your current avatar.</p><pre><code>print(JSON.stringify(MyAvatar.getJointNames()));</code></pre>
+   <h5 class="name" id=".getJointRotation"> getJointRotation<span class="signature">(index)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Quat">Quat</a>}</span></h5>
+   <div class="description"> Get the rotation of a joint relative to its parent. For information on the joint hierarchy used, see <a href="https://docs.highfidelity.com/create-and-explore/avatars/avatar-standards">Avatar Standards</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The rotation of the joint relative to its parent.</div>
+   <dl><dt> Type: <a href="/api-reference/globals#Quat">Quat</a></dt></dl>
+   <h5 class="name" id=".getJointRotation"> getJointRotation<span class="signature">(name)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Quat">Quat</a>}</span></h5>
+   <div class="description"> Get the rotation of a joint relative to its parent. For information on the joint hierarchy used, see <a href="https://docs.highfidelity.com/create-and-explore/avatars/avatar-standards">Avatar Standards</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The rotation of the joint relative to its parent.</div>
+   <dl><dt> Type: <a href="/api-reference/globals#Quat">Quat</a></dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the rotation of your avatar&apos;s hips joint.</p><pre><code>print(JSON.stringify(MyAvatar.getJointRotation(&quot;Hips&quot;)));</code></pre>
+   <h5 class="name" id=".getJointRotations"> getJointRotations<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;<a href="/api-reference/globals#Quat">Quat</a>&gt;}</span></h5>
+   <div class="description"> Get the rotations of all joints in the current avatar. Each joint&apos;s rotation is relative to its parent joint.</div>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The rotations of all joints relative to each&apos;s parent. The values are in the same order as the array returned by <a href="/api-reference/namespaces/myavatar#.getJointNames">MyAvatar.getJointNames</a> or <a href="/api-reference/namespaces/avatar#.getJointNames">Avatar.getJointNames</a>.</div>
+   <dl><dt> Type: Array.&lt;<a href="/api-reference/globals#Quat">Quat</a>&gt;</dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the rotations of all your avatar&apos;s joints.</p><pre><code>print(JSON.stringify(MyAvatar.getJointRotations()));</code></pre>
+   <h5 class="name" id=".getJointTranslation"> getJointTranslation<span class="signature">(index)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+   <div class="description"> Get the translation of a joint relative to its parent. For information on the joint hierarchy used, see <a href="https://docs.highfidelity.com/create-and-explore/avatars/avatar-standards">Avatar Standards</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The translation of the joint relative to its parent.</div>
+   <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+   <h5 class="name" id=".getJointTranslation"> getJointTranslation<span class="signature">(name)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+   <div class="description"> Get the translation of a joint relative to its parent. For information on the joint hierarchy used, see <a href="https://docs.highfidelity.com/create-and-explore/avatars/avatar-standards">Avatar Standards</a>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <div class="param-desc"> The translation of the joint relative to its parent.</div>
+   <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+   <h5>Example</h5>
+   <p class="code-caption">Report the translation of your avatar&apos;s hips joint.</p><pre><code>print(JSON.stringify(MyAvatar.getJointRotation(&quot;Hips&quot;)));</code></pre>
+   <h5 class="name" id=".getJointTranslations"> getJointTranslations<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</dt></dl>
+   <h5 class="name" id=".getSensorToWorldMatrix"> getSensorToWorldMatrix<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/mat4">Mat4</a>}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: <a href="/api-reference/namespaces/mat4">Mat4</a></dt></dl>
+   <h5 class="name" id=".getSensorToWorldScale"> getSensorToWorldScale<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getTargetScale"> getTargetScale<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".getUpdateRate"> getUpdateRate<span class="signature">(rateName<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>rateName</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> &quot;&quot;</td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: number</dt></dl>
+   <h5 class="name" id=".isJointDataValid"> isJointDataValid<span class="signature">(name)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: boolean</dt></dl>
+   <h5 class="name" id=".isJointDataValid"> isJointDataValid<span class="signature">(index)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: boolean</dt></dl>
+   <h5 class="name" id=".resetLastSent"> resetLastSent<span class="signature">()</span><span class="type-signature"></span></h5>
+   <h5 class="name" id=".sendAvatarDataPacket"> sendAvatarDataPacket<span class="signature">(sendAll<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>sendAll</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> false</td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".sendIdentityPacket"> sendIdentityPacket<span class="signature">()</span><span class="type-signature"></span></h5>
+   <h5 class="name" id=".setAbsoluteJointRotationInObjectFrame"> setAbsoluteJointRotationInObjectFrame<span class="signature">(index, rotation)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: boolean</dt></dl>
+   <h5 class="name" id=".setAbsoluteJointTranslationInObjectFrame"> setAbsoluteJointTranslationInObjectFrame<span class="signature">(index, translation)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: boolean</dt></dl>
+   <h5 class="name" id=".setAttachmentData"> setAttachmentData<span class="signature">(attachmentData)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set all models currently attached to your avatar. For example, if you retrieve attachment data using <a href="/api-reference/namespaces/myavatar#.getAttachmentData">MyAvatar.getAttachmentData</a> or <a href="/api-reference/namespaces/avatar#.getAttachmentData">Avatar.getAttachmentData</a>, make changes to it, and then want to update your avatar&apos;s attachments per the changed data. You can also remove all attachments by using setting <code>attachmentData</code> to <code>null</code>.</div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>attachmentData</code></td>
+         <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#AttachmentData">AttachmentData</a>&gt;</span></td>
+         <td class="description last">The attachment data defining the models to have attached to your avatar. Use <code>null</code> to remove all attachments.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Remove a hat attachment if your avatar is wearing it.</p><pre><code>var hatURL = &quot;https://s3.amazonaws.com/hifi-public/tony/cowboy-hat.fbx&quot;;
+var attachments = MyAvatar.getAttachmentData();
+
+for (var i = 0; i &lt; attachments.length; i++) {
+   if (attachments[i].modelURL === hatURL) {
+       attachments.splice(i, 1);
+       MyAvatar.setAttachmentData(attachments);
+       break;
+   }
+}</code></pre>
+   <h5 class="name" id=".setAttachmentsVariant"> setAttachmentsVariant<span class="signature">(variant)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>variant</code></td>
+         <td class="type"> <span class="param-type">object</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setAvatarEntityData"> setAvatarEntityData<span class="signature">(avatarEntityData)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>avatarEntityData</code></td>
+         <td class="type"> <span class="param-type">object</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setAvatarEntityData"> setAvatarEntityData<span class="signature">(avatarEntityData)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>avatarEntityData</code></td>
+         <td class="type"> <span class="param-type">object</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setBlendshape"> setBlendshape<span class="signature">(name, value)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>value</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setForceFaceTrackerConnected"> setForceFaceTrackerConnected<span class="signature">(connected)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>connected</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setHandState"> setHandState<span class="signature">(state)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>state</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setJointData"> setJointData<span class="signature">(index, rotation, translation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s rotation and position relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="description last">The rotation of the joint relative to its parent.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="description last">The translation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Set your avatar to it&apos;s default T-pose for a while.<br> <img alt="Avatar in T-pose" src="https://docs.highfidelity.com/images/t-pose.png"></p><pre><code>// Set all joint translations and rotations to defaults.
+var i, length, rotation, translation;
+for (i = 0, length = MyAvatar.getJointNames().length; i &lt; length; i++) {
+   rotation = MyAvatar.getDefaultJointRotation(i);
+   translation = MyAvatar.getDefaultJointTranslation(i);
+   MyAvatar.setJointData(i, rotation, translation);
+}
+
+// Restore your avatar&apos;s motion after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointsData();
+}, 5000);</code></pre>
+   <h5 class="name" id=".setJointData"> setJointData<span class="signature">(name, rotation, translation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s rotation and position relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="description last">The rotation of the joint relative to its parent.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="description last">The translation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setJointMappingsFromNetworkReply"> setJointMappingsFromNetworkReply<span class="signature">()</span><span class="type-signature"></span></h5>
+   <h5 class="name" id=".setJointRotation"> setJointRotation<span class="signature">(index, rotation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s rotation relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="description last">The rotation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setJointRotation"> setJointRotation<span class="signature">(name, rotation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s rotation relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>rotation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+         <td class="description last">The rotation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Set your avatar to its default T-pose then rotate its right arm.<br> <img alt="Avatar in T-pose with arm rotated" src="https://docs.highfidelity.com/images/armpose.png"></p><pre><code>// Set all joint translations and rotations to defaults.
+var i, length, rotation, translation;
+for (i = 0, length = MyAvatar.getJointNames().length; i &lt; length; i++) {
+   rotation = MyAvatar.getDefaultJointRotation(i);
+   translation = MyAvatar.getDefaultJointTranslation(i);
+   MyAvatar.setJointData(i, rotation, translation);
+}
+
+// Rotate the right arm.
+var newArmRotation = { x: 0.47, y: 0.22, z: -0.02, w: 0.87 };
+MyAvatar.setJointRotation(&quot;RightArm&quot;, newArmRotation);
+
+// Restore your avatar&apos;s motion after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointsData();
+}, 5000);</code></pre>
+   <h5 class="name" id=".setJointRotations"> setJointRotations<span class="signature">(jointRotations)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set the rotations of all joints in the current avatar. Each joint&apos;s rotation is relative to its parent joint.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>jointRotations</code></td>
+         <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Quat">Quat</a>&gt;</span></td>
+         <td class="description last">The rotations for all joints in the avatar. The values are in the same order as the array returned by <a href="/api-reference/namespaces/myavatar#.getJointNames">MyAvatar.getJointNames</a> or <a href="/api-reference/namespaces/avatar#.getJointNames">Avatar.getJointNames</a>.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Set your avatar to its default T-pose then rotate its right arm.<br> <img alt="Avatar in T-pose" src="https://docs.highfidelity.com/images/armpose.png"></p><pre><code>// Set all joint translations and rotations to defaults.
+var i, length, rotation, translation;
+for (i = 0, length = MyAvatar.getJointNames().length; i &lt; length; i++) {
+   rotation = MyAvatar.getDefaultJointRotation(i);
+   translation = MyAvatar.getDefaultJointTranslation(i);
+   MyAvatar.setJointData(i, rotation, translation);
+}
+
+// Get all join rotations.
+var jointRotations = MyAvatar.getJointRotations(); 
+
+// Update the rotation of the right arm in the array.
+jointRotations[MyAvatar.getJointIndex(&quot;RightArm&quot;)] = { x: 0.47, y: 0.22, z: -0.02, w: 0.87 };
+
+// Update all joint rotations.
+MyAvatar.setJointRotations(jointRotations);
+
+// Restore your avatar&apos;s motion after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointsData();
+}, 5000);</code></pre>
+   <h5 class="name" id=".setJointTranslation"> setJointTranslation<span class="signature">(name, translation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s translation relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>name</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last">The name of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="description last">The translation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5>Example</h5>
+   <p class="code-caption">Stretch your avatar&apos;s neck. Depending on the avatar you are using, you will either see a gap between the head and body or you will see the neck stretched.<br> <img alt="Avatar with neck stretched" src="https://docs.highfidelity.com/images/stretched-neck.png"></p><pre><code>// Stretch your avatar&apos;s neck.
+MyAvatar.setJointTranslation(&quot;Neck&quot;, { x: 0, y: 25, z: 0 });
+
+// Restore your avatar&apos;s neck after 5s.
+Script.setTimeout(function () {
+   MyAvatar.clearJointData(&quot;Neck&quot;);
+}, 5000);</code></pre>
+   <h5 class="name" id=".setJointTranslation"> setJointTranslation<span class="signature">(index, translation)</span><span class="type-signature"></span></h5>
+   <div class="description"> Set a specific joint&apos;s translation relative to its parent.<p>Setting joint data completely overrides/replaces all motion from the default animation system including inverse kinematics, but just for the specified joint. So for example, if you were to procedurally manipulate the finger joints, the avatar&apos;s hand and head would still do inverse kinematics properly. However, as soon as you start to manipulate joints in the inverse kinematics chain, the inverse kinematics might not function as you expect. For example, if you set the rotation of the elbow, the hand inverse kinematics position won&apos;t end up in the right place.</p>
+   </div>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>index</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last">The index of the joint.</td>
+       </tr>
+       <tr>
+         <td class="name"><code>translation</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+         <td class="description last">The translation of the joint relative to its parent.</td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setJointTranslations"> setJointTranslations<span class="signature">(translations)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>translations</code></td>
+         <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setRawJointData"> setRawJointData<span class="signature">(data)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>data</code></td>
+         <td class="type"> <span class="param-type">Array.&lt;JointData&gt;</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".setSessionUUID"> setSessionUUID<span class="signature">(sessionUUID)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>sessionUUID</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".startAnimation"> startAnimation<span class="signature">(url, fps<span class="signature-attributes">opt</span>, priority<span class="signature-attributes">opt</span>, loop<span class="signature-attributes">opt</span>, hold<span class="signature-attributes">opt</span>, firstFrame<span class="signature-attributes">opt</span>, lastFrame<span class="signature-attributes">opt</span>, maskedJoints<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th>Attributes</th>
+         <th>Default</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>url</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="attributes"></td>
+         <td class="default"></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>fps</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> 30</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>priority</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> 1</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>loop</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> false</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>hold</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> false</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>firstFrame</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> 0</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>lastFrame</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> 3.403e+38</td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>maskedJoints</code></td>
+         <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+         <td class="attributes"> &lt;optional&gt;<br></td>
+         <td class="default"> []</td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".stopAnimation"> stopAnimation<span class="signature">()</span><span class="type-signature"></span></h5>
+   <h5 class="name" id=".updateAvatarEntity"> updateAvatarEntity<span class="signature">(entityID, entityData)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>entityID</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>entityData</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h5 class="name" id=".updateAvatarEntity"> updateAvatarEntity<span class="signature">(entityID, entityData)</span><span class="type-signature"></span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>entityID</code></td>
+         <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>entityData</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h4 class="subsection-title">Signals</h4>
+   <h5 class="name" id=".displayNameChanged"> displayNameChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Signal</dt></dl>
+   <h5 class="name" id=".lookAtSnappingChanged"> lookAtSnappingChanged<span class="signature">(enabled)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+   <h5>Parameters:</h5>
+   <table class="params">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>enabled</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Signal</dt></dl>
+   <h5 class="name" id=".sessionDisplayNameChanged"> sessionDisplayNameChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Signal</dt></dl>
+   <h5 class="name" id=".sessionUUIDChanged"> sessionUUIDChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Signal</dt></dl>
+   <h5 class="name" id=".skeletonModelURLChanged"> skeletonModelURLChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+   <h6>Returns:</h6>
+   <dl><dt> Type: Signal</dt></dl>
+   <h4 class="subsection-title">Type Definitions</h4>
+   <h5 class="name" id=".AnimationDetails">AnimationDetails</h5>
+   <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+   <h5 class="subsection-title">Properties:</h5>
+   <table class="props">
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Type</th>
+         <th class="last">Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td class="name"><code>role</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>url</code></td>
+         <td class="type"> <span class="param-type">string</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>fps</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>priority</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>loop</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>hold</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>startAutomatically</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>firstFrame</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>lastFrame</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>running</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>currentFrame</code></td>
+         <td class="type"> <span class="param-type">number</span></td>
+         <td class="description last"></td>
+       </tr>
+       <tr>
+         <td class="name"><code>allowTranslation</code></td>
+         <td class="type"> <span class="param-type">boolean</span></td>
+         <td class="description last"></td>
+       </tr>
+     </tbody>
+   </table>
+ </article>
+</section>
+               </div>
+           </div>
+       {% endblock %}

@@ -1,0 +1,156 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#editProperties">editProperties</a></div>
+    <div><a href="#readProperties">readProperties</a></div>
+    <div><a href="#readProperty">readProperty</a></div>
+    <div><a href="#writeProperties">writeProperties</a></div>
+    <div><a href="#writeProperty">writeProperty</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#clicked">clicked</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id="editProperties"><span class="type-signature"></span>editProperties<span class="signature">(properties)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="readProperties"><span class="type-signature"></span>readProperties<span class="signature">(propertyList)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>propertyList</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;string&gt;</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id="readProperty"><span class="type-signature"></span>readProperty<span class="signature">(propertyName)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>propertyName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id="writeProperties"><span class="type-signature"></span>writeProperties<span class="signature">(properties)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="writeProperty"><span class="type-signature"></span>writeProperty<span class="signature">(propertyValue)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>propertyValue</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id="clicked"><span class="type-signature"></span>clicked<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

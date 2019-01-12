@@ -1,0 +1,190 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>Helper functions to render ephemeral debug markers and lines. DebugDraw markers and lines are only visible locally, they are not visible by other users.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.addMarker">addMarker</a></div>
+    <div><a href="#.addMyAvatarMarker">addMyAvatarMarker</a></div>
+    <div><a href="#.drawRay">drawRay</a></div>
+    <div><a href="#.removeMarker">removeMarker</a></div>
+    <div><a href="#.removeMyAvatarMarker">removeMyAvatarMarker</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".addMarker"> addMarker<span class="signature">(key, rotation, position, color)</span><span class="type-signature"></span></h5>
+  <div class="description"> Adds a debug marker to the world. This marker will be drawn every frame until it is removed with DebugDraw.removeMarker. This can be called repeatedly to change the position of the marker.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>key</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">name to uniquely identify this marker, later used for DebugDraw.removeMarker.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>rotation</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="description last">start position of line in world space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">position of the marker in world space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>color</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec4">Vec4</a></span></td>
+        <td class="description last">color of the marker.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".addMyAvatarMarker"> addMyAvatarMarker<span class="signature">(key, rotation, position, color)</span><span class="type-signature"></span></h5>
+  <div class="description"> Adds a debug marker to the world, this marker will be drawn every frame until it is removed with DebugDraw.removeMyAvatarMarker. This can be called repeatedly to change the position of the marker.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>key</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">name to uniquely identify this marker, later used for DebugDraw.removeMyAvatarMarker.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>rotation</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="description last">start position of line in avatar space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">position of the marker in avatar space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>color</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec4">Vec4</a></span></td>
+        <td class="description last">color of the marker.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".drawRay"> drawRay<span class="signature">(start, end, color)</span><span class="type-signature"></span></h5>
+  <div class="description"> Draws a line in world space, but it will only be visible for a single frame.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>start</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">start position of line in world space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>end</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">end position of line in world space.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>color</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec4">Vec4</a></span></td>
+        <td class="description last">color of line, each component should be in the zero to one range. x = red, y = blue, z = green, w = alpha.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".removeMarker"> removeMarker<span class="signature">(key)</span><span class="type-signature"></span></h5>
+  <div class="description"> Removes debug marker from the world. Once a marker is removed, it will no longer be visible.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>key</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">name of marker to remove.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".removeMyAvatarMarker"> removeMyAvatarMarker<span class="signature">(key)</span><span class="type-signature"></span></h5>
+  <div class="description"> Removes debug marker from the world. Once a marker is removed, it will no longer be visible</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>key</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">name of marker to remove.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

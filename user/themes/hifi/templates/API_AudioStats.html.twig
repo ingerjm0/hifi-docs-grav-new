@@ -1,0 +1,294 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>Audio stats from the client.
+    </div>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.clientStreamChanged">clientStreamChanged</a></div>
+    <div><a href="#.injectorStreamsChanged">injectorStreamsChanged</a></div>
+    <div><a href="#.inputReadMsMaxChanged">inputReadMsMaxChanged</a></div>
+    <div><a href="#.inputUnplayedMsMaxChanged">inputUnplayedMsMaxChanged</a></div>
+    <div><a href="#.mixerStreamChanged">mixerStreamChanged</a></div>
+    <div><a href="#.outputUnplayedMsMaxChanged">outputUnplayedMsMaxChanged</a></div>
+    <div><a href="#.pingMsChanged">pingMsChanged</a></div>
+    <div><a href="#.sentTimegapMsAvgChanged">sentTimegapMsAvgChanged</a></div>
+    <div><a href="#.sentTimegapMsAvgWindowChanged">sentTimegapMsAvgWindowChanged</a></div>
+    <div><a href="#.sentTimegapMsMaxChanged">sentTimegapMsMaxChanged</a></div>
+    <div><a href="#.sentTimegapMsMaxWindowChanged">sentTimegapMsMaxWindowChanged</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>pingMs</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>inputReadMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>inputUnplayedMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>outputUnplayedMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sentTimegapMsMax</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sentTimegapMsAvg</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sentTimegapMsMaxWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sentTimegapMsAvgWindow</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>clientStream</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/audiostreamstats">AudioStats.AudioStreamStats</a></span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>mixerStream</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/audiostreamstats">AudioStats.AudioStreamStats</a></span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Classes</h4>
+  <dl><dt><a href="/api-reference/objects/audiostreamstats">AudioStreamStats</a></dt>
+    <dd></dd>
+  </dl>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".clientStreamChanged"> clientStreamChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".injectorStreamsChanged"> injectorStreamsChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".inputReadMsMaxChanged"> inputReadMsMaxChanged<span class="signature">(inputReadMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>inputReadMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".inputUnplayedMsMaxChanged"> inputUnplayedMsMaxChanged<span class="signature">(inputUnplayedMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>inputUnplayedMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".mixerStreamChanged"> mixerStreamChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".outputUnplayedMsMaxChanged"> outputUnplayedMsMaxChanged<span class="signature">(outputUnplayedMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>outputUnplayedMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".pingMsChanged"> pingMsChanged<span class="signature">(pingMs)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>pingMs</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".sentTimegapMsAvgChanged"> sentTimegapMsAvgChanged<span class="signature">(sentTimegapMsAvg)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sentTimegapMsAvg</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".sentTimegapMsAvgWindowChanged"> sentTimegapMsAvgWindowChanged<span class="signature">(sentTimegapMsAvgWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sentTimegapMsAvgWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".sentTimegapMsMaxChanged"> sentTimegapMsMaxChanged<span class="signature">(sentTimegapMsMax)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sentTimegapMsMax</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".sentTimegapMsMaxWindowChanged"> sentTimegapMsMaxWindowChanged<span class="signature">(sentTimegapMsMaxWindow)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sentTimegapMsMaxWindow</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

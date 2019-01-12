@@ -1,0 +1,184 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getConfig">getConfig</a></div>
+    <div><a href="#.getNumSubs">getNumSubs</a></div>
+    <div><a href="#.getSubConfig">getSubConfig</a></div>
+    <div><a href="#.getSubConfigs">getSubConfigs</a></div>
+    <div><a href="#.isTask">isTask</a></div>
+    <div><a href="#.load">load</a></div>
+    <div><a href="#.load">load</a></div>
+    <div><a href="#.refresh">refresh</a></div>
+    <div><a href="#.toJSON">toJSON</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.dirtyEnabled">dirtyEnabled</a></div>
+    <div><a href="#.loaded">loaded</a></div>
+    <div><a href="#.newStats">newStats</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>cpuRunTime</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getConfig"> getConfig<span class="signature">(name)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id=".getNumSubs"> getNumSubs<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getSubConfig"> getSubConfig<span class="signature">(index)</span> <span class="type-signature">&#x2192; {object}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>index</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: object</dt></dl>
+  <h5 class="name" id=".getSubConfigs"> getSubConfigs<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;object&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;object&gt;</dt></dl>
+  <h5 class="name" id=".isTask"> isTask<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".load"> load<span class="signature">(map)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>map</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".load"> load<span class="signature">(map)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>map</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".refresh"> refresh<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".toJSON"> toJSON<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".dirtyEnabled"> dirtyEnabled<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".loaded"> loaded<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".newStats"> newStats<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

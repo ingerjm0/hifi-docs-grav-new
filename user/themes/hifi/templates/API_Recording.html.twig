@@ -1,0 +1,391 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getDefaultRecordingSaveDirectory">getDefaultRecordingSaveDirectory</a></div>
+    <div><a href="#.getPlayerUseAttachments">getPlayerUseAttachments</a></div>
+    <div><a href="#.getPlayerUseDisplayName">getPlayerUseDisplayName</a></div>
+    <div><a href="#.getPlayerUseHeadModel">getPlayerUseHeadModel</a></div>
+    <div><a href="#.getPlayerUseSkeletonModel">getPlayerUseSkeletonModel</a></div>
+    <div><a href="#.getPlayFromCurrentLocation">getPlayFromCurrentLocation</a></div>
+    <div><a href="#.isPaused">isPaused</a></div>
+    <div><a href="#.isPlaying">isPlaying</a></div>
+    <div><a href="#.isRecording">isRecording</a></div>
+    <div><a href="#.loadLastRecording">loadLastRecording</a></div>
+    <div><a href="#.loadRecording">loadRecording</a></div>
+    <div><a href="#.pausePlayer">pausePlayer</a></div>
+    <div><a href="#.playerElapsed">playerElapsed</a></div>
+    <div><a href="#.playerLength">playerLength</a></div>
+    <div><a href="#.recorderElapsed">recorderElapsed</a></div>
+    <div><a href="#.saveRecording">saveRecording</a></div>
+    <div><a href="#.saveRecordingToAsset">saveRecordingToAsset</a></div>
+    <div><a href="#.setPlayerAudioOffset">setPlayerAudioOffset</a></div>
+    <div><a href="#.setPlayerLoop">setPlayerLoop</a></div>
+    <div><a href="#.setPlayerTime">setPlayerTime</a></div>
+    <div><a href="#.setPlayerUseAttachments">setPlayerUseAttachments</a></div>
+    <div><a href="#.setPlayerUseDisplayName">setPlayerUseDisplayName</a></div>
+    <div><a href="#.setPlayerUseHeadModel">setPlayerUseHeadModel</a></div>
+    <div><a href="#.setPlayerUseSkeletonModel">setPlayerUseSkeletonModel</a></div>
+    <div><a href="#.setPlayerVolume">setPlayerVolume</a></div>
+    <div><a href="#.setPlayFromCurrentLocation">setPlayFromCurrentLocation</a></div>
+    <div><a href="#.startPlaying">startPlaying</a></div>
+    <div><a href="#.startRecording">startRecording</a></div>
+    <div><a href="#.stopPlaying">stopPlaying</a></div>
+    <div><a href="#.stopRecording">stopRecording</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#~loadRecordingCallback">~loadRecordingCallback</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getDefaultRecordingSaveDirectory"> getDefaultRecordingSaveDirectory<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".getPlayerUseAttachments"> getPlayerUseAttachments<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getPlayerUseDisplayName"> getPlayerUseDisplayName<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getPlayerUseHeadModel"> getPlayerUseHeadModel<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getPlayerUseSkeletonModel"> getPlayerUseSkeletonModel<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getPlayFromCurrentLocation"> getPlayFromCurrentLocation<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isPaused"> isPaused<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isPlaying"> isPlaying<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isRecording"> isRecording<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".loadLastRecording"> loadLastRecording<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".loadRecording"> loadRecording<span class="signature">(url, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>url</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>callback</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/recording#~loadRecordingCallback">Recording~loadRecordingCallback</a></span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> null</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".pausePlayer"> pausePlayer<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".playerElapsed"> playerElapsed<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".playerLength"> playerLength<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".recorderElapsed"> recorderElapsed<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".saveRecording"> saveRecording<span class="signature">(filename)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".saveRecordingToAsset"> saveRecordingToAsset<span class="signature">(getClipAtpUrl)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>getClipAtpUrl</code></td>
+        <td class="type"> <span class="param-type">function</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerAudioOffset"> setPlayerAudioOffset<span class="signature">(audioOffset)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>audioOffset</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerLoop"> setPlayerLoop<span class="signature">(loop)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>loop</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerTime"> setPlayerTime<span class="signature">(time)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>time</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerUseAttachments"> setPlayerUseAttachments<span class="signature">(useAttachments)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>useAttachments</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerUseDisplayName"> setPlayerUseDisplayName<span class="signature">(useDisplayName)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>useDisplayName</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayerUseHeadModel"> setPlayerUseHeadModel<span class="signature">(useHeadModel)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>useHeadModel</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <dl class="details"><dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+      <ul>
+        <li><strong>Note:</strong> This function currently has no effect.</li>
+      </ul>
+    </dd>
+  </dl>
+  <h5 class="name" id=".setPlayerUseSkeletonModel"> setPlayerUseSkeletonModel<span class="signature">(useSkeletonModel)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>useSkeletonModel</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <dl class="details"><dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+      <ul>
+        <li><strong>Note:</strong> This function currently doesn&apos;t work.</li>
+      </ul>
+    </dd>
+  </dl>
+  <h5 class="name" id=".setPlayerVolume"> setPlayerVolume<span class="signature">(volume)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>volume</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPlayFromCurrentLocation"> setPlayFromCurrentLocation<span class="signature">(playFromCurrentLocation)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>playFromCurrentLocation</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".startPlaying"> startPlaying<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".startRecording"> startRecording<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".stopPlaying"> stopPlaying<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".stopRecording"> stopRecording<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id="~loadRecordingCallback"><span class="type-signature"></span>loadRecordingCallback<span class="signature">(success, url)</span><span class="type-signature"></span></h5>
+  <div class="description"> Called when <a href="/api-reference/namespaces/recording#.loadRecording">Recording.loadRecording</a> is complete.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>success</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>url</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

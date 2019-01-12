@@ -1,0 +1,228 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.setLocation">setLocation</a></div>
+    <div><a href="#.setOrientation">setOrientation</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.KeyLight">KeyLight</a></div>
+    <div><a href="#.Location">Location</a></div>
+    <div><a href="#.Time">Time</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>backgroundMode</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>keyLight</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/stage#.KeyLight">Scene.Stage.KeyLight</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>location</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/stage#.Location">Scene.Stage.Location</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sunModel</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>time</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/stage#.Time">Scene.Stage.Time</a></span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".setLocation"> setLocation<span class="signature">(longitude, latitude, altitude)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>longitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>latitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>altitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setOrientation"> setOrientation<span class="signature">(orientation)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>orientation</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".KeyLight">KeyLight</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>color</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>intensity</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>ambientIntensity</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>direction</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Location">Location</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>longitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>latitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>altitude</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".Time">Time</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>hour</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>day</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

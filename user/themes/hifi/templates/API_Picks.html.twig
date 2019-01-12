@@ -1,0 +1,847 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Picks API lets you create and manage objects for repeatedly calculating intersections in different ways.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.createPick">createPick</a></div>
+    <div><a href="#.disablePick">disablePick</a></div>
+    <div><a href="#.enablePick">enablePick</a></div>
+    <div><a href="#.getPrevPickResult">getPrevPickResult</a></div>
+    <div><a href="#.INTERSECTED_AVATAR">INTERSECTED_AVATAR</a></div>
+    <div><a href="#.INTERSECTED_ENTITY">INTERSECTED_ENTITY</a></div>
+    <div><a href="#.INTERSECTED_HUD">INTERSECTED_HUD</a></div>
+    <div><a href="#.INTERSECTED_NONE">INTERSECTED_NONE</a></div>
+    <div><a href="#.INTERSECTED_OVERLAY">INTERSECTED_OVERLAY</a></div>
+    <div><a href="#.isLeftHand">isLeftHand</a></div>
+    <div><a href="#.isMouse">isMouse</a></div>
+    <div><a href="#.isRightHand">isRightHand</a></div>
+    <div><a href="#.PICK_ALL_INTERSECTIONS">PICK_ALL_INTERSECTIONS</a></div>
+    <div><a href="#.PICK_AVATAR_ENTITIES">PICK_AVATAR_ENTITIES</a></div>
+    <div><a href="#.PICK_AVATARS">PICK_AVATARS</a></div>
+    <div><a href="#.PICK_COARSE">PICK_COARSE</a></div>
+    <div><a href="#.PICK_DOMAIN_ENTITIES">PICK_DOMAIN_ENTITIES</a></div>
+    <div><a href="#.PICK_ENTITIES">PICK_ENTITIES</a></div>
+    <div><a href="#.PICK_HUD">PICK_HUD</a></div>
+    <div><a href="#.PICK_INCLUDE_COLLIDABLE">PICK_INCLUDE_COLLIDABLE</a></div>
+    <div><a href="#.PICK_INCLUDE_INVISIBLE">PICK_INCLUDE_INVISIBLE</a></div>
+    <div><a href="#.PICK_INCLUDE_NONCOLLIDABLE">PICK_INCLUDE_NONCOLLIDABLE</a></div>
+    <div><a href="#.PICK_INCLUDE_VISIBLE">PICK_INCLUDE_VISIBLE</a></div>
+    <div><a href="#.PICK_LOCAL_ENTITIES">PICK_LOCAL_ENTITIES</a></div>
+    <div><a href="#.PICK_OVERLAYS">PICK_OVERLAYS</a></div>
+    <div><a href="#.PICK_PRECISE">PICK_PRECISE</a></div>
+    <div><a href="#.removePick">removePick</a></div>
+    <div><a href="#.setIgnoreItems">setIgnoreItems</a></div>
+    <div><a href="#.setIncludeItems">setIncludeItems</a></div>
+    <div><a href="#.setPrecisionPicking">setPrecisionPicking</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.CollisionPickProperties">CollisionPickProperties</a></div>
+    <div><a href="#.ParabolaPickProperties">ParabolaPickProperties</a></div>
+    <div><a href="#.RayPickProperties">RayPickProperties</a></div>
+    <div><a href="#.StylusPickProperties">StylusPickProperties</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>PICK_ENTITIES</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include domain and avatar entities when intersecting. <em>Read-only.</em>. Deprecated.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_OVERLAYS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include local entities when intersecting. <em>Read-only.</em>. Deprecated.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_DOMAIN_ENTITIES</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include domain entities when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_AVATAR_ENTITIES</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include avatar entities when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_LOCAL_ENTITIES</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include local entities when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_AVATARS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include avatars when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_HUD</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include the HUD sphere when intersecting in HMD mode. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_VISIBLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include visible objects when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_INVISIBLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include invisible objects when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_COLLIDABLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include collidable objects when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_INCLUDE_NONCOLLIDABLE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Include non-collidable objects when intersecting. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_PRECISE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Pick against exact meshes. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_COARSE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">A filter flag. Pick against coarse meshes. <em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>PICK_ALL_INTERSECTIONS</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_NONE</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">An intersection type. Intersected nothing with the given filter flags. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_ENTITY</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">An intersection type. Intersected an entity. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_OVERLAY</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">An intersection type. Intersected an overlay. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_AVATAR</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">An intersection type. Intersected an avatar. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>INTERSECTED_HUD</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">An intersection type. Intersected the HUD sphere. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>perFrameTimeBudget</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The max number of usec to spend per frame updating Pick results.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".createPick"> createPick<span class="signature">(type, properties)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Adds a new Pick. Different <a href="/api-reference/globals#PickType">PickType</a>s use different properties, and within one PickType, the properties you choose can lead to a wide range of behaviors. For example, with PickType.Ray, depending on which optional parameters you pass, you could create a Static Ray Pick, a Mouse Ray Pick, or a Joint Ray Pick. Picks created with this method always intersect at least visible and collidable things</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>type</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#PickType">PickType</a></span></td>
+        <td class="description last">A PickType that specifies the method of picking to use</td>
+      </tr>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/picks#.RayPickProperties">Picks.RayPickProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/picks#.StylusPickProperties">Picks.StylusPickProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/picks#.ParabolaPickProperties">Picks.ParabolaPickProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/picks#.CollisionPickProperties">Picks.CollisionPickProperties</a></span></td>
+        <td class="description last">A PickProperties object, containing all the properties for initializing this Pick</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The ID of the created Pick. Used for managing the Pick. 0 if invalid.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".disablePick"> disablePick<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+  <div class="description"> Disables a Pick.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".enablePick"> enablePick<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+  <div class="description"> Enables a Pick.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".getPrevPickResult"> getPrevPickResult<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#RayPickResult">RayPickResult</a>|<a href="/api-reference/globals#StylusPickResult">StylusPickResult</a>|<a href="/api-reference/globals#ParabolaPickResult">ParabolaPickResult</a>|<a href="/api-reference/globals#CollisionPickResult">CollisionPickResult</a>}</span></h5>
+  <div class="description"> Get the most recent pick result from this Pick. This will be updated as long as the Pick is enabled.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The most recent intersection result. This will be different for different PickTypes.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#RayPickResult">RayPickResult</a></span> | <span class="param-type"><a href="/api-reference/globals#StylusPickResult">StylusPickResult</a></span> | <span class="param-type"><a href="/api-reference/globals#ParabolaPickResult">ParabolaPickResult</a></span> | <span class="param-type"><a href="/api-reference/globals#CollisionPickResult">CollisionPickResult</a></dt></dl><h5 class="name" id=".INTERSECTED_AVATAR"> INTERSECTED_AVATAR<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".INTERSECTED_ENTITY"> INTERSECTED_ENTITY<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".INTERSECTED_HUD"> INTERSECTED_HUD<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".INTERSECTED_NONE"> INTERSECTED_NONE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".INTERSECTED_OVERLAY"> INTERSECTED_OVERLAY<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".isLeftHand"> isLeftHand<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pick is associated with the left hand.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pick is a Joint Ray or Parabola Pick with joint == &quot;_CONTROLLER_LEFTHAND&quot; or &quot;_CAMERA_RELATIVE_CONTROLLER_LEFTHAND&quot;, or a Stylus Pick with hand == 0.</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".isMouse"> isMouse<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pick is associated with the system mouse.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pick is a Mouse Ray or Parabola Pick, false otherwise.</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".isRightHand"> isRightHand<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pick is associated with the right hand.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pick is a Joint Ray or Parabola Pick with joint == &quot;_CONTROLLER_RIGHTHAND&quot; or &quot;_CAMERA_RELATIVE_CONTROLLER_RIGHTHAND&quot;, or a Stylus Pick with hand == 1.</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".PICK_ALL_INTERSECTIONS"> PICK_ALL_INTERSECTIONS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_AVATAR_ENTITIES"> PICK_AVATAR_ENTITIES<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_AVATARS"> PICK_AVATARS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_COARSE"> PICK_COARSE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_DOMAIN_ENTITIES"> PICK_DOMAIN_ENTITIES<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_ENTITIES"> PICK_ENTITIES<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_HUD"> PICK_HUD<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_INCLUDE_COLLIDABLE"> PICK_INCLUDE_COLLIDABLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_INCLUDE_INVISIBLE"> PICK_INCLUDE_INVISIBLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_INCLUDE_NONCOLLIDABLE"> PICK_INCLUDE_NONCOLLIDABLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_INCLUDE_VISIBLE"> PICK_INCLUDE_VISIBLE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_LOCAL_ENTITIES"> PICK_LOCAL_ENTITIES<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_OVERLAYS"> PICK_OVERLAYS<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".PICK_PRECISE"> PICK_PRECISE<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+      <h6>Returns:</h6>
+      <dl><dt> Type: number</dt></dl>
+      <h5 class="name" id=".removePick"> removePick<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+      <div class="description"> Removes a Pick.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setIgnoreItems"> setIgnoreItems<span class="signature">(uid, ignoreItems)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets a list of Entity IDs, Overlay IDs, and/or Avatar IDs to ignore during intersection. Not used by Stylus Picks.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>ignoreItems</code></td>
+            <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+            <td class="description last">A list of IDs to ignore.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setIncludeItems"> setIncludeItems<span class="signature">(uid, includeItems)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets a list of Entity IDs, Overlay IDs, and/or Avatar IDs to include during intersection, instead of intersecting with everything. Stylus Picks <b>only</b> intersect with objects in their include list.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>includeItems</code></td>
+            <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+            <td class="description last">A list of IDs to include.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setPrecisionPicking"> setPrecisionPicking<span class="signature">(uid, precisionPicking)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets whether or not to use precision picking.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pick, as returned by <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>precisionPicking</code></td>
+            <td class="type"> <span class="param-type">boolean</span></td>
+            <td class="description last">Whether or not to use precision picking</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="subsection-title">Type Definitions</h4>
+      <h5 class="name" id=".CollisionPickProperties">CollisionPickProperties</h5>
+      <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a> to create a new Collision Pick.</div>
+      <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pick should start enabled or not. Disabled Picks do not updated their pick results.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>filter</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The filter for this Pick to use, constructed using filter flags combined using bitwise OR.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>shape</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Shape">Shape</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The information about the collision region&apos;s size and shape. Dimensions are in world space, but will scale with the parent if defined.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The position of the collision region, relative to a parent if defined.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>orientation</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The orientation of the collision region, relative to a parent if defined.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>threshold</code></td>
+          <td class="type"> <span class="param-type">float</span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The approximate minimum penetration depth for a test object to be considered in contact with the collision region. The depth is measured in world space, but will scale with the parent if defined.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>collisionGroup</code></td>
+          <td class="type"> <span class="param-type">CollisionMask</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 8</td>
+          <td class="description last">The type of object this collision pick collides as. Objects whose collision masks overlap with the pick&apos;s collision group will be considered colliding with the pick.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The ID of the parent, either an avatar, an entity, an overlay, or a pick.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentJointIndex</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The joint of the parent to parent to, for example, the joints on the model of an avatar. (default = 0, no joint)</td>
+        </tr>
+        <tr>
+          <td class="name"><code>joint</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">If &quot;Mouse,&quot; parents the pick to the mouse. If &quot;Avatar,&quot; parents the pick to MyAvatar&apos;s head. Otherwise, parents to the joint of the given name on MyAvatar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>scaleWithParent</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">If true, the collision pick&apos;s dimensions and threshold will adjust according to the scale of the parent.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".ParabolaPickProperties">ParabolaPickProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a> to create a new Parabola Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pick should start enabled or not. Disabled Picks do not updated their pick results.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>filter</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The filter for this Pick to use, constructed using filter flags combined using bitwise OR.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>maxDistance</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0.0</td>
+          <td class="description last">The max distance at which this Pick will intersect. 0.0 = no max.&lt;0.0 is invalid.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The ID of the parent, either an avatar, an entity, an overlay, or a pick.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentJointIndex</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The joint of the parent to parent to, for example, the joints on the model of an avatar. (default = 0, no joint)</td>
+        </tr>
+        <tr>
+          <td class="name"><code>joint</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">If &quot;Mouse,&quot; parents the pick to the mouse. If &quot;Avatar,&quot; parents the pick to MyAvatar&apos;s head. Otherwise, parents to the joint of the given name on MyAvatar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>posOffset</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> Vec3.ZERO</td>
+          <td class="description last">Only for Joint Parabola Picks. A local joint position offset, in meters. x = upward, y = forward, z = lateral</td>
+        </tr>
+        <tr>
+          <td class="name"><code>dirOffset</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> Vec3.UP</td>
+          <td class="description last">Only for Joint Parabola Picks. A local joint direction offset. x = upward, y = forward, z = lateral</td>
+        </tr>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">Only for Static Parabola Picks. The world-space origin of the parabola segment.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>direction</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> -Vec3.FRONT</td>
+          <td class="description last">Only for Static Parabola Picks. The world-space direction of the parabola segment.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>speed</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 1</td>
+          <td class="description last">The initial speed of the parabola, i.e. the initial speed of the projectile whose trajectory defines the parabola.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>accelerationAxis</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> -Vec3.UP</td>
+          <td class="description last">The acceleration of the parabola, i.e. the acceleration of the projectile whose trajectory defines the parabola, both magnitude and direction.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>rotateAccelerationWithAvatar</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">Whether or not the acceleration axis should rotate with the avatar&apos;s local Y axis.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>rotateAccelerationWithParent</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">Whether or not the acceleration axis should rotate with the parent&apos;s local Y axis, if available.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>scaleWithParent</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">If true, the velocity and acceleration of the Pick will scale linearly with the parent, if available. scaleWithAvatar is an alias but is deprecated.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".RayPickProperties">RayPickProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a> to create a new Ray Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pick should start enabled or not. Disabled Picks do not updated their pick results.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>filter</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The filter for this Pick to use, constructed using filter flags combined using bitwise OR.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>maxDistance</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0.0</td>
+          <td class="description last">The max distance at which this Pick will intersect. 0.0 = no max.&lt;0.0 is invalid.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">The ID of the parent, either an avatar, an entity, an overlay, or a pick.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>parentJointIndex</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The joint of the parent to parent to, for example, the joints on the model of an avatar. (default = 0, no joint)</td>
+        </tr>
+        <tr>
+          <td class="name"><code>joint</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="attributes"></td>
+          <td class="default"></td>
+          <td class="description last">If &quot;Mouse,&quot; parents the pick to the mouse. If &quot;Avatar,&quot; parents the pick to MyAvatar&apos;s head. Otherwise, parents to the joint of the given name on MyAvatar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>posOffset</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> Vec3.ZERO</td>
+          <td class="description last">Only for Joint Ray Picks. A local joint position offset, in meters. x = upward, y = forward, z = lateral</td>
+        </tr>
+        <tr>
+          <td class="name"><code>dirOffset</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> Vec3.UP</td>
+          <td class="description last">Only for Joint Ray Picks. A local joint direction offset. x = upward, y = forward, z = lateral</td>
+        </tr>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">Only for Static Ray Picks. The world-space origin of the ray.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>direction</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> -Vec3.UP</td>
+          <td class="description last">Only for Static Ray Picks. The world-space direction of the ray.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".StylusPickProperties">StylusPickProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/picks#.createPick">Picks.createPick</a> to create a new Stylus Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>hand</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> -1</td>
+          <td class="description last">An integer. 0 == left, 1 == right. Invalid otherwise.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pick should start enabled or not. Disabled Picks do not updated their pick results.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>filter</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0</td>
+          <td class="description last">The filter for this Pick to use, constructed using filter flags combined using bitwise OR.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>maxDistance</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0.0</td>
+          <td class="description last">The max distance at which this Pick will intersect. 0.0 = no max.&lt;0.0 is invalid.</td>
+        </tr>
+      </tbody>
+    </table>
+    <dl class="details"></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

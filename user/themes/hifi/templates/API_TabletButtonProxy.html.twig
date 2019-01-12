@@ -1,0 +1,178 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#editProperties">editProperties</a></div>
+    <div><a href="#getProperties">getProperties</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#clicked">clicked</a></div>
+    <div><a href="#propertiesChanged">propertiesChanged</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.ButtonProperties">ButtonProperties</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>uuid</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="description last">Uniquely identifies this button. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>properties</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/tabletbuttonproxy#.ButtonProperties">TabletButtonProxy.ButtonProperties</a></span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id="editProperties"><span class="type-signature"></span>editProperties<span class="signature">(properties)</span><span class="type-signature"></span></h5>
+  <div class="description"> Replace the values of some of this button&apos;s properties.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/tabletbuttonproxy#.ButtonProperties">TabletButtonProxy.ButtonProperties</a></span></td>
+        <td class="description last">Set of properties to change.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="getProperties"><span class="type-signature"></span>getProperties<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/tabletbuttonproxy#.ButtonProperties">TabletButtonProxy.ButtonProperties</a>}</span></h5>
+  <div class="description"> Returns the current value of this button&apos;s properties.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/objects/tabletbuttonproxy#.ButtonProperties">TabletButtonProxy.ButtonProperties</a></dt></dl>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id="clicked"><span class="type-signature"></span>clicked<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when this button has been clicked on by the user.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id="propertiesChanged"><span class="type-signature"></span>propertiesChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".ButtonProperties">ButtonProperties</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>icon</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">URL to button icon. (50 x 50)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>hoverIcon</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">URL to button icon, displayed during mouse hover. (50 x 50)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>activeHoverIcon</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">URL to button icon used when button is active, and during mouse hover. (50 x 50)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>activeIcon</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">URL to button icon used when button is active. (50 x 50)</td>
+      </tr>
+      <tr>
+        <td class="name"><code>text</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Button caption.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>hoverText</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Button caption when button is not-active but during mouse hover.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>activeText</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Button caption when button is active.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>activeHoverText</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Button caption when button is active and during mouse hover.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isActive</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> when button is active.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>sortOrder</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Determines sort order on tablet. lower numbers will appear before larger numbers. Default is 100.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

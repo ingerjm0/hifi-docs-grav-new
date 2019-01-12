@@ -1,0 +1,227 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getAllowMouseCapture">getAllowMouseCapture</a></div>
+    <div><a href="#.getDepth">getDepth</a></div>
+    <div><a href="#.getMaximumPosition">getMaximumPosition</a></div>
+    <div><a href="#.getPosition">getPosition</a></div>
+    <div><a href="#.getScale">getScale</a></div>
+    <div><a href="#.getVisible">getVisible</a></div>
+    <div><a href="#.isMouseCaptured">isMouseCaptured</a></div>
+    <div><a href="#.isPointingAtSystemOverlay">isPointingAtSystemOverlay</a></div>
+    <div><a href="#.setAllowMouseCapture">setAllowMouseCapture</a></div>
+    <div><a href="#.setDepth">setDepth</a></div>
+    <div><a href="#.setPosition">setPosition</a></div>
+    <div><a href="#.setScale">setScale</a></div>
+    <div><a href="#.setVisible">setVisible</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>allowMouseCapture</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>depth</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>maximumPosition</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>mouseCaptured</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>pointingAtSystemOverlay</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>scale</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>visible</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getAllowMouseCapture"> getAllowMouseCapture<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getDepth"> getDepth<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getMaximumPosition"> getMaximumPosition<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec2">Vec2</a>}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec2">Vec2</a></dt></dl>
+  <h5 class="name" id=".getPosition"> getPosition<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec2">Vec2</a>}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec2">Vec2</a></dt></dl>
+  <h5 class="name" id=".getScale"> getScale<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getVisible"> getVisible<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isMouseCaptured"> isMouseCaptured<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isPointingAtSystemOverlay"> isPointingAtSystemOverlay<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".setAllowMouseCapture"> setAllowMouseCapture<span class="signature">(allowMouseCaptured)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>allowMouseCaptured</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setDepth"> setDepth<span class="signature">(depth)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>depth</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setPosition"> setPosition<span class="signature">(position)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setScale"> setScale<span class="signature">(scale)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>scale</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setVisible"> setVisible<span class="signature">(visible)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>visible</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,501 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#addButton">addButton</a></div>
+    <div><a href="#closeDialog">closeDialog</a></div>
+    <div><a href="#emitScriptEvent">emitScriptEvent</a></div>
+    <div><a href="#getLandscape">getLandscape</a></div>
+    <div><a href="#gotoHomeScreen">gotoHomeScreen</a></div>
+    <div><a href="#gotoMenuScreen">gotoMenuScreen</a></div>
+    <div><a href="#gotoWebScreen">gotoWebScreen</a></div>
+    <div><a href="#initialScreen">initialScreen</a></div>
+    <div><a href="#isMessageDialogOpen">isMessageDialogOpen</a></div>
+    <div><a href="#isPathLoaded">isPathLoaded</a></div>
+    <div><a href="#loadQMLOnTop">loadQMLOnTop</a></div>
+    <div><a href="#loadQMLSource">loadQMLSource</a></div>
+    <div><a href="#loadWebScreenOnTop">loadWebScreenOnTop</a></div>
+    <div><a href="#onHomeScreen">onHomeScreen</a></div>
+    <div><a href="#popFromStack">popFromStack</a></div>
+    <div><a href="#pushOntoStack">pushOntoStack</a></div>
+    <div><a href="#removeButton">removeButton</a></div>
+    <div><a href="#returnToPreviousApp">returnToPreviousApp</a></div>
+    <div><a href="#screenChanged">screenChanged</a></div>
+    <div><a href="#sendToQml">sendToQml</a></div>
+    <div><a href="#setLandscape">setLandscape</a></div>
+    <div><a href="#toolbarModeChanged">toolbarModeChanged</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#fromQml">fromQml</a></div>
+    <div><a href="#isTabletShownChanged">isTabletShownChanged</a></div>
+    <div><a href="#webEventReceived">webEventReceived</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#ButtonList">ButtonList</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>name</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last">Name of this tablet. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>toolbarMode</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last">Used to transition this tablet into and out of toolbar mode. When tablet is in toolbar mode, all its buttons will appear in a floating toolbar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>landscape</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>tabletShown</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>buttons</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/tabletproxy#ButtonList">TabletProxy#ButtonList</a></span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id="addButton"><span class="type-signature"></span>addButton<span class="signature">(properties)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/tabletbuttonproxy">TabletButtonProxy</a>}</span></h5>
+  <div class="description"> Creates a new button, adds it to this and returns it.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last">Button properties.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: <a href="/api-reference/objects/tabletbuttonproxy">TabletButtonProxy</a></dt></dl>
+  <h5 class="name" id="closeDialog"><span class="type-signature"></span>closeDialog<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Close any open dialogs.</div>
+  <h5 class="name" id="emitScriptEvent"><span class="type-signature"></span>emitScriptEvent<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <div class="description"> Used to send an event to the HTML/JavaScript embedded in the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span> | <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="getLandscape"><span class="type-signature"></span>getLandscape<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id="gotoHomeScreen"><span class="type-signature"></span>gotoHomeScreen<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Transition to the home screen.</div>
+  <h5 class="name" id="gotoMenuScreen"><span class="type-signature"></span>gotoMenuScreen<span class="signature">(submenu<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>submenu</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="gotoWebScreen"><span class="type-signature"></span>gotoWebScreen<span class="signature">(url, injectedJavaScriptUrl<span class="signature-attributes">opt</span>, loadOtherBase<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Show the specified Web url on the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>url</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">URL of web page.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>injectedJavaScriptUrl</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">URL to an additional JS script to inject into the web page.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>loadOtherBase</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="initialScreen"><span class="type-signature"></span>initialScreen<span class="signature">(url)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>url</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="isMessageDialogOpen"><span class="type-signature"></span>isMessageDialogOpen<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check if the tablet has a message dialog open.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id="isPathLoaded"><span class="type-signature"></span>isPathLoaded<span class="signature">(path)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id="loadQMLOnTop"><span class="type-signature"></span>loadQMLOnTop<span class="signature">(path)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="loadQMLSource"><span class="type-signature"></span>loadQMLSource<span class="signature">(path, resizable<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>resizable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="loadWebScreenOnTop"><span class="type-signature"></span>loadWebScreenOnTop<span class="signature">(path, injectedJavaScriptURL<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>injectedJavaScriptURL</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="onHomeScreen"><span class="type-signature"></span>onHomeScreen<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check if the tablet is on the home screen.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id="popFromStack"><span class="type-signature"></span>popFromStack<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id="pushOntoStack"><span class="type-signature"></span>pushOntoStack<span class="signature">(path)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>path</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id="removeButton"><span class="type-signature"></span>removeButton<span class="signature">(button)</span><span class="type-signature"></span></h5>
+  <div class="description"> Removes a button from the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>button</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/tabletbuttonproxy">TabletButtonProxy</a></span></td>
+        <td class="description last">The button to be removed</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="returnToPreviousApp"><span class="type-signature"></span>returnToPreviousApp<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id="screenChanged"><span class="type-signature"></span>screenChanged<span class="signature">(type, url)</span><span class="type-signature"></span></h5>
+  <div class="description"> Signaled when this tablet screen changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>type</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">&quot;Home&quot;, &quot;Web&quot;, &quot;Menu&quot;, &quot;QML&quot;, &quot;Closed&quot;.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>url</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Only valid for Web and QML.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="sendToQml"><span class="type-signature"></span>sendToQml<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <div class="description"> Used to send an event to the QML embedded in the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span> | <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="setLandscape"><span class="type-signature"></span>setLandscape<span class="signature">(landscape)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set tablet into or out of landscape mode.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>landscape</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> for landscape,<ode>false for portrait.</ode>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id="toolbarModeChanged"><span class="type-signature"></span>toolbarModeChanged<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id="fromQml"><span class="type-signature"></span>fromQml<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Signaled when this tablet receives an event from the qml embedded in the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span> | <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id="isTabletShownChanged"><span class="type-signature"></span>isTabletShownChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Signaled when the tablet becomes visible or becomes invisible.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id="webEventReceived"><span class="type-signature"></span>webEventReceived<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Signaled when this tablet receives an event from the html/js embedded in the tablet.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span> | <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id="ButtonList">ButtonList</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

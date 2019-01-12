@@ -1,0 +1,413 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.allNotesOff">allNotesOff</a></div>
+    <div><a href="#.blockMidiDevice">blockMidiDevice</a></div>
+    <div><a href="#.broadcastEnable">broadcastEnable</a></div>
+    <div><a href="#.listMidiDevices">listMidiDevices</a></div>
+    <div><a href="#.playMidiNote">playMidiNote</a></div>
+    <div><a href="#.resetDevices">resetDevices</a></div>
+    <div><a href="#.sendMidiMessage">sendMidiMessage</a></div>
+    <div><a href="#.sendRawDword">sendRawDword</a></div>
+    <div><a href="#.thruModeEnable">thruModeEnable</a></div>
+    <div><a href="#.typeChanPressureEnable">typeChanPressureEnable</a></div>
+    <div><a href="#.typeControlChangeEnable">typeControlChangeEnable</a></div>
+    <div><a href="#.typeNoteOffEnable">typeNoteOffEnable</a></div>
+    <div><a href="#.typeNoteOnEnable">typeNoteOnEnable</a></div>
+    <div><a href="#.typePitchBendEnable">typePitchBendEnable</a></div>
+    <div><a href="#.typePolyKeyPressureEnable">typePolyKeyPressureEnable</a></div>
+    <div><a href="#.typeProgramChangeEnable">typeProgramChangeEnable</a></div>
+    <div><a href="#.typeSystemMessageEnable">typeSystemMessageEnable</a></div>
+    <div><a href="#.unblockMidiDevice">unblockMidiDevice</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".allNotesOff"> allNotesOff<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Turn off all notes on all connected devices.</div>
+  <h5 class="name" id=".blockMidiDevice"> blockMidiDevice<span class="signature">(name, output)</span><span class="type-signature"></span></h5>
+  <div class="description"> Block an input/output by name.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>output</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".broadcastEnable"> broadcastEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <div class="description"> Broadcast on all unblocked devices.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".listMidiDevices"> listMidiDevices<span class="signature">(output)</span> <span class="type-signature">&#x2192; {Array.&lt;string&gt;}</span></h5>
+  <div class="description"> Get a list of inputs/outputs.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>output</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;string&gt;</dt></dl>
+  <h5 class="name" id=".playMidiNote"> playMidiNote<span class="signature">(status, note, velocity)</span><span class="type-signature"></span></h5>
+  <div class="description"> Play a note on all connected devices.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>status</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">0x80 is note off, 0x90 is note on (if velocity=0, note off), etc.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>note</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">MIDI note number.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>velocity</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Note velocity (0 means note off).</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".resetDevices"> resetDevices<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Clean up and re-discover attached devices.</div>
+  <h5 class="name" id=".sendMidiMessage"> sendMidiMessage<span class="signature">(device, channel, type, note, velocity)</span><span class="type-signature"></span></h5>
+  <div class="description"> Send MIDI message to a particular device.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>device</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Integer device number.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>channel</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Integer channel number.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>type</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">0x8 is note off, 0x9 is note on (if velocity=0, note off), etc.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>note</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">MIDI note number.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>velocity</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Note velocity (0 means note off).</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".sendRawDword"> sendRawDword<span class="signature">(device, raw)</span><span class="type-signature"></span></h5>
+  <div class="description"> Send Raw MIDI packet to a particular device.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>device</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Integer device number.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>raw</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Integer (DWORD) raw MIDI message.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".thruModeEnable"> thruModeEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <div class="description"> Repeat all incoming notes to all outputs (default disabled).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeChanPressureEnable"> typeChanPressureEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeControlChangeEnable"> typeControlChangeEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeNoteOffEnable"> typeNoteOffEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeNoteOnEnable"> typeNoteOnEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typePitchBendEnable"> typePitchBendEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typePolyKeyPressureEnable"> typePolyKeyPressureEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeProgramChangeEnable"> typeProgramChangeEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".typeSystemMessageEnable"> typeSystemMessageEnable<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".unblockMidiDevice"> unblockMidiDevice<span class="signature">(name, output)</span><span class="type-signature"></span></h5>
+  <div class="description"> Unblock an input/output by name.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>output</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,228 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>A UUID (Universally Unique IDentifier) is used to uniquely identify entities, overlays, avatars, and the like. It is represented in JavaScript as a string in the format, <code>{nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn}</code>, where the &quot;n&quot;s are hexadecimal digits.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.fromString">fromString</a></div>
+    <div><a href="#.generate">generate</a></div>
+    <div><a href="#.isEqual">isEqual</a></div>
+    <div><a href="#.isNull">isNull</a></div>
+    <div><a href="#.print">print</a></div>
+    <div><a href="#.toString">toString</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>NULL</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="description last">The null UUID, <code>{00000000-0000-0000-0000-000000000000}</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".fromString"> fromString<span class="signature">(string)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/uuid">Uuid</a>}</span></h5>
+  <div class="description"> Generates a UUID from a string representation of the UUID.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>string</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">A string representation of a UUID. The curly braces are optional.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A UUID if the given <code>string</code> is valid, <code>null</code> otherwise.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/uuid">Uuid</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Valid and invalid parameters.</p><pre><code>var uuid = Uuid.fromString(&quot;{527c27ea-6d7b-4b47-9ae2-b3051d50d2cd}&quot;);
+print(uuid); // {527c27ea-6d7b-4b47-9ae2-b3051d50d2cd}
+
+uuid = Uuid.fromString(&quot;527c27ea-6d7b-4b47-9ae2-b3051d50d2cd&quot;);
+print(uuid); // {527c27ea-6d7b-4b47-9ae2-b3051d50d2cd}
+
+uuid = Uuid.fromString(&quot;527c27ea&quot;);
+print(uuid); // null</code></pre>
+  <h5 class="name" id=".generate"> generate<span class="signature">()</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/uuid">Uuid</a>}</span></h5>
+  <div class="description"> Generate a new UUID.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> A new UUID.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/uuid">Uuid</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Generate a new UUID and reports its JavaScript type.</p><pre><code>var uuid = Uuid.generate();
+print(uuid);        // {nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn}
+print(typeof uuid); // string</code></pre>
+  <h5 class="name" id=".isEqual"> isEqual<span class="signature">(idA, idB)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Test whether two given UUIDs are equal.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>idA</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The first UUID to compare.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>idB</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The second UUID to compare.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the two UUIDs are equal, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Demonstrate <code>true</code> and <code>false</code> cases.</p><pre><code>var uuidA = Uuid.generate();
+var uuidB = Uuid.generate();
+print(Uuid.isEqual(uuidA, uuidB)); // false
+uuidB = uuidA;
+print(Uuid.isEqual(uuidA, uuidB)); // true</code></pre>
+  <h5 class="name" id=".isNull"> isNull<span class="signature">(id)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Test whether a given UUID is null.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The UUID to test.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the UUID equals Uuid.NULL or is <code>null</code>, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Demonstrate <code>true</code> and <code>false</code> cases.</p><pre><code>var uuid; // undefined
+print(Uuid.isNull(uuid)); // false
+uuid = Uuid.generate();
+print(Uuid.isNull(uuid)); // false
+uuid = Uuid.NULL;
+print(Uuid.isNull(uuid)); // true
+uuid = null;
+print(Uuid.isNull(uuid)); // true</code></pre>
+  <h5 class="name" id=".print"> print<span class="signature">(label, id)</span><span class="type-signature"></span></h5>
+  <div class="description"> Print to the program log a text label followed by the UUID value.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>label</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The label to print.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The UUID to print.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Two ways of printing a label plus UUID.</p><pre><code>var uuid = Uuid.generate();
+Uuid.print(&quot;Generated UUID:&quot;, uuid); // Generated UUID: {nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn}
+print(&quot;Generated UUID: &quot; + uuid);    // Generated UUID: {nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn}
+   </code></pre>
+  <h5 class="name" id=".toString"> toString<span class="signature">(id)</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <div class="description"> Generates a string representation of a UUID. However, because UUIDs are represented in JavaScript as strings, this is in effect a no-op.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>id</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The UUID to generate a string from.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> - A string representation of the UUID.</div>
+  <dl><dt> Type: string</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

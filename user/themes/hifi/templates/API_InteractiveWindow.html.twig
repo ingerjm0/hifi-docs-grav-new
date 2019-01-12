@@ -1,0 +1,260 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.close">close</a></div>
+    <div><a href="#.emitScriptEvent">emitScriptEvent</a></div>
+    <div><a href="#.emitWebEvent">emitWebEvent</a></div>
+    <div><a href="#.raise">raise</a></div>
+    <div><a href="#.sendToQml">sendToQml</a></div>
+    <div><a href="#.show">show</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.closed">closed</a></div>
+    <div><a href="#.fromQml">fromQml</a></div>
+    <div><a href="#.positionChanged">positionChanged</a></div>
+    <div><a href="#.presentationModeChanged">presentationModeChanged</a></div>
+    <div><a href="#.qmlToScript">qmlToScript</a></div>
+    <div><a href="#.scriptEventReceived">scriptEventReceived</a></div>
+    <div><a href="#.sizeChanged">sizeChanged</a></div>
+    <div><a href="#.titleChanged">titleChanged</a></div>
+    <div><a href="#.visibleChanged">visibleChanged</a></div>
+    <div><a href="#.webEventReceived">webEventReceived</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>title</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>size</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>visible</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>presentationMode</code></td>
+          <td class="type"> <span class="param-type">Desktop.PresentationMode</span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".close"> close<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".emitScriptEvent"> emitScriptEvent<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".emitWebEvent"> emitWebEvent<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".raise"> raise<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".sendToQml"> sendToQml<span class="signature">(message)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".show"> show<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".closed"> closed<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".fromQml"> fromQml<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".positionChanged"> positionChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".presentationModeChanged"> presentationModeChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".qmlToScript"> qmlToScript<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".scriptEventReceived"> scriptEventReceived<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".sizeChanged"> sizeChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".titleChanged"> titleChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".visibleChanged"> visibleChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".webEventReceived"> webEventReceived<span class="signature">(message)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>message</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

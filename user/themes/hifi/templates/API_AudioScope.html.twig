@@ -1,0 +1,266 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The AudioScope API helps control the Audio Scope features in Interface
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getAutoTrigger">getAutoTrigger</a></div>
+    <div><a href="#.getFramesPerScope">getFramesPerScope</a></div>
+    <div><a href="#.getFramesPerSecond">getFramesPerSecond</a></div>
+    <div><a href="#.getPause">getPause</a></div>
+    <div><a href="#.getScopeInput">getScopeInput</a></div>
+    <div><a href="#.getScopeOutputLeft">getScopeOutputLeft</a></div>
+    <div><a href="#.getScopeOutputRight">getScopeOutputRight</a></div>
+    <div><a href="#.getTriggered">getTriggered</a></div>
+    <div><a href="#.getTriggerInput">getTriggerInput</a></div>
+    <div><a href="#.getTriggerOutputLeft">getTriggerOutputLeft</a></div>
+    <div><a href="#.getTriggerOutputRight">getTriggerOutputRight</a></div>
+    <div><a href="#.getVisible">getVisible</a></div>
+    <div><a href="#.selectAudioScopeFiftyFrames">selectAudioScopeFiftyFrames</a></div>
+    <div><a href="#.selectAudioScopeFiveFrames">selectAudioScopeFiveFrames</a></div>
+    <div><a href="#.selectAudioScopeTwentyFrames">selectAudioScopeTwentyFrames</a></div>
+    <div><a href="#.setAutoTrigger">setAutoTrigger</a></div>
+    <div><a href="#.setLocalEcho">setLocalEcho</a></div>
+    <div><a href="#.setPause">setPause</a></div>
+    <div><a href="#.setServerEcho">setServerEcho</a></div>
+    <div><a href="#.setTriggered">setTriggered</a></div>
+    <div><a href="#.setTriggerValues">setTriggerValues</a></div>
+    <div><a href="#.setVisible">setVisible</a></div>
+    <div><a href="#.toggle">toggle</a></div>
+    <div><a href="#.togglePause">togglePause</a></div>
+    <div><a href="#.toggleTrigger">toggleTrigger</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.pauseChanged">pauseChanged</a></div>
+    <div><a href="#.triggered">triggered</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>scopeInput</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>scopeOutputLeft</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>scopeOutputRight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>triggerInput</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>triggerOutputLeft</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>triggerOutputRight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last"><em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getAutoTrigger"> getAutoTrigger<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getFramesPerScope"> getFramesPerScope<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getFramesPerSecond"> getFramesPerSecond<span class="signature">()</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getPause"> getPause<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getScopeInput"> getScopeInput<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getScopeOutputLeft"> getScopeOutputLeft<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getScopeOutputRight"> getScopeOutputRight<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getTriggered"> getTriggered<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getTriggerInput"> getTriggerInput<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getTriggerOutputLeft"> getTriggerOutputLeft<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getTriggerOutputRight"> getTriggerOutputRight<span class="signature">()</span> <span class="type-signature">&#x2192; {Array.&lt;number&gt;}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Array.&lt;number&gt;</dt></dl>
+  <h5 class="name" id=".getVisible"> getVisible<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".selectAudioScopeFiftyFrames"> selectAudioScopeFiftyFrames<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".selectAudioScopeFiveFrames"> selectAudioScopeFiveFrames<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".selectAudioScopeTwentyFrames"> selectAudioScopeTwentyFrames<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".setAutoTrigger"> setAutoTrigger<span class="signature">(autoTrigger)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>autoTrigger</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setLocalEcho"> setLocalEcho<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".setPause"> setPause<span class="signature">(paused)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>paused</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setServerEcho"> setServerEcho<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".setTriggered"> setTriggered<span class="signature">(triggered)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>triggered</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setTriggerValues"> setTriggerValues<span class="signature">(x, y)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>x</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>y</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setVisible"> setVisible<span class="signature">(visible)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>visible</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".toggle"> toggle<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".togglePause"> togglePause<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h5 class="name" id=".toggleTrigger"> toggleTrigger<span class="signature">()</span><span class="type-signature"></span></h5>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".pauseChanged"> pauseChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".triggered"> triggered<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,116 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Settings API provides a facility to store and retrieve values that persist between Interface runs.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.getValue">getValue</a></div>
+    <div><a href="#.setValue">setValue</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".getValue"> getValue<span class="signature">(key, defaultValue<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {string|number|boolean|object}</span></h5>
+  <div class="description"> Retrieve the value from a named setting.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>key</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The name of the setting.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>defaultValue</code></td>
+        <td class="type"> <span class="param-type">string</span> | <span class="param-type">number</span> | <span class="param-type">boolean</span> | <span class="param-type">object</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">The value to return if the setting doesn&apos;t exist.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The value stored in the named setting if it exists, otherwise the <code>defaultValue</code>.</div>
+  <dl><dt> Type: string</span> | <span class="param-type">number</span> | <span class="param-type">boolean</span> | <span class="param-type">object</dt></dl><h5>Example</h5><p class="code-caption">Retrieve non-existent setting values.</p><pre><code>var value1 = Settings.getValue(&quot;Script Example/Nonexistent Key&quot;);
+print(&quot;Value: &quot; + (typeof value1) + &quot; &quot; + JSON.stringify(value1));  // string &quot;&quot;
+
+var value2 = Settings.getValue(&quot;Script Example/Nonexistent Key&quot;, true);
+print(&quot;Value: &quot; + (typeof value2) + &quot; &quot; + JSON.stringify(value2));  // boolean true</code></pre><h5 class="name" id=".setValue"> setValue<span class="signature">(key, value)</span><span class="type-signature"></span></h5>
+      <div class="description"> Store a value in a named setting. If the setting already exists its value is overwritten, otherwise a new setting is created. If the value is set to <code>null</code> or <code>undefined</code>, the setting is deleted.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>key</code></td>
+            <td class="type"> <span class="param-type">string</span></td>
+            <td class="description last">The name of the setting. Be sure to use a unique name if creating a new setting.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>value</code></td>
+            <td class="type"> <span class="param-type">string</span> | <span class="param-type">number</span> | <span class="param-type">boolean</span> | <span class="param-type">object</span> | <span class="param-type">undefined</span></td>
+            <td class="description last">The value to store in the setting. If <code>null</code> or <code>undefined</code> is specified, the setting is deleted.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5>Example</h5>
+      <p class="code-caption">Store and retrieve an object value.</p><pre><code>Settings.setValue(&quot;Script Example/My Key&quot;, { x: 0, y: 10, z: 0 });
+
+var value = Settings.getValue(&quot;Script Example/My Key&quot;);
+print(&quot;Value: &quot; + (typeof value) + &quot; &quot; + JSON.stringify(value));  // object {&quot;x&quot;:0,&quot;y&quot;:10,&quot;z&quot;:0}
+   </code></pre>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

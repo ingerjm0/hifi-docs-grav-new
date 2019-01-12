@@ -1,0 +1,606 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The <code>Audio</code> API provides facilities to interact with audio inputs and outputs and to play sounds.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.addToSoloList">addToSoloList</a></div>
+    <div><a href="#.getRecording">getRecording</a></div>
+    <div><a href="#.isStereoInput">isStereoInput</a></div>
+    <div><a href="#.onContextChanged">onContextChanged</a></div>
+    <div><a href="#.playSound">playSound</a></div>
+    <div><a href="#.playSystemSound">playSystemSound</a></div>
+    <div><a href="#.removeFromSoloList">removeFromSoloList</a></div>
+    <div><a href="#.resetSoloList">resetSoloList</a></div>
+    <div><a href="#.setInputDevice">setInputDevice</a></div>
+    <div><a href="#.setOutputDevice">setOutputDevice</a></div>
+    <div><a href="#.setReverb">setReverb</a></div>
+    <div><a href="#.setReverbOptions">setReverbOptions</a></div>
+    <div><a href="#.setStereoInput">setStereoInput</a></div>
+    <div><a href="#.startRecording">startRecording</a></div>
+    <div><a href="#.stopRecording">stopRecording</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.contextChanged">contextChanged</a></div>
+    <div><a href="#.disconnected">disconnected</a></div>
+    <div><a href="#.environmentMuted">environmentMuted</a></div>
+    <div><a href="#.inputLevelChanged">inputLevelChanged</a></div>
+    <div><a href="#.inputReceived">inputReceived</a></div>
+    <div><a href="#.inputVolumeChanged">inputVolumeChanged</a></div>
+    <div><a href="#.isStereoInputChanged">isStereoInputChanged</a></div>
+    <div><a href="#.mutedByMixer">mutedByMixer</a></div>
+    <div><a href="#.mutedChanged">mutedChanged</a></div>
+    <div><a href="#.noiseGateClosed">noiseGateClosed</a></div>
+    <div><a href="#.noiseGateOpened">noiseGateOpened</a></div>
+    <div><a href="#.noiseReductionChanged">noiseReductionChanged</a></div>
+    <div><a href="#.nop">nop</a></div>
+    <div><a href="#.receivedFirstPacket">receivedFirstPacket</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>muted</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the audio input is muted, otherwise <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>noiseReduction</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if noise reduction is enabled, otherwise <code>false</code>. When enabled, the input audio signal is blocked (fully attenuated) when it falls below an adaptive threshold set just above the noise floor.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>inputLevel</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The loudness of the audio input, range <code>0.0</code> (no sound) &#x2013; <code>1.0</code> (the onset of clipping). <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>inputVolume</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">Adjusts the volume of the input audio; range <code>0.0</code> &#x2013; <code>1.0</code>. If set to a value, the resulting value depends on the input device: for example, the volume can&apos;t be changed on some devices, and others might only support values of <code>0.0</code> and <code>1.0</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>isStereoInput</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the input audio is being used in stereo, otherwise <code>false</code>. Some devices do not support stereo, in which case the value is always <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>context</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last">The current context of the audio: either <code>&quot;Desktop&quot;</code> or <code>&quot;HMD&quot;</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>devices</code></td>
+          <td class="type"> <span class="param-type">object</span></td>
+          <td class="description last"><em>Read-only.</em> <strong>Deprecated:</strong> This property is deprecated and will be removed.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>isSoloing</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><em>Read-only.</em> <code>true</code> if any nodes are soloed.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>soloList</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+          <td class="description last"><em>Read-only.</em> Get the list of currently soloed node UUIDs.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".addToSoloList"> addToSoloList<span class="signature">(uuidList)</span><span class="type-signature"></span></h5>
+  <div class="description"> Add nodes to the audio solo list</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uuidList</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+        <td class="description last">List of node UUIDs to add to the solo list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".getRecording"> getRecording<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether an audio recording is currently being made.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if an audio recording is currently being made, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isStereoInput"> isStereoInput<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Get whether or not the audio input is used in stereo.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the audio input is used in stereo, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".onContextChanged"> onContextChanged<span class="signature">()</span><span class="type-signature"></span></h5>
+  <dl class="details"><em><strong><dt class="important tag-deprecated">Deprecated:</dt></strong><div>This function is deprecated and will be removed.</li></div></em></dl>
+  <h5 class="name" id=".playSound"> playSound<span class="signature">(sound, injectorOptions<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/audioinjector">AudioInjector</a>}</span></h5>
+  <div class="description"> Starts playing &#x2014; &quot;injecting&quot; &#x2014; the content of an audio file. The sound is played globally (sent to the audio mixer) so that everyone hears it, unless the <code>injectorOptions</code> has <code>localOnly</code> set to <code>true</code> in which case only the client hears the sound played. No sound is played if sent to the audio mixer but the client is not connected to an audio mixer. The <a href="/api-reference/objects/audioinjector">AudioInjector</a> object returned by the function can be used to control the playback and get information about its current state.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sound</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/soundobject">SoundObject</a></span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">The content of an audio file, loaded using <a href="/api-reference/namespaces/soundcache#.getSound">SoundCache.getSound</a>. See <a href="/api-reference/objects/soundobject">SoundObject</a> for supported formats.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>injectorOptions</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a></span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> {}</td>
+        <td class="description last">Audio injector configuration.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The audio injector that plays the audio file.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/audioinjector">AudioInjector</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Play a sound.</p><pre><code>var sound = SoundCache.getSound(Script.resourcesPath() + &quot;sounds/sample.wav&quot;);
+var injector;
+var injectorOptions = {
+  position: MyAvatar.position
+};
+
+Script.setTimeout(function () { // Give the sound time to load.
+  injector = Audio.playSound(sound, injectorOptions);
+}, 1000);</code></pre>
+  <h5 class="name" id=".playSystemSound"> playSystemSound<span class="signature">(sound, position)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/objects/audioinjector">AudioInjector</a>}</span></h5>
+  <div class="description"> Start playing the content of an audio file, locally (isn&apos;t sent to the audio mixer). This is the same as calling <a href="/api-reference/namespaces/audio#.playSound">Audio.playSound</a> with <a href="/api-reference/objects/audioinjector#.AudioInjectorOptions">AudioInjector.AudioInjectorOptions</a> <code>localOnly</code> set <code>true</code> and the specified <code>position</code>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sound</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/soundobject">SoundObject</a></span></td>
+        <td class="description last">The content of an audio file, loaded using <a href="/api-reference/namespaces/soundcache#.getSound">SoundCache.getSound</a>. See <a href="/api-reference/objects/soundobject">SoundObject</a> for supported formats.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The position in the domain to play the sound.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The audio injector that plays the audio file.</div>
+  <dl><dt> Type: <a href="/api-reference/objects/audioinjector">AudioInjector</a></dt></dl>
+  <h5 class="name" id=".removeFromSoloList"> removeFromSoloList<span class="signature">(uuidList)</span><span class="type-signature"></span></h5>
+  <div class="description"> Remove nodes from the audio solo list</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uuidList</code></td>
+        <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+        <td class="description last">List of node UUIDs to remove from the solo list.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".resetSoloList"> resetSoloList<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Reset the list of soloed nodes.</div>
+  <h5 class="name" id=".setInputDevice"> setInputDevice<span class="signature">(device, isHMD)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>device</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isHMD</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <dl class="details"><em><strong><dt class="important tag-deprecated">Deprecated:</dt></strong><div>This function is deprecated and will be removed.</li></div></em></dl>
+  <h5 class="name" id=".setOutputDevice"> setOutputDevice<span class="signature">(device, isHMD)</span><span class="type-signature"></span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>device</code></td>
+        <td class="type"> <span class="param-type">object</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isHMD</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <dl class="details"><em><strong><dt class="important tag-deprecated">Deprecated:</dt></strong><div>This function is deprecated and will be removed.</li></div></em></dl>
+  <h5 class="name" id=".setReverb"> setReverb<span class="signature">(enable)</span><span class="type-signature"></span></h5>
+  <div class="description"> Enable or disable reverberation. Reverberation is done by the client, on the post-mix audio. The reverberation options come from either the domain&apos;s audio zone if used &#x2014; configured on the server &#x2014; or as scripted by <a href="/api-reference/namespaces/audio#.setReverbOptions">setReverbOptions</a>.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> to enable reverberation, <code>false</code> to disable.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Enable reverberation for a short while.</p><pre><code>var sound = SoundCache.getSound(Script.resourcesPath() + &quot;sounds/sample.wav&quot;);
+var injector;
+var injectorOptions = {
+  position: MyAvatar.position
+};
+
+Script.setTimeout(function () {
+  print(&quot;Reverb OFF&quot;);
+  Audio.setReverb(false);
+  injector = Audio.playSound(sound, injectorOptions);
+}, 1000);
+
+Script.setTimeout(function () {
+  var reverbOptions = new AudioEffectOptions();
+  reverbOptions.roomSize = 100;
+  Audio.setReverbOptions(reverbOptions);
+  print(&quot;Reverb ON&quot;);
+  Audio.setReverb(true);
+}, 4000);
+
+Script.setTimeout(function () {
+  print(&quot;Reverb OFF&quot;);
+  Audio.setReverb(false);
+}, 8000);</code></pre>
+  <h5 class="name" id=".setReverbOptions"> setReverbOptions<span class="signature">(options)</span><span class="type-signature"></span></h5>
+  <div class="description"> Configure reverberation options. Use <a href="/api-reference/namespaces/audio#.setReverb">setReverb</a> to enable or disable reverberation.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>options</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/objects/audioeffectoptions">AudioEffectOptions</a></span></td>
+        <td class="description last">The reverberation options.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setStereoInput"> setStereoInput<span class="signature">(stereo)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set whether or not the audio input should be used in stereo. If the audio input does not support stereo then setting a value of <code>true</code> has no effect.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>stereo</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the audio input should be used in stereo, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".startRecording"> startRecording<span class="signature">(filename)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Starts making an audio recording of the audio being played in-world (i.e., not local-only audio) to a file in WAV format.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>filename</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The path and name of the file to make the recording in. Should have a <code>.wav</code> extension. The file is overwritten if it already exists.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the specified file could be opened and audio recording has started, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Make a 10 second audio recording.</p><pre><code>var filename = File.getTempDir() + &quot;/audio.wav&quot;;
+if (Audio.startRecording(filename)) {
+  Script.setTimeout(function () {
+      Audio.stopRecording();
+      print(&quot;Audio recording made in: &quot; + filename);
+  }, 10000);
+
+} else {
+  print(&quot;Could not make an audio recording in: &quot; + filename);
+}</code></pre>
+  <h5 class="name" id=".stopRecording"> stopRecording<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Finish making an audio recording started with <a href="/api-reference/namespaces/audio#.startRecording">startRecording</a>.</div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".contextChanged"> contextChanged<span class="signature">(context)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the current context of the audio changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>context</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The current context of the audio: either <code>&quot;Desktop&quot;</code> or <code>&quot;HMD&quot;</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".disconnected"> disconnected<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the client is disconnected from the audio mixer.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".environmentMuted"> environmentMuted<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the client is muted by the mixer because they&apos;re within a certain radius (50m) of someone who requested the mute through Developer &gt; Audio &gt; Mute Environment.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".inputLevelChanged"> inputLevelChanged<span class="signature">(level)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the input audio level changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>level</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The loudness of the input audio, range <code>0.0</code> (no sound) &#x2013; <code>1.0</code> (the onset of clipping).</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".inputReceived"> inputReceived<span class="signature">(inputSamples)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when a frame of audio input is processed.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>inputSamples</code></td>
+        <td class="type"> <span class="param-type">Int16Array</span></td>
+        <td class="description last">The audio input processed.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".inputVolumeChanged"> inputVolumeChanged<span class="signature">(volume)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the input audio volume changes.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>volume</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The requested volume to be applied to the audio input, range <code>0.0</code> &#x2013; <code>1.0</code>. The resulting value of <code>Audio.inputVolume</code> depends on the capabilities of the device: for example, the volume can&apos;t be changed on some devices, and others might only support values of <code>0.0</code> and <code>1.0</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".isStereoInputChanged"> isStereoInputChanged<span class="signature">(isStereo)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the input audio use changes between mono and stereo.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>isStereo</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the input audio is stereo, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".mutedByMixer"> mutedByMixer<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the client is muted by the mixer because their loudness value for the noise background has reached the threshold set for the domain in the server settings.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".mutedChanged"> mutedChanged<span class="signature">(isMuted)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the audio input is muted or unmuted.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>isMuted</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the audio input is muted, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report when audio input is muted or unmuted</p><pre><code>Audio.mutedChanged.connect(function (isMuted) {
+  print(&quot;Audio muted: &quot; + isMuted);
+});</code></pre>
+  <h5 class="name" id=".noiseGateClosed"> noiseGateClosed<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the noise gate is closed: the input audio signal is blocked (fully attenuated) because it has fallen below an adaptive threshold set just above the noise floor. Only occurs if <code>Audio.noiseReduction</code> is <code>true</code>.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".noiseGateOpened"> noiseGateOpened<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the noise gate is opened: the input audio signal is no longer blocked (fully attenuated) because it has risen above an adaptive threshold set just above the noise floor. Only occurs if <code>Audio.noiseReduction</code> is <code>true</code>.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".noiseReductionChanged"> noiseReductionChanged<span class="signature">(isEnabled)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the audio input noise reduction is enabled or disabled.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>isEnabled</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if audio input noise reduction is enabled, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".nop"> nop<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <dl class="details"><em><strong><dt class="important tag-deprecated">Deprecated:</dt></strong><div>This signal is deprecated and will be removed.</li></div></em></dl>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".receivedFirstPacket"> receivedFirstPacket<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the client receives its first packet from the audio mixer.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

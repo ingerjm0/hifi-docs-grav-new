@@ -1,0 +1,354 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>Audio effect options used by the <a href="/api-reference/namespaces/audio">Audio</a> API.<p>Create using <code>new AudioEffectOptions(reverbOptions)</code>.</p>
+    </div>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.ReverbOptions">ReverbOptions</a></div><br>
+    <h5>Parameters:</h5>
+    <table class="params">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>reverbOptions</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/objects/audioeffectoptions#.ReverbOptions">AudioEffectOptions.ReverbOptions</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> null</td>
+          <td class="description last">Reverberation options.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>bandwidth</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 10000</td>
+          <td class="description last">The corner frequency (Hz) of the low-pass filter at reverb input.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>preDelay</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 20</td>
+          <td class="description last">The delay (milliseconds) between dry signal and the onset of early reflections.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lateDelay</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 0</td>
+          <td class="description last">The delay (milliseconds) between early reflections and the onset of reverb tail.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>reverbTime</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 2</td>
+          <td class="description last">The time (seconds) for the reverb tail to decay by 60dB, also known as RT60.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>earlyDiffusion</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 100</td>
+          <td class="description last">Adjusts the buildup of echo density in the early reflections, normally 100%.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lateDiffusion</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 100</td>
+          <td class="description last">Adjusts the buildup of echo density in the reverb tail, normally 100%.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>roomSize</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 50</td>
+          <td class="description last">The apparent room size, from small (0%) to large (100%).</td>
+        </tr>
+        <tr>
+          <td class="name"><code>density</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 100</td>
+          <td class="description last">Adjusts the echo density in the reverb tail, normally 100%.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>bassMult</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 1.5</td>
+          <td class="description last">Adjusts the bass-frequency reverb time, as multiple of reverbTime.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>bassFreq</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 250</td>
+          <td class="description last">The crossover frequency (Hz) for the onset of bassMult.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>highGain</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> -6</td>
+          <td class="description last">Reduces the high-frequency reverb time, as attenuation (dB).</td>
+        </tr>
+        <tr>
+          <td class="name"><code>highFreq</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 3000</td>
+          <td class="description last">The crossover frequency (Hz) for the onset of highGain.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>modRate</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 2.3</td>
+          <td class="description last">The rate of modulation (Hz) of the LFO-modulated delay lines.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>modDepth</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 50</td>
+          <td class="description last">The depth of modulation (percent) of the LFO-modulated delay lines.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>earlyGain</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 0</td>
+          <td class="description last">Adjusts the relative level (dB) of the early reflections.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lateGain</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 0</td>
+          <td class="description last">Adjusts the relative level (dB) of the reverb tail.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>earlyMixLeft</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 20</td>
+          <td class="description last">The apparent distance of the source (percent) in the early reflections.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>earlyMixRight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 20</td>
+          <td class="description last">The apparent distance of the source (percent) in the early reflections.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lateMixLeft</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 90</td>
+          <td class="description last">The apparent distance of the source (percent) in the reverb tail.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lateMixRight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 90</td>
+          <td class="description last">The apparent distance of the source (percent) in the reverb tail.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>wetDryMix</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 50</td>
+          <td class="description last">Adjusts the wet/dry ratio, from completely dry (0%) to completely wet (100%).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".ReverbOptions">ReverbOptions</h5>
+  <div class="description"> Reverberation options that can be used to initialize an <a href="/api-reference/objects/audioeffectoptions">AudioEffectOptions</a> object when created.</div>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>bandwidth</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 10000</td>
+        <td class="description last">The corner frequency (Hz) of the low-pass filter at reverb input.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>preDelay</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 20</td>
+        <td class="description last">The delay (milliseconds) between dry signal and the onset of early reflections.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>lateDelay</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 0</td>
+        <td class="description last">The delay (milliseconds) between early reflections and the onset of reverb tail.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>reverbTime</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 2</td>
+        <td class="description last">The time (seconds) for the reverb tail to decay by 60dB, also known as RT60.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>earlyDiffusion</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 100</td>
+        <td class="description last">Adjusts the buildup of echo density in the early reflections, normally 100%.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>lateDiffusion</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 100</td>
+        <td class="description last">Adjusts the buildup of echo density in the reverb tail, normally 100%.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>roomSize</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 50</td>
+        <td class="description last">The apparent room size, from small (0%) to large (100%).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>density</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 100</td>
+        <td class="description last">Adjusts the echo density in the reverb tail, normally 100%.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>bassMult</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 1.5</td>
+        <td class="description last">Adjusts the bass-frequency reverb time, as multiple of reverbTime.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>bassFreq</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 250</td>
+        <td class="description last">The crossover frequency (Hz) for the onset of bassMult.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>highGain</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> -6</td>
+        <td class="description last">Reduces the high-frequency reverb time, as attenuation (dB).</td>
+      </tr>
+      <tr>
+        <td class="name"><code>highFreq</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 3000</td>
+        <td class="description last">The crossover frequency (Hz) for the onset of highGain.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>modRate</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 2.3</td>
+        <td class="description last">The rate of modulation (Hz) of the LFO-modulated delay lines.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>modDepth</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 50</td>
+        <td class="description last">The depth of modulation (percent) of the LFO-modulated delay lines.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>earlyGain</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 0</td>
+        <td class="description last">Adjusts the relative level (dB) of the early reflections.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>lateGain</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 0</td>
+        <td class="description last">Adjusts the relative level (dB) of the reverb tail.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>earlyMixLeft</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 20</td>
+        <td class="description last">The apparent distance of the source (percent) in the early reflections.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>earlyMixRight</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 20</td>
+        <td class="description last">The apparent distance of the source (percent) in the early reflections.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>lateMixLeft</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 90</td>
+        <td class="description last">The apparent distance of the source (percent) in the reverb tail.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>lateMixRight</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 90</td>
+        <td class="description last">The apparent distance of the source (percent) in the reverb tail.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>wetDryMix</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="default"> 50</td>
+        <td class="description last">Adjusts the wet/dry ratio, from completely dry (0%) to completely wet (100%).</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,925 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Pointers API lets you create and manage objects for repeatedly calculating intersections in different ways, as well as the visual representation of those objects. Pointers can also be configured to automatically generate <a href="/api-reference/globals#PointerEvent">PointerEvent</a>s on <a href="/api-reference/namespaces/entities">Entities</a> and <a href="/api-reference/namespaces/overlays">Overlays</a>.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.createPointer">createPointer</a></div>
+    <div><a href="#.disablePointer">disablePointer</a></div>
+    <div><a href="#.editRenderState">editRenderState</a></div>
+    <div><a href="#.enablePointer">enablePointer</a></div>
+    <div><a href="#.getPointerProperties">getPointerProperties</a></div>
+    <div><a href="#.getPrevPickResult">getPrevPickResult</a></div>
+    <div><a href="#.isLeftHand">isLeftHand</a></div>
+    <div><a href="#.isMouse">isMouse</a></div>
+    <div><a href="#.isRightHand">isRightHand</a></div>
+    <div><a href="#.removePointer">removePointer</a></div>
+    <div><a href="#.setIgnoreItems">setIgnoreItems</a></div>
+    <div><a href="#.setIncludeItems">setIncludeItems</a></div>
+    <div><a href="#.setLength">setLength</a></div>
+    <div><a href="#.setLockEndUUID">setLockEndUUID</a></div>
+    <div><a href="#.setPrecisionPicking">setPrecisionPicking</a></div>
+    <div><a href="#.setRenderState">setRenderState</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.DefaultParabolaPointerRenderState">DefaultParabolaPointerRenderState</a></div>
+    <div><a href="#.DefaultRayPointerRenderState">DefaultRayPointerRenderState</a></div>
+    <div><a href="#.LaserPointerProperties">LaserPointerProperties</a></div>
+    <div><a href="#.ParabolaPointerProperties">ParabolaPointerProperties</a></div>
+    <div><a href="#.ParabolaPointerRenderState">ParabolaPointerRenderState</a></div>
+    <div><a href="#.ParabolaProperties">ParabolaProperties</a></div>
+    <div><a href="#.RayPointerRenderState">RayPointerRenderState</a></div>
+    <div><a href="#.StylusPointerProperties">StylusPointerProperties</a></div>
+    <div><a href="#.Trigger">Trigger</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".createPointer"> createPointer<span class="signature">(type, properties)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Adds a new Pointer Different <a href="/api-reference/globals#PickType">PickType</a>s use different properties, and within one PickType, the properties you choose can lead to a wide range of behaviors. For example, with PickType.Ray, depending on which optional parameters you pass, you could create a Static Ray Pointer, a Mouse Ray Pointer, or a Joint Ray Pointer. Pointers created with this method always intersect at least visible and collidable things</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>type</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#PickType">PickType</a></span></td>
+        <td class="description last">A PickType that specifies the method of picking to use</td>
+      </tr>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/pointers#.LaserPointerProperties">Pointers.LaserPointerProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/pointers#.StylusPointerProperties">Pointers.StylusPointerProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/pointers#.ParabolaPointerProperties">Pointers.ParabolaPointerProperties</a></span></td>
+        <td class="description last">A PointerProperties object, containing all the properties for initializing this Pointer <b>and</b> the Picks.PickProperties for the Pick that this Pointer will use to do its picking.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The ID of the created Pointer. Used for managing the Pointer. 0 if invalid.</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Create a left hand Ray Pointer that triggers events on left controller trigger click and changes color when it&apos;s intersecting something.</p><pre><code>var end = {
+  type: &quot;sphere&quot;,
+  dimensions: {x:0.5, y:0.5, z:0.5},
+  solid: true,
+  color: {red:0, green:255, blue:0},
+  ignorePickIntersection: true
+};
+var end2 = {
+  type: &quot;sphere&quot;,
+  dimensions: {x:0.5, y:0.5, z:0.5},
+  solid: true,
+  color: {red:255, green:0, blue:0},
+  ignorePickIntersection: true
+};
+
+var renderStates = [ {name: &quot;test&quot;, end: end} ];
+var defaultRenderStates = [ {name: &quot;test&quot;, distance: 10.0, end: end2} ];
+var pointer = Pointers.createPointer(PickType.Ray, {
+  joint: &quot;_CAMERA_RELATIVE_CONTROLLER_LEFTHAND&quot;,
+  filter: Picks.PICK_LOCAL_ENTITIES | Picks.PICK_DOMAIN_ENTITIES | Picks.PICK_INCLUDE_NONCOLLIDABLE,
+  renderStates: renderStates,
+  defaultRenderStates: defaultRenderStates,
+  distanceScaleEnd: true,
+  triggers: [ {action: Controller.Standard.LTClick, button: &quot;Focus&quot;}, {action: Controller.Standard.LTClick, button: &quot;Primary&quot;} ],
+  hover: true,
+  enabled: true
+});
+Pointers.setRenderState(pointer, &quot;test&quot;);</code></pre>
+  <h5 class="name" id=".disablePointer"> disablePointer<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+  <div class="description"> Disables a Pointer.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".editRenderState"> editRenderState<span class="signature">(uid, renderState, properties)</span><span class="type-signature"></span></h5>
+  <div class="description"> Edit some visual aspect of a Pointer. Currently only supported for Ray Pointers.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>renderState</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the render state you want to edit.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/pointers#.RayPointerRenderState">Pointers.RayPointerRenderState</a></span></td>
+        <td class="description last">The new properties for <code>renderStates</code> item.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".enablePointer"> enablePointer<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+  <div class="description"> Enables a Pointer.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".getPointerProperties"> getPointerProperties<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/namespaces/pointers#.LaserPointerProperties">Pointers.LaserPointerProperties</a>|<a href="/api-reference/namespaces/pointers#.StylusPointerProperties">Pointers.StylusPointerProperties</a>|<a href="/api-reference/namespaces/pointers#.ParabolaPointerProperties">Pointers.ParabolaPointerProperties</a>}</span></h5>
+  <div class="description"> Returns information about an existing Pointer</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>uid</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The information about the Pointer. Currently only includes renderStates and defaultRenderStates with associated overlay IDs.</div>
+  <dl><dt> Type: <a href="/api-reference/namespaces/pointers#.LaserPointerProperties">Pointers.LaserPointerProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/pointers#.StylusPointerProperties">Pointers.StylusPointerProperties</a></span> | <span class="param-type"><a href="/api-reference/namespaces/pointers#.ParabolaPointerProperties">Pointers.ParabolaPointerProperties</a></dt></dl><h5 class="name" id=".getPrevPickResult"> getPrevPickResult<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#RayPickResult">RayPickResult</a>|<a href="/api-reference/globals#StylusPickResult">StylusPickResult</a>}</span></h5>
+      <div class="description"> Get the most recent pick result from this Pointer. This will be updated as long as the Pointer is enabled, regardless of the render state.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> The most recent intersection result. This will be slightly different for different PickTypes.</div>
+      <dl><dt> Type: <a href="/api-reference/globals#RayPickResult">RayPickResult</a>
+      </span> | <span class="param-type"><a href="/api-reference/globals#StylusPickResult">StylusPickResult</a></dt></dl><h5 class="name" id=".isLeftHand"> isLeftHand<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pointer is associated with the left hand.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pointer is a Joint Ray Pointer with joint == &quot;_CONTROLLER_LEFTHAND&quot; or &quot;_CAMERA_RELATIVE_CONTROLLER_LEFTHAND&quot;, or a Stylus Pointer with hand == 0</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".isMouse"> isMouse<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pointer is associated with the system mouse.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pointer is a Mouse Ray Pointer, false otherwise.</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".isRightHand"> isRightHand<span class="signature">(uid)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+      <div class="description"> Check if a Pointer is associated with the right hand.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h6>Returns:</h6>
+      <div class="param-desc"> True if the Pointer is a Joint Ray Pointer with joint == &quot;_CONTROLLER_RIGHTHAND&quot; or &quot;_CAMERA_RELATIVE_CONTROLLER_RIGHTHAND&quot;, or a Stylus Pointer with hand == 1</div>
+      <dl><dt> Type: boolean</dt></dl>
+      <h5 class="name" id=".removePointer"> removePointer<span class="signature">(uid)</span><span class="type-signature"></span></h5>
+      <div class="description"> Removes a Pointer.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setIgnoreItems"> setIgnoreItems<span class="signature">(uid, ignoreItems)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets a list of Entity IDs, Overlay IDs, and/or Avatar IDs to ignore during intersection. Not used by Stylus Pointers.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>ignoreItems</code></td>
+            <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+            <td class="description last">A list of IDs to ignore.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setIncludeItems"> setIncludeItems<span class="signature">(uid, includeItems)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets a list of Entity IDs, Overlay IDs, and/or Avatar IDs to include during intersection, instead of intersecting with everything. Stylus Pointers <b>only</b> intersect with objects in their include list.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>includeItems</code></td>
+            <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/uuid">Uuid</a>&gt;</span></td>
+            <td class="description last">A list of IDs to include.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setLength"> setLength<span class="signature">(uid, length)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets the length of this Pointer. No effect on Stylus Pointers.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>length</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The desired length of the Pointer.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setLockEndUUID"> setLockEndUUID<span class="signature">(uid, objectID, isOverlay, offsetMat<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+      <div class="description"> Lock a Pointer onto a specific object (overlay, entity, or avatar). Optionally, provide an offset in object-space, otherwise the Pointer will lock on to the center of the object. Not used by Stylus Pointers.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Attributes</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="attributes"></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>objectID</code></td>
+            <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+            <td class="attributes"></td>
+            <td class="description last">The ID of the object to which to lock on.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>isOverlay</code></td>
+            <td class="type"> <span class="param-type">boolean</span></td>
+            <td class="attributes"></td>
+            <td class="description last">False for entities or avatars, true for overlays</td>
+          </tr>
+          <tr>
+            <td class="name"><code>offsetMat</code></td>
+            <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/mat4">Mat4</a></span></td>
+            <td class="attributes"> &lt;optional&gt;<br></td>
+            <td class="description last">The offset matrix to use if you do not want to lock on to the center of the object.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setPrecisionPicking"> setPrecisionPicking<span class="signature">(uid, precisionPicking)</span><span class="type-signature"></span></h5>
+      <div class="description"> Sets whether or not to use precision picking.</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>precisionPicking</code></td>
+            <td class="type"> <span class="param-type">boolean</span></td>
+            <td class="description last">Whether or not to use precision picking</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="name" id=".setRenderState"> setRenderState<span class="signature">(uid, renderState)</span><span class="type-signature"></span></h5>
+      <div class="description"> Set the render state of a Pointer. For Ray Pointers, this means switching between their <a href="/api-reference/namespaces/pointers#.RayPointerRenderState">Pointers.RayPointerRenderState</a>s, or &quot;&quot; to turn off rendering and hover/trigger events. For Stylus Pointers, there are three built-in options: &quot;events on&quot; (render and send events, the default), &quot;events off&quot; (render but don&apos;t send events), and &quot;disabled&quot; (don&apos;t render, don&apos;t send events).</div>
+      <h5>Parameters:</h5>
+      <table class="params">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th class="last">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><code>uid</code></td>
+            <td class="type"> <span class="param-type">number</span></td>
+            <td class="description last">The ID of the Pointer, as returned by <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>.</td>
+          </tr>
+          <tr>
+            <td class="name"><code>renderState</code></td>
+            <td class="type"> <span class="param-type">string</span></td>
+            <td class="description last">The name of the render state to which you want to switch.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="subsection-title">Type Definitions</h4>
+      <h5 class="name" id=".DefaultParabolaPointerRenderState">DefaultParabolaPointerRenderState</h5>
+      <div class="description"> A set of properties used to define the visual aspect of a Parabola Pointer in the case that the Pointer is not intersecting something. Same as a <a href="/api-reference/namespaces/pointers#.ParabolaPointerRenderState">Pointers.ParabolaPointerRenderState</a>, but with an additional distance field.</div>
+      <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>distance</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The distance along the parabola at which to render the end of this Parabola Pointer, if one is defined.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".DefaultRayPointerRenderState">DefaultRayPointerRenderState</h5>
+    <div class="description"> A set of properties used to define the visual aspect of a Ray Pointer in the case that the Pointer is not intersecting something. Same as a <a href="/api-reference/namespaces/pointers#.RayPointerRenderState">Pointers.RayPointerRenderState</a>, but with an additional distance field.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>distance</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The distance at which to render the end of this Ray Pointer, if one is defined.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".LaserPointerProperties">LaserPointerProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a> to create a new Pointer. Contains the relevant Picks.PickProperties to define the underlying Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>faceAvatar</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will always rotate to face the avatar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>centerEndY</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">If false, the end of the Pointer will be moved up by half of its height.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lockEnd</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will lock on to the center of the object at which the pointer is pointing.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>distanceScaleEnd</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the dimensions of the end of the Pointer will scale linearly with distance.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>scaleWithParent</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the width of the Pointer&apos;s path will scale linearly with the pick parent&apos;s scale. scaleWithAvatar is an alias but is deprecated.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>followNormal</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will rotate to follow the normal of the intersected surface.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>followNormalStrength</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0.0</td>
+          <td class="description last">The strength of the interpolation between the real normal and the visual normal if followNormal is true. <code>0-1</code>. If 0 or 1, the normal will follow exactly.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>renderStates</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.RayPointerRenderState">Pointers.RayPointerRenderState</a>&gt;</span> | <span class="param-type">Object.&lt;string, <a href="/api-reference/namespaces/pointers#.RayPointerRenderState">Pointers.RayPointerRenderState</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A collection of different visual states to switch between. When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, a list of RayPointerRenderStates. When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, a map between render state names and RayPointRenderStates.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>defaultRenderStates</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.DefaultRayPointerRenderState">Pointers.DefaultRayPointerRenderState</a>&gt;</span> | <span class="param-type">Object.&lt;string, <a href="/api-reference/namespaces/pointers#.DefaultRayPointerRenderState">Pointers.DefaultRayPointerRenderState</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A collection of different visual states to use if there is no intersection. When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, a list of DefaultRayPointerRenderStates. When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, a map between render state names and DefaultRayPointRenderStates.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>hover</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pointer should generate hover events.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>triggers</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.Trigger">Pointers.Trigger</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A list of different triggers mechanisms that control this Pointer&apos;s click event generation.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".ParabolaPointerProperties">ParabolaPointerProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a> to create a new Pointer. Contains the relevant Picks.PickProperties to define the underlying Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>faceAvatar</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will always rotate to face the avatar.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>centerEndY</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">If false, the end of the Pointer will be moved up by half of its height.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>lockEnd</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will lock on to the center of the object at which the pointer is pointing.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>distanceScaleEnd</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the dimensions of the end of the Pointer will scale linearly with distance.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>scaleWithParent</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> true</td>
+          <td class="description last">If true, the width of the Pointer&apos;s path will scale linearly with the pick parent&apos;s scale. scaleWithAvatar is an alias but is deprecated.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>followNormal</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If true, the end of the Pointer will rotate to follow the normal of the intersected surface.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>followNormalStrength</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> 0.0</td>
+          <td class="description last">The strength of the interpolation between the real normal and the visual normal if followNormal is true. <code>0-1</code>. If 0 or 1, the normal will follow exactly.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>renderStates</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.ParabolaPointerRenderState">Pointers.ParabolaPointerRenderState</a>&gt;</span> | <span class="param-type">Object.&lt;string, <a href="/api-reference/namespaces/pointers#.ParabolaPointerRenderState">Pointers.ParabolaPointerRenderState</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A collection of different visual states to switch between. When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, a list of ParabolaPointerRenderStates. When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, a map between render state names and ParabolaPointerRenderStates.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>defaultRenderStates</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.DefaultParabolaPointerRenderState">Pointers.DefaultParabolaPointerRenderState</a>&gt;</span> | <span class="param-type">Object.&lt;string, <a href="/api-reference/namespaces/pointers#.DefaultParabolaPointerRenderState">Pointers.DefaultParabolaPointerRenderState</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A collection of different visual states to use if there is no intersection. When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, a list of DefaultParabolaPointerRenderStates. When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, a map between render state names and DefaultParabolaPointerRenderStates.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>hover</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this Pointer should generate hover events.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>triggers</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/namespaces/pointers#.Trigger">Pointers.Trigger</a>&gt;</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">A list of different triggers mechanisms that control this Pointer&apos;s click event generation.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".ParabolaPointerRenderState">ParabolaPointerRenderState</h5>
+    <div class="description"> A set of properties used to define the visual aspect of a Parabola Pointer in the case that the Pointer is intersecting something.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>name</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="attributes"></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, the name of this render state, used by <a href="/api-reference/namespaces/pointers#.setRenderState">Pointers.setRenderState</a> and <a href="/api-reference/namespaces/pointers#.editRenderState">Pointers.editRenderState</a></td>
+        </tr>
+        <tr>
+          <td class="name"><code>start</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/overlays#.OverlayProperties">Overlays.OverlayProperties</a></span> | <span class="param-type">QUuid</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, an optionally defined overlay to represent the beginning of the Parabola Pointer, using the properties you would normally pass to <a href="/api-reference/namespaces/overlays#.addOverlay">Overlays.addOverlay</a>, plus the type (as a <code>type</code> field). When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, the ID of the created overlay if it exists, or a null ID otherwise.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>path</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/pointers#.ParabolaProperties">Pointers.ParabolaProperties</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, the optionally defined rendering properties of the parabolic path defined by the Parabola Pointer. Not defined in <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>end</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/overlays#.OverlayProperties">Overlays.OverlayProperties</a></span> | <span class="param-type">QUuid</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, an optionally defined overlay to represent the end of the Parabola Pointer, using the properties you would normally pass to <a href="/api-reference/namespaces/overlays#.addOverlay">Overlays.addOverlay</a>, plus the type (as a <code>type</code> field). When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, the ID of the created overlay if it exists, or a null ID otherwise.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".ParabolaProperties">ParabolaProperties</h5>
+    <div class="description"> The rendering properties of the parabolic path</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>color</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Color">Color</a></span></td>
+          <td class="default"> 255,255,255</td>
+          <td class="description last">The color of the parabola.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>alpha</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 1.0</td>
+          <td class="description last">The alpha of the parabola.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>width</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 0.01</td>
+          <td class="description last">The width of the parabola, in meters.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>isVisibleInSecondaryCamera</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"> false</td>
+          <td class="description last">The width of the parabola, in meters.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>drawInFront</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"> false</td>
+          <td class="description last">If <code>true</code>, the parabola is rendered in front of other items in the scene.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".RayPointerRenderState">RayPointerRenderState</h5>
+    <div class="description"> A set of properties which define the visual aspect of a Ray Pointer in the case that the Pointer is intersecting something.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>name</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="attributes"></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, the name of this render state, used by <a href="/api-reference/namespaces/pointers#.setRenderState">Pointers.setRenderState</a> and <a href="/api-reference/namespaces/pointers#.editRenderState">Pointers.editRenderState</a></td>
+        </tr>
+        <tr>
+          <td class="name"><code>start</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/overlays#.OverlayProperties">Overlays.OverlayProperties</a></span> | <span class="param-type">QUuid</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, an optionally defined overlay to represent the beginning of the Ray Pointer, using the properties you would normally pass to <a href="/api-reference/namespaces/overlays#.addOverlay">Overlays.addOverlay</a>, plus the type (as a <code>type</code> field). When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, the ID of the created overlay if it exists, or a null ID otherwise.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>path</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/overlays#.OverlayProperties">Overlays.OverlayProperties</a></span> | <span class="param-type">QUuid</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, an optionally defined overlay to represent the path of the Ray Pointer, using the properties you would normally pass to <a href="/api-reference/namespaces/overlays#.addOverlay">Overlays.addOverlay</a>, plus the type (as a <code>type</code> field), which <b>must</b> be <code>&quot;line3d&quot;</code>. When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, the ID of the created overlay if it exists, or a null ID otherwise.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>end</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/overlays#.OverlayProperties">Overlays.OverlayProperties</a></span> | <span class="param-type">QUuid</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="description last">When using <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a>, an optionally defined overlay to represent the end of the Ray Pointer, using the properties you would normally pass to <a href="/api-reference/namespaces/overlays#.addOverlay">Overlays.addOverlay</a>, plus the type (as a <code>type</code> field). When returned from <a href="/api-reference/namespaces/pointers#.getPointerProperties">Pointers.getPointerProperties</a>, the ID of the created overlay if it exists, or a null ID otherwise.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".StylusPointerProperties">StylusPointerProperties</h5>
+    <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/pointers#.createPointer">Pointers.createPointer</a> to create a new Pointer. Contains the relevant Picks.PickProperties to define the underlying Pick.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Attributes</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>hover</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last">If this pointer should generate hover events.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>enabled</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"> false</td>
+          <td class="description last"></td>
+        </tr>
+        <tr>
+          <td class="name"><code>tipOffset</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">The specified offset of the from the joint index.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>model</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/pointers#.StylusPointerProperties">Pointers.StylusPointerProperties.model</a></span></td>
+          <td class="attributes"> &lt;optional&gt;<br></td>
+          <td class="default"></td>
+          <td class="description last">Data to replace the default model url, positionOffset and rotationOffset.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 class="name" id=".Trigger">Trigger</h5>
+    <div class="description"> A trigger mechanism for Ray and Parabola Pointers.</div>
+    <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>action</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/controller#.Standard">Controller.Standard</a></span> | <span class="param-type"><a href="/api-reference/namespaces/controller#.Actions">Controller.Actions</a></span> | <span class="param-type">function</span></td>
+          <td class="description last">This can be a built-in Controller action, like Controller.Standard.LTClick, or a function that evaluates to &gt;= 1.0 when you want to trigger <code>button</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>button</code></td>
+          <td class="type"> <span class="param-type">string</span></td>
+          <td class="description last">Which button to trigger. &quot;Primary&quot;, &quot;Secondary&quot;, &quot;Tertiary&quot;, and &quot;Focus&quot; are currently supported. Only &quot;Primary&quot; will trigger clicks on web surfaces. If &quot;Focus&quot; is triggered, it will try to set the entity or overlay focus to the object at which the Pointer is aimed. Buttons besides the first three will still trigger events, but event.button will be &quot;None&quot;.</td>
+        </tr>
+      </tbody>
+    </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,83 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>An audio resource, created by <a href="/api-reference/namespaces/soundcache#.getSound">SoundCache.getSound</a>, to be played back using <a href="/api-reference/namespaces/audio#.playSound">Audio.playSound</a>.<p>Supported formats:</p>
+      <ul>
+        <li>WAV: 16-bit uncompressed WAV at any sample rate, with 1 (mono), 2(stereo), or 4 (ambisonic) channels.</li>
+        <li>MP3: Mono or stereo, at any sample rate.</li>
+        <li>RAW: 48khz 16-bit mono or stereo. Filename must include <code>&quot;.stereo&quot;</code> to be interpreted as stereo.</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.ready">ready</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>downloaded</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the sound has been downloaded and is ready to be played, otherwise <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>duration</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="description last">The duration of the sound, in seconds.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".ready"> ready<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the sound has been downloaded and is ready to be played.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,641 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The HMD API provides access to the HMD used in VR display mode.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.activateHMDHandMouse">activateHMDHandMouse</a></div>
+    <div><a href="#.calculateRayUICollisionPoint">calculateRayUICollisionPoint</a></div>
+    <div><a href="#.centerUI">centerUI</a></div>
+    <div><a href="#.closeTablet">closeTablet</a></div>
+    <div><a href="#.deactivateHMDHandMouse">deactivateHMDHandMouse</a></div>
+    <div><a href="#.isHandControllerAvailable">isHandControllerAvailable</a></div>
+    <div><a href="#.isHeadControllerAvailable">isHeadControllerAvailable</a></div>
+    <div><a href="#.isHMDAvailable">isHMDAvailable</a></div>
+    <div><a href="#.isKeyboardVisible">isKeyboardVisible</a></div>
+    <div><a href="#.isSubdeviceContainingNameAvailable">isSubdeviceContainingNameAvailable</a></div>
+    <div><a href="#.openTablet">openTablet</a></div>
+    <div><a href="#.overlayFromWorldPoint">overlayFromWorldPoint</a></div>
+    <div><a href="#.overlayToSpherical">overlayToSpherical</a></div>
+    <div><a href="#.preferredAudioInput">preferredAudioInput</a></div>
+    <div><a href="#.preferredAudioOutput">preferredAudioOutput</a></div>
+    <div><a href="#.requestHideHandControllers">requestHideHandControllers</a></div>
+    <div><a href="#.requestShowHandControllers">requestShowHandControllers</a></div>
+    <div><a href="#.shouldShowHandControllers">shouldShowHandControllers</a></div>
+    <div><a href="#.sphericalToOverlay">sphericalToOverlay</a></div>
+    <div><a href="#.suppressKeyboard">suppressKeyboard</a></div>
+    <div><a href="#.unsuppressKeyboard">unsuppressKeyboard</a></div>
+    <div><a href="#.worldPointFromOverlay">worldPointFromOverlay</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.displayModeChanged">displayModeChanged</a></div>
+    <div><a href="#.IPDScaleChanged">IPDScaleChanged</a></div>
+    <div><a href="#.miniTabletEnabledChanged">miniTabletEnabledChanged</a></div>
+    <div><a href="#.mountedChanged">mountedChanged</a></div>
+    <div><a href="#.shouldShowHandControllersChanged">shouldShowHandControllersChanged</a></div>
+    <div><a href="#.showTabletChanged">showTabletChanged</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>position</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The position of the HMD if currently in VR display mode, otherwise <a href="/api-reference/namespaces/vec3">Vec3.ZERO</a>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>orientation</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Quat">Quat</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The orientation of the HMD if currently in VR display mode, otherwise <a href="/api-reference/namespaces/quat">Quat.IDENTITY</a>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>active</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"></td>
+          <td class="description last"><code>true</code> if the display mode is HMD, otherwise <code>false</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>mounted</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"></td>
+          <td class="description last"><code>true</code> if currently in VR display mode and the HMD is being worn, otherwise <code>false</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>playerHeight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"></td>
+          <td class="description last">The real-world height of the user. <em>Read-only.</em> <em>Currently always returns a value of <code>1.755</code>.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>eyeHeight</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"></td>
+          <td class="description last">The real-world height of the user&apos;s eyes. <em>Read-only.</em> <em>Currently always returns a value of <code>1.655</code>.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>ipd</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"></td>
+          <td class="description last">The inter-pupillary distance (distance between eyes) of the user, used for rendering. Defaults to the human average of <code>0.064</code> unless set by the HMD. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>ipdScale</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"> 1.0</td>
+          <td class="description last">A scale factor applied to the <code>ipd</code> property value.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>showTablet</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"></td>
+          <td class="description last"><code>true</code> if the tablet is being displayed, <code>false</code> otherwise. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>tabletContextualMode</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="default"></td>
+          <td class="description last"><code>true</code> if the tablet has been opened in contextual mode, otherwise <code>false</code>. In contextual mode, the tablet has been opened at a specific world position and orientation rather than at a position and orientation relative to the user. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>tabletID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the tablet body model overlay.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>tabletScreenID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the tablet&apos;s screen overlay.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>homeButtonID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the tablet&apos;s &quot;home&quot; button overlay.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>homeButtonHighlightID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the tablet&apos;s &quot;home&quot; button highlight overlay.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>miniTabletID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the mini tablet&apos;s body model overlay. <code>null</code> if not in HMD mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>miniTabletScreenID</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+          <td class="default"></td>
+          <td class="description last">The UUID of the mini tablet&apos;s screen overlay. <code>null</code> if not in HMD mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>miniTabletHand</code></td>
+          <td class="type"> <span class="param-type">number</span></td>
+          <td class="default"></td>
+          <td class="description last">The hand that the mini tablet is displayed on: <code>0</code> for left hand, <code>1</code> for right hand, <code>-1</code> if not in HMD mode.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>miniTabletEnabled</code></td>
+          <td class="type"> <span class="param-type">bool</span></td>
+          <td class="default"> true</td>
+          <td class="description last"><code>true</code> if the mini tablet is enabled to be displayed, otherwise <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td class="name"><code>playArea</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/globals#Rect">Rect</a></span></td>
+          <td class="default"> 0,0,0,0</td>
+          <td class="description last">The size and position of the HMD play area in sensor coordinates. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>sensorPositions</code></td>
+          <td class="type"> <span class="param-type">Array.&lt;<a href="/api-reference/globals#Vec3">Vec3</a>&gt;</span></td>
+          <td class="default"> []</td>
+          <td class="description last">The positions of the VR system sensors in sensor coordinates. <em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".activateHMDHandMouse"> activateHMDHandMouse<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Causes the borders in HUD windows to be enlarged when the laser intersects them in HMD mode. By default, borders are not enlarged.</div>
+  <h5 class="name" id=".calculateRayUICollisionPoint"> calculateRayUICollisionPoint<span class="signature">(position, direction)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Calculate the intersection of a ray with the HUD overlay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The origin of the ray.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>direction</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The direction of the ray.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The point of intersection with the HUD overlay if it intersects, otherwise <a href="/api-reference/namespaces/vec3">Vec3.ZERO</a>.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Draw a square on the HUD overlay in the direction you&apos;re looking.</p><pre><code>var hudIntersection = HMD.calculateRayUICollisionPoint(MyAvatar.getHeadPosition(),
+  Quat.getForward(MyAvatar.headOrientation));
+var hudPoint = HMD.overlayFromWorldPoint(hudIntersection);
+
+var DIMENSIONS = { x: 50, y: 50 };
+var square = Overlays.addOverlay(&quot;rectangle&quot;, {
+  x: hudPoint.x - DIMENSIONS.x / 2,
+  y: hudPoint.y - DIMENSIONS.y / 2,
+  width: DIMENSIONS.x,
+  height: DIMENSIONS.y,
+  color: { red: 255, green: 0, blue: 0 }
+});
+
+Script.scriptEnding.connect(function () {
+  Overlays.deleteOverlay(square);
+});</code></pre>
+  <h5 class="name" id=".centerUI"> centerUI<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Recenter the HMD HUD to the current HMD position and orientation.</div>
+  <h5 class="name" id=".closeTablet"> closeTablet<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Closes the tablet if it is open.</div>
+  <h5 class="name" id=".deactivateHMDHandMouse"> deactivateHMDHandMouse<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Causes the border in HUD windows to no longer be enlarged when the laser intersects them in HMD mode. By default, borders are not enlarged.</div>
+  <h5 class="name" id=".isHandControllerAvailable"> isHandControllerAvailable<span class="signature">(name<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether there are HMD hand controllers available.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">The name of the HMD hand controller to check for, e.g., <code>&quot;Oculus&quot;</code>. If no name is specified then any HMD hand controller matches.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if an HMD hand controller of the specified <code>name</code> is available, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report HMD hand controller availability.</p><pre><code>print(&quot;Are any HMD hand controllers available: &quot; + HMD.isHandControllerAvailable());
+print(&quot;Are Oculus hand controllers available: &quot; + HMD.isHandControllerAvailable(&quot;Oculus&quot;));
+print(&quot;Are Vive hand controllers available: &quot; + HMD.isHandControllerAvailable(&quot;OpenVR&quot;));</code></pre>
+  <h5 class="name" id=".isHeadControllerAvailable"> isHeadControllerAvailable<span class="signature">(name<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether there is an HMD head controller available.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">The name of the HMD head controller to check for, e.g., <code>&quot;Oculus&quot;</code>. If no name is specified then any HMD head controller matches.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if an HMD head controller of the specified <code>name</code> is available, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report HMD head controller availability.</p><pre><code>print(&quot;Is any HMD head controller available: &quot; + HMD.isHeadControllerAvailable());
+print(&quot;Is an Oculus head controller available: &quot; + HMD.isHeadControllerAvailable(&quot;Oculus&quot;));
+print(&quot;Is a Vive head controller available: &quot; + HMD.isHeadControllerAvailable(&quot;OpenVR&quot;));</code></pre>
+  <h5 class="name" id=".isHMDAvailable"> isHMDAvailable<span class="signature">(name<span class="signature-attributes">opt</span>)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether there is an HMD available.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> &quot;&quot;</td>
+        <td class="description last">The name of the HMD to check for, e.g., <code>&quot;Oculus Rift&quot;</code>. The name is the same as may be displayed in Interface&apos;s &quot;Display&quot; menu. If no name is specified then any HMD matches.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if an HMD of the specified <code>name</code> is available, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report on HMD availability.</p><pre><code>print(&quot;Is any HMD available: &quot; + HMD.isHMDAvailable());
+print(&quot;Is an Oculus Rift HMD available: &quot; + HMD.isHMDAvailable(&quot;Oculus Rift&quot;));
+print(&quot;Is a Vive HMD available: &quot; + HMD.isHMDAvailable(&quot;OpenVR (Vive)&quot;));</code></pre>
+  <h5 class="name" id=".isKeyboardVisible"> isKeyboardVisible<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether the HMD-provided keyboard, if any, is visible.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the current HMD provides a keyboard and it is visible, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".isSubdeviceContainingNameAvailable"> isSubdeviceContainingNameAvailable<span class="signature">(name)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether there are specific HMD controllers available.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>name</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the HMD controller to check for, e.g., <code>&quot;OculusTouch&quot;</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if an HMD controller with a name containing the specified <code>name</code> is available, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report if particular Oculus controllers are available.</p><pre><code>print(&quot;Is an Oculus Touch controller available: &quot; + HMD.isSubdeviceContainingNameAvailable(&quot;Touch&quot;));
+print(&quot;Is an Oculus Remote controller available: &quot; + HMD.isSubdeviceContainingNameAvailable(&quot;Remote&quot;));</code></pre>
+  <h5 class="name" id=".openTablet"> openTablet<span class="signature">(contextualMode<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Opens the tablet if the tablet is used in the current display mode and it isn&apos;t already showing, and sets the tablet to contextual mode if requested. In contextual mode, the page displayed on the tablet is wholly controlled by script (i.e., the user cannot navigate to another).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>contextualMode</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">If <code>true</code> then the tablet is opened at a specific position and orientation already set by the script, otherwise it opens at a position and orientation relative to the user. For contextual mode, set the world or local position and orientation of the <code>HMD.tabletID</code> overlay.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".overlayFromWorldPoint"> overlayFromWorldPoint<span class="signature">(position)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec2">Vec2</a>}</span></h5>
+  <div class="description"> Get the 2D HUD overlay coordinates of a 3D point on the HUD overlay. 2D HUD overlay coordinates are pixels with the origin at the top left of the overlay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec3">Vec3</a></span></td>
+        <td class="description last">The point on the HUD overlay in world coordinates.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The point on the HUD overlay in HUD coordinates.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec2">Vec2</a></dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Draw a square on the HUD overlay in the direction you&apos;re looking.</p><pre><code>var hudIntersection = HMD.calculateRayUICollisionPoint(MyAvatar.getHeadPosition(),
+  Quat.getForward(MyAvatar.headOrientation));
+var hudPoint = HMD.overlayFromWorldPoint(hudIntersection);
+
+var DIMENSIONS = { x: 50, y: 50 };
+var square = Overlays.addOverlay(&quot;rectangle&quot;, {
+  x: hudPoint.x - DIMENSIONS.x / 2,
+  y: hudPoint.y - DIMENSIONS.y / 2,
+  width: DIMENSIONS.x,
+  height: DIMENSIONS.y,
+  color: { red: 255, green: 0, blue: 0 }
+});
+
+Script.scriptEnding.connect(function () {
+  Overlays.deleteOverlay(square);
+});</code></pre>
+  <h5 class="name" id=".overlayToSpherical"> overlayToSpherical<span class="signature">(overlayPos)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec2">Vec2</a>}</span></h5>
+  <div class="description"> Get the spherical coordinates of a 2D point on the HUD overlay. 2D HUD overlay coordinates are pixels with the origin at the top left of the overlay. Spherical coordinates are polar coordinates in radians with <code>{ x: 0, y: 0 }</code> being the center of the HUD overlay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>overlayPos</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+        <td class="description last">The point on the HUD overlay in HUD coordinates.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The point on the HUD overlay in spherical coordinates.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec2">Vec2</a></dt></dl>
+  <h5 class="name" id=".preferredAudioInput"> preferredAudioInput<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <div class="description"> Get the name of the HMD audio input device.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The name of the HMD audio input device if in HMD mode, otherwise an empty string.</div>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".preferredAudioOutput"> preferredAudioOutput<span class="signature">()</span> <span class="type-signature">&#x2192; {string}</span></h5>
+  <div class="description"> Get the name of the HMD audio output device.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The name of the HMD audio output device if in HMD mode, otherwise an empty string.</div>
+  <dl><dt> Type: string</dt></dl>
+  <h5 class="name" id=".requestHideHandControllers"> requestHideHandControllers<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Signal that it is no longer necessary to display models of the HMD hand controllers being used. If no other scripts want the models displayed then they are no longer displayed.</div>
+  <h5 class="name" id=".requestShowHandControllers"> requestShowHandControllers<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Signal that models of the HMD hand controllers being used should be displayed. The models are displayed at their actual, real-world locations.</div>
+  <h5>Example</h5>
+  <p class="code-caption">Show your hand controllers for 10 seconds.</p><pre><code>HMD.requestShowHandControllers();
+Script.setTimeout(function () {
+  HMD.requestHideHandControllers();
+}, 10000);</code></pre>
+  <h5 class="name" id=".shouldShowHandControllers"> shouldShowHandControllers<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether any script wants models of the HMD hand controllers displayed. Requests are made and canceled using <a href="/api-reference/namespaces/hmd#.requestShowHandControllers">requestShowHandControllers</a> and <a href="/api-reference/namespaces/hmd#.requestHideHandControllers">requestHideHandControllers</a>.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if any script is requesting that HMD hand controller models be displayed.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".sphericalToOverlay"> sphericalToOverlay<span class="signature">(sphericalPos)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec2">Vec2</a>}</span></h5>
+  <div class="description"> Get the 2D point on the HUD overlay represented by given spherical coordinates. 2D HUD overlay coordinates are pixels with the origin at the top left of the overlay. Spherical coordinates are polar coordinates in radians with <code>{ x: 0, y: 0 }</code> being the center of the HUD overlay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>sphericalPos</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+        <td class="description last">The point on the HUD overlay in spherical coordinates.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The point on the HUD overlay in HUD coordinates.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec2">Vec2</a></dt></dl>
+  <h5 class="name" id=".suppressKeyboard"> suppressKeyboard<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Suppress the activation of the HMD-provided keyboard, if any. Successful calls should be balanced with a call to unspressKeyboard within a reasonable amount of time.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the current HMD provides a keyboard and it was successfully suppressed (e.g., it isn&apos;t being displayed), otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".unsuppressKeyboard"> unsuppressKeyboard<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Unsuppress the activation of the HMD-provided keyboard, if any.</div>
+  <h5 class="name" id=".worldPointFromOverlay"> worldPointFromOverlay<span class="signature">(coordinates)</span> <span class="type-signature">&#x2192; {<a href="/api-reference/globals#Vec3">Vec3</a>}</span></h5>
+  <div class="description"> Get the 3D world coordinates of a 2D point on the HUD overlay. 2D HUD overlay coordinates are pixels with the origin at the top left of the overlay.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>coordinates</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#Vec2">Vec2</a></span></td>
+        <td class="description last">The point on the HUD overlay in HUD coordinates.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> The point on the HUD overlay in world coordinates.</div>
+  <dl><dt> Type: <a href="/api-reference/globals#Vec3">Vec3</a></dt></dl>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".displayModeChanged"> displayModeChanged<span class="signature">(isHMDMode)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when Interface&apos;s display mode changes and when the user puts on or takes off their HMD.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>isHMDMode</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the display mode is HMD, otherwise <code>false</code>. This is the same value as provided by <code>HMD.active</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report when the display mode changes.</p><pre><code>HMD.displayModeChanged.connect(function (isHMDMode) {
+  print(&quot;Display mode changed&quot;);
+  print(&quot;isHMD = &quot; + isHMDMode);
+  print(&quot;HMD.active = &quot; + HMD.active);
+  print(&quot;HMD.mounted = &quot; + HMD.mounted);
+});</code></pre>
+  <h5 class="name" id=".IPDScaleChanged"> IPDScaleChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the <code>HMD.ipdScale</code> property value changes.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".miniTabletEnabledChanged"> miniTabletEnabledChanged<span class="signature">(enabled)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the ability to display the mini tablet has changed.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>enabled</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the mini tablet is enabled to be displayed, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".mountedChanged"> mountedChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the <code>HMD.mounted</code> property value changes.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report when there&apos;s a change in the HMD being worn.</p><pre><code>HMD.mountedChanged.connect(function () {
+  print(&quot;Mounted changed. HMD is mounted: &quot; + HMD.mounted);
+});
+   </code></pre>
+  <h5 class="name" id=".shouldShowHandControllersChanged"> shouldShowHandControllersChanged<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when a request to show or hide models of the HMD hand controllers is made using <a href="/api-reference/namespaces/hmd#.requestShowHandControllers">requestShowHandControllers</a> or <a href="/api-reference/namespaces/hmd#.requestHideHandControllers">requestHideHandControllers</a>.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report when showing of hand controllers changes.</p><pre><code>function onShouldShowHandControllersChanged() {
+  print(&quot;Should show hand controllers: &quot; + HMD.shouldShowHandControllers());
+}
+HMD.shouldShowHandControllersChanged.connect(onShouldShowHandControllersChanged);
+
+HMD.requestShowHandControllers();
+Script.setTimeout(function () {
+  HMD.requestHideHandControllers();
+}, 10000);</code></pre>
+  <h5 class="name" id=".showTabletChanged"> showTabletChanged<span class="signature">(showTablet)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when the tablet is shown or hidden.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>showTablet</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"><code>true</code> if the tablet is showing, otherwise <code>false</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

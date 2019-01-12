@@ -1,0 +1,231 @@
+    {% extends 'partials/base_noGit.html.twig' %}
+    {% set tags = page.taxonomy.tag %}
+    {% if tags %}
+        {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+    {% else %}
+        {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+    {% endif %}
+    
+    {% block navigation %}
+        <div id="navigation">
+        {% if not progress.isFirst(page.path) %}
+            <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+        {% endif %}
+    
+        {% if not progress.isLast(page.path) %}
+            <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+        {% endif %}
+        </div>
+    {% endblock %}
+    
+    {% block content %}
+        <div id="api-specific">
+            <div id="body-inner">
+                <h1>{{ page.title }}</h1>
+                <div>
+<a href="/api-reference/namespaces/accountservices/">AccountServices</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/agent/">Agent</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/animationcache/">AnimationCache</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/assets/">Assets</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/audio/">Audio</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/audioscope/">AudioScope</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/audiostats/">AudioStats</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/avatar/">Avatar</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/avatarbookmarks/">AvatarBookmarks</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/avatarinputs/">AvatarInputs</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/avatarlist/">AvatarList</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/avatarmanager/">AvatarManager</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/camera/">Camera</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/clipboard/">Clipboard</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/controller/">Controller</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/debugdraw/">DebugDraw</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/desktop/">Desktop</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/entities/">Entities</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/entityviewer/">EntityViewer</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/facetracker/">FaceTracker</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/file/">File</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/googlepoly/">GooglePoly</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/graphics/">Graphics</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/hifiabout/">HifiAbout</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/hmd/">HMD</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/keyboard/">Keyboard</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/laserpointers/">LaserPointers</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/location/">location</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/locationbookmarks/">LocationBookmarks</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/lodmanager/">LODManager</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/mat4/">Mat4</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/menu/">Menu</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/messages/">Messages</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/midi/">Midi</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/modelcache/">ModelCache</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/myavatar/">MyAvatar</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/offscreenflags/">OffscreenFlags</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/overlays/">Overlays</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/paths/">Paths</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/picks/">Picks</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/picktype/">PickType</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/pointers/">Pointers</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/quat/">Quat</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/raypick/">RayPick</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/recording/">Recording</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/render/">Render</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/resource/">Resource</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/resources/">Resources</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/reticle/">Reticle</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/scene/">Scene</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/script/">Script</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/scriptdiscoveryservice/">ScriptDiscoveryService</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/selection/">Selection</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/settings/">Settings</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/snapshot/">Snapshot</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/soundcache/">SoundCache</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/speechrecognizer/">SpeechRecognizer</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/stats/">Stats</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/steam/">Steam</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/tablet/">Tablet</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/tabletinterface/">tabletInterface</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/texturecache/">TextureCache</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/toolbars/">Toolbars</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/users/">Users</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/uuid/">Uuid</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/vec3/">Vec3</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/wallet/">Wallet</a>
+</div>
+<div>
+<a href="/api-reference/namespaces/window/">Window</a>
+</div>
+            </div>
+        </div>
+    {% endblock %}

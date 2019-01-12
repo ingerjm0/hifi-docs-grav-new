@@ -1,0 +1,566 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>The Menu API provides access to the menu that is displayed at the top of the window on a user&apos;s desktop and in the tablet when the &quot;MENU&quot; button is pressed.<p></p>
+      <h3>Groupings</h3> A &quot;grouping&quot; provides a way to group a set of menus or menu items together so that they can all be set visible or invisible as a group. There are two available groups: <code>&quot;Advanced&quot;</code> and <code>&quot;Developer&quot;</code>. These groupings can be toggled in the &quot;Settings&quot; menu. If a menu item doesn&apos;t belong to a group it is always displayed.
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.addMenu">addMenu</a></div>
+    <div><a href="#.addMenuItem">addMenuItem</a></div>
+    <div><a href="#.addMenuItem">addMenuItem</a></div>
+    <div><a href="#.addSeparator">addSeparator</a></div>
+    <div><a href="#.isMenuEnabled">isMenuEnabled</a></div>
+    <div><a href="#.isOptionChecked">isOptionChecked</a></div>
+    <div><a href="#.menuExists">menuExists</a></div>
+    <div><a href="#.menuItemExists">menuItemExists</a></div>
+    <div><a href="#.removeMenu">removeMenu</a></div>
+    <div><a href="#.removeMenuItem">removeMenuItem</a></div>
+    <div><a href="#.removeSeparator">removeSeparator</a></div>
+    <div><a href="#.setIsOptionChecked">setIsOptionChecked</a></div>
+    <div><a href="#.setMenuEnabled">setMenuEnabled</a></div>
+    <div><a href="#.triggerOption">triggerOption</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.menuItemEvent">menuItemEvent</a></div><br>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.MenuItemProperties">MenuItemProperties</a></div><br>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".addMenu"> addMenu<span class="signature">(menuName, grouping<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Add a new top-level menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="description last">Name that will be displayed for the menu. Nested menus can be described using the &quot;&gt;&quot; symbol.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>grouping</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="description last">Name of the grouping, if any, to add this menu to.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Examples</h5>
+  <p class="code-caption">Add a menu and a nested submenu.</p><pre><code>Menu.addMenu(&quot;Test Menu&quot;);
+Menu.addMenu(&quot;Test Menu &gt; Test Sub Menu&quot;);</code></pre>
+  <p class="code-caption">Add a menu to the Settings menu that is only visible if Settings &gt; Advanced is enabled.</p><pre><code>Menu.addMenu(&quot;Settings &gt; Test Grouping Menu&quot;, &quot;Advanced&quot;);</code></pre>
+  <h5 class="name" id=".addMenuItem"> addMenuItem<span class="signature">(menuName, menuItem, shortcutKey<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h5>
+  <div class="description"> Add a new menu item to a menu. The new item is added at the end of the menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="description last">Name of the menu to add a menu item to.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>menuItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="description last">Name of the menu item. This is what will be displayed in the menu.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>shortcutKey</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="description last">A shortcut key that can be used to trigger the menu item.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Add a menu item to the end of the &quot;Developer&quot; menu.</p><pre><code>Menu.addMenuItem(&quot;Developer&quot;, &quot;Test&quot;, &quot;Ctrl+Shift+T&quot;);</code></pre>
+  <h5 class="name" id=".addMenuItem"> addMenuItem<span class="signature">(properties)</span><span class="type-signature"></span></h5>
+  <div class="description"> Add a new menu item to a menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>properties</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/menu#.MenuItemProperties">Menu.MenuItemProperties</a></span></td>
+        <td class="description last">Properties of the menu item to create.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Add a menu item using <a href="/api-reference/namespaces/menu#.MenuItemProperties">Menu.MenuItemProperties</a>.</p><pre><code>Menu.addMenuItem({
+  menuName:     &quot;Developer&quot;,
+  menuItemName: &quot;Test&quot;,
+  afterItem:    &quot;Log&quot;,
+  shortcutKey:  &quot;Ctrl+Shift+T&quot;,
+  grouping:     &quot;Advanced&quot;
+});</code></pre>
+  <h5 class="name" id=".addSeparator"> addSeparator<span class="signature">(menuName, separatorName)</span><span class="type-signature"></span></h5>
+  <div class="description"> Add a separator with an unclickable label below it. The separator will be placed at the bottom of the menu. If you want to add a separator at a specific point in the menu, use <a href="/api-reference/namespaces/menu#.addMenuItem">Menu.addMenuItem</a> with <a href="/api-reference/namespaces/menu#.MenuItemProperties">Menu.MenuItemProperties</a> instead.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu to add a separator to.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>separatorName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the separator that will be displayed as the label below the separator line.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Add a separator.</p><pre><code>Menu.addSeparator(&quot;Developer&quot;,&quot;Test Separator&quot;);</code></pre>
+  <h5 class="name" id=".isMenuEnabled"> isMenuEnabled<span class="signature">(menuName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether a menu or menu item is enabled. If disabled, the item is grayed out and unusable. Menus are enabled by default.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the menu or menu item to check.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the menu is enabled, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report with the Settings &gt; Advanced Menus menu item is enabled.</p><pre><code>print(Menu.isMenuEnabled(&quot;Settings &gt; Advanced Menus&quot;)); // true or false</code></pre>
+  <h5 class="name" id=".isOptionChecked"> isOptionChecked<span class="signature">(menuOption)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether a checkable menu item is checked.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuOption</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the menu item.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the option is checked, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Report whether the Settings &gt; Advanced menu item is turned on.</p><pre><code>print(Menu.isOptionChecked(&quot;Advanced Menus&quot;)); // true or false</code></pre>
+  <h5 class="name" id=".menuExists"> menuExists<span class="signature">(menuName)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check whether a top-level menu exists.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu to check for existence.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the menu exists, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Check if the &quot;Developer&quot; menu exists.</p><pre><code>if (Menu.menuExists(&quot;Developer&quot;)) {
+  print(&quot;Developer menu exists.&quot;);
+}</code></pre>
+  <h5 class="name" id=".menuItemExists"> menuItemExists<span class="signature">(menuName, menuItem)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Check if a menu item exists.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu that the menu item is in.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>menuItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu item to check for existence of.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the menu item exists, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Determine if the Developer &gt; Stats menu exists.</p><pre><code>if (Menu.menuItemExists(&quot;Developer&quot;, &quot;Stats&quot;)) {
+  print(&quot;Developer &gt; Stats menu item exists.&quot;);
+}</code></pre>
+  <h5 class="name" id=".removeMenu"> removeMenu<span class="signature">(menuName)</span><span class="type-signature"></span></h5>
+  <div class="description"> Remove a top-level menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu to remove.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Remove a menu and nested submenu.</p><pre><code>Menu.removeMenu(&quot;Test Menu &gt; Test Sub Menu&quot;);
+Menu.removeMenu(&quot;Test Menu&quot;);</code></pre>
+  <h5 class="name" id=".removeMenuItem"> removeMenuItem<span class="signature">(menuName, menuItem)</span><span class="type-signature"></span></h5>
+  <div class="description"> Remove a menu item from a menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu to remove a menu item from.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>menuItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu item to remove. Menu.removeMenuItem(&quot;Developer&quot;, &quot;Test&quot;);</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".removeSeparator"> removeSeparator<span class="signature">(menuName, separatorName)</span><span class="type-signature"></span></h5>
+  <div class="description"> Remove a separator from a menu.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu to remove the separator from.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>separatorName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the separator to remove.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Remove a separator.</p><pre><code>Menu.removeSeparator(&quot;Developer&quot;,&quot;Test Separator&quot;);</code></pre>
+  <h5 class="name" id=".setIsOptionChecked"> setIsOptionChecked<span class="signature">(menuOption, isChecked)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set a checkable menu item as checked or unchecked.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuOption</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the menu item to modify.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isChecked</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last">If <code>true</code>, the menu item will be checked, otherwise it will not be checked.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Turn on Settings &gt; Advanced Menus.</p><pre><code>Menu.setIsOptionChecked(&quot;Advanced Menus&quot;, true);
+print(Menu.isOptionChecked(&quot;Advanced Menus&quot;)); // true</code></pre>
+  <h5 class="name" id=".setMenuEnabled"> setMenuEnabled<span class="signature">(menuName, isEnabled)</span><span class="type-signature"></span></h5>
+  <div class="description"> Set a menu or menu item to be enabled or disabled. If disabled, the item is grayed out and unusable.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the menu or menu item to modify.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isEnabled</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last">If <code>true</code>, the menu will be enabled, otherwise it will be disabled.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Disable the Settings &gt; Advanced Menus menu item.</p><pre><code>Menu.setMenuEnabled(&quot;Settings &gt; Advanced Menus&quot;, false);
+print(Menu.isMenuEnabled(&quot;Settings &gt; Advanced Menus&quot;)); // false</code></pre>
+  <h5 class="name" id=".triggerOption"> triggerOption<span class="signature">(menuOption)</span><span class="type-signature"></span></h5>
+  <div class="description"> Trigger the menu item as if the user clicked on it.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuOption</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">The name of the menu item to trigger.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5>Example</h5>
+  <p class="code-caption">Open the help window.</p><pre><code>Menu.triggerOption(&apos;Help...&apos;);</code></pre>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".menuItemEvent"> menuItemEvent<span class="signature">(menuItem)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered when a menu item is clicked (or triggered by <a href="/api-reference/namespaces/menu#.triggerOption">Menu.triggerOption</a>).</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last">Name of the menu item that was clicked.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5>Example</h5>
+  <p class="code-caption">Detect menu item events.</p><pre><code>function onMenuItemEvent(menuItem) {
+  print(&quot;You clicked on &quot; + menuItem);
+}
+
+Menu.menuItemEvent.connect(onMenuItemEvent);
+   </code></pre>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".MenuItemProperties">MenuItemProperties</h5>
+  <div class="description"> A set of properties that can be passed to <a href="/api-reference/namespaces/menu#.addMenuItem">Menu.addMenuItem</a> to create a new menu item. If none of <code>position</code>, <code>beforeItem</code>, <code>afterItem</code>, or <code>grouping</code> are specified, the menu item will be placed at the end of the menu.</div>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Attributes</th>
+        <th>Default</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>menuName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">Name of the menu. Nested menus can be described using the &quot;&gt;&quot; symbol.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>menuItemName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"></td>
+        <td class="default"></td>
+        <td class="description last">Name of the menu item.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isCheckable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">Whether or not the menu item is checkable.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isChecked</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">Whether or not the menu item is checked.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>isSeparator</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"> false</td>
+        <td class="description last">Whether or not the menu item is a separator.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>shortcutKey</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">A shortcut key that triggers the menu item.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>shortcutKeyEvent</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/globals#KeyEvent">KeyEvent</a></span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">A <a href="/api-reference/globals#KeyEvent">KeyEvent</a> that specifies a key that triggers the menu item.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>position</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">The position to place the new menu item. An integer number with <code>0</code> being the first menu item.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>beforeItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">The name of the menu item to place this menu item before.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>afterItem</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">The name of the menu item to place this menu item after.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>grouping</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="attributes"> &lt;optional&gt;<br></td>
+        <td class="default"></td>
+        <td class="description last">The name of grouping to add this menu item to.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

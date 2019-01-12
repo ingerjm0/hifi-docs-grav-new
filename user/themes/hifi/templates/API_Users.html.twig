@@ -1,0 +1,404 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Methods</h5>
+    </div>
+    <div><a href="#.disableIgnoreRadius">disableIgnoreRadius</a></div>
+    <div><a href="#.enableIgnoreRadius">enableIgnoreRadius</a></div>
+    <div><a href="#.getAvatarGain">getAvatarGain</a></div>
+    <div><a href="#.getCanKick">getCanKick</a></div>
+    <div><a href="#.getIgnoreRadiusEnabled">getIgnoreRadiusEnabled</a></div>
+    <div><a href="#.getIgnoreStatus">getIgnoreStatus</a></div>
+    <div><a href="#.ignore">ignore</a></div>
+    <div><a href="#.kick">kick</a></div>
+    <div><a href="#.mute">mute</a></div>
+    <div><a href="#.personalMute">personalMute</a></div>
+    <div><a href="#.requestPersonalMuteStatus">requestPersonalMuteStatus</a></div>
+    <div><a href="#.requestUsernameFromID">requestUsernameFromID</a></div>
+    <div><a href="#.setAvatarGain">setAvatarGain</a></div>
+    <div><a href="#.toggleIgnoreRadius">toggleIgnoreRadius</a></div><br>
+    <div>
+      <h5>Signals</h5>
+    </div>
+    <div><a href="#.avatarDisconnected">avatarDisconnected</a></div>
+    <div><a href="#.canKickChanged">canKickChanged</a></div>
+    <div><a href="#.enteredIgnoreRadius">enteredIgnoreRadius</a></div>
+    <div><a href="#.ignoreRadiusEnabledChanged">ignoreRadiusEnabledChanged</a></div>
+    <div><a href="#.usernameFromIDReply">usernameFromIDReply</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>canKick</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the domain server allows the node or avatar to kick (ban) avatars, otherwise <code>false</code>. <em>Read-only.</em></td>
+        </tr>
+        <tr>
+          <td class="name"><code>requestsDomainListData</code></td>
+          <td class="type"> <span class="param-type">boolean</span></td>
+          <td class="description last"><code>true</code> if the avatar requests extra data from the mixers (such as positional data of an avatar you&apos;ve ignored). <em>Read-only.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Methods</h4>
+  <h5 class="name" id=".disableIgnoreRadius"> disableIgnoreRadius<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Disables the space bubble feature.</div>
+  <h5 class="name" id=".enableIgnoreRadius"> enableIgnoreRadius<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Enables the space bubble feature.</div>
+  <h5 class="name" id=".getAvatarGain"> getAvatarGain<span class="signature">(nodeID)</span> <span class="type-signature">&#x2192; {number}</span></h5>
+  <div class="description"> Gets an avatar&apos;s gain for you and you only.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user whose gain you want to get, or null to get the master gain.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <div class="param-desc"> gain (in dB)</div>
+  <dl><dt> Type: number</dt></dl>
+  <h5 class="name" id=".getCanKick"> getCanKick<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Returns `true` if the DomainServer will allow this Node/Avatar to make kick.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the domain server allows the client to kick (ban) other users, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getIgnoreRadiusEnabled"> getIgnoreRadiusEnabled<span class="signature">()</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Returns `true` if the space bubble feature is enabled.</div>
+  <h6>Returns:</h6>
+  <div class="param-desc"> <code>true</code> if the space bubble is enabled, otherwise <code>false</code>.</div>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".getIgnoreStatus"> getIgnoreStatus<span class="signature">(nodeID)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Get whether or not you have ignored the node with the given UUID.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user whose ignore status you want.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".ignore"> ignore<span class="signature">(nodeID, enable)</span><span class="type-signature"></span></h5>
+  <div class="description"> Personally ignore another user, making them disappear for you and you disappear for them.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user you want to ignore.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>enable</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last">True for ignored; false for un-ignored.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".kick"> kick<span class="signature">(nodeID)</span><span class="type-signature"></span></h5>
+  <div class="description"> Kick/ban another user. Removes them from the server and prevents them from returning. Bans by either user name (if available) or machine fingerprint otherwise. This will only do anything if you&apos;re an admin of the domain you&apos;re in.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user you want to kick.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".mute"> mute<span class="signature">(nodeID)</span><span class="type-signature"></span></h5>
+  <div class="description"> Mutes another user&apos;s microphone for everyone. Not permanent; the silenced user can unmute themselves with the UNMUTE button in their HUD. This will only do anything if you&apos;re an admin of the domain you&apos;re in.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user you want to mute.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".personalMute"> personalMute<span class="signature">(nodeID, muteEnabled)</span><span class="type-signature"></span></h5>
+  <div class="description"> Mute another user for you and you only. They won&apos;t be able to hear you, and you won&apos;t be able to hear them.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user you want to mute.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>muteEnabled</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last">True for enabled; false for disabled.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".requestPersonalMuteStatus"> requestPersonalMuteStatus<span class="signature">(nodeID)</span> <span class="type-signature">&#x2192; {boolean}</span></h5>
+  <div class="description"> Get whether or not you have personally muted the node with the given UUID.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user whose personal mute status you want.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: boolean</dt></dl>
+  <h5 class="name" id=".requestUsernameFromID"> requestUsernameFromID<span class="signature">(nodeID)</span><span class="type-signature"></span></h5>
+  <div class="description"> Request the user name and machine fingerprint associated with the given UUID. The user name will be returned in a <a href="/api-reference/namespaces/users#.usernameFromIDReply">usernameFromIDReply</a> signal. This will only do anything if you&apos;re an admin of the domain you&apos;re in.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user whose user name you want.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".setAvatarGain"> setAvatarGain<span class="signature">(nodeID, gain)</span><span class="type-signature"></span></h5>
+  <div class="description"> Sets an avatar&apos;s gain for you and you only. Units are Decibels (dB)</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The node or session ID of the user whose gain you want to modify, or null to set the master gain.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>gain</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The gain of the avatar you&apos;d like to set. Units are dB.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="name" id=".toggleIgnoreRadius"> toggleIgnoreRadius<span class="signature">()</span><span class="type-signature"></span></h5>
+  <div class="description"> Toggle the state of the space bubble feature.</div>
+  <h4 class="subsection-title">Signals</h4>
+  <h5 class="name" id=".avatarDisconnected"> avatarDisconnected<span class="signature">(nodeID)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Notifies scripts that a user has disconnected from the domain.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last">The session ID of the avatar that has disconnected.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".canKickChanged"> canKickChanged<span class="signature">(canKick)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>canKick</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".enteredIgnoreRadius"> enteredIgnoreRadius<span class="signature">()</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Notifies scripts that another user has entered the ignore radius.</div>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".ignoreRadiusEnabledChanged"> ignoreRadiusEnabledChanged<span class="signature">(isEnabled)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>isEnabled</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+  <h5 class="name" id=".usernameFromIDReply"> usernameFromIDReply<span class="signature">(nodeID, userName, machineFingerprint, isAdmin)</span> <span class="type-signature">&#x2192; {Signal}</span></h5>
+  <div class="description"> Triggered in response to a <a href="/api-reference/namespaces/users#.requestUsernameFromID">requestUsernameFromID</a> call. Provides the user name and machine fingerprint associated with a UUID. Username and machineFingerprint will be their default constructor output if the requesting user isn&apos;t an admin.</div>
+  <h5>Parameters:</h5>
+  <table class="params">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>nodeID</code></td>
+        <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/uuid">Uuid</a></span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>userName</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>machineFingerprint</code></td>
+        <td class="type"> <span class="param-type">string</span></td>
+        <td class="description last"></td>
+      </tr>
+      <tr>
+        <td class="name"><code>isAdmin</code></td>
+        <td class="type"> <span class="param-type">boolean</span></td>
+        <td class="description last"></td>
+      </tr>
+    </tbody>
+  </table>
+  <h6>Returns:</h6>
+  <dl><dt> Type: Signal</dt></dl>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}

@@ -1,0 +1,107 @@
+      {% extends 'partials/base_noGit.html.twig' %}
+      {% set tags = page.taxonomy.tag %}
+      {% if tags %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs', 'tag': tags}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% else %}
+          {% set progress = page.collection({'items':{'@taxonomy':{'category': 'docs'}},'order': {'by': 'default', 'dir': 'asc'}}) %}
+      {% endif %}
+      
+      {% block navigation %}
+          <div id="navigation">
+          {% if not progress.isFirst(page.path) %}
+              <a class="nav nav-prev" href="{{ progress.nextSibling(page.path).url }}"> <img src="{{ url('theme://images/left-arrow.png') }}"></a>
+          {% endif %}
+      
+          {% if not progress.isLast(page.path) %}
+              <a class="nav nav-next" href="{{ progress.prevSibling(page.path).url }}"><img src="{{ url('theme://images/right-arrow.png') }}"></a>
+          {% endif %}
+          </div>
+      {% endblock %}
+      
+      {% block content %}
+          <div id="api-specific">
+              <div id="body-inner">
+                  <h1>{{ page.title }}</h1>
+                  <section>
+<article>
+  <div class="container-overview">
+    <div class="description">
+      <table>
+        <tbody>
+          <tr>
+            <th>Available in:</th>
+            <td>Interface Scripts</td>
+            <td>Client Entity Scripts</td>
+            <td>Server Entity Scripts</td>
+            <td>Assignment Client Scripts</td>
+          </tr>
+        </tbody>
+      </table><br>
+    </div>
+    <div>
+      <h5>Type Definitions</h5>
+    </div>
+    <div><a href="#.State">State</a></div><br>
+    <h5 class="subsection-title">Properties:</h5>
+    <table class="props">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="last">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name"><code>State</code></td>
+          <td class="type"> <span class="param-type"><a href="/api-reference/namespaces/resource#.State">Resource.State</a></span></td>
+          <td class="description last"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subsection-title">Type Definitions</h4>
+  <h5 class="name" id=".State">State</h5>
+  <dl><dt>Type: <span class="param-type">object</span></dl></dt>
+  <h5 class="subsection-title">Properties:</h5>
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name"><code>QUEUED</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The resource is queued up, waiting to be loaded.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>LOADING</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The resource is downloading.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>LOADED</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The resource has finished downloaded by is not complete.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>FINISHED</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">The resource has completely finished loading and is ready.</td>
+      </tr>
+      <tr>
+        <td class="name"><code>FAILED</code></td>
+        <td class="type"> <span class="param-type">number</span></td>
+        <td class="description last">Downloading the resource has failed.</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</section>
+              </div>
+          </div>
+      {% endblock %}
