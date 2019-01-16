@@ -150,3 +150,14 @@ input {
 	color: #3A3F3E;
 }
 
+/***********************************/
+/********** Code styles ************/
+/***********************************/
+code {
+    font-family: Consolas;
+}
+
+pre code {
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+}
