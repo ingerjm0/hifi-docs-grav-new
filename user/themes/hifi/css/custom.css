@@ -104,6 +104,9 @@ td {
 	border: solid #c7cccb 1px;
 }
 
+li table {
+    padding-bottom: 200px;
+}
 
 /***********************************/
 /******** Headings styles **********/

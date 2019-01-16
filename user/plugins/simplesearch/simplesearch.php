@@ -2,15 +2,19 @@
 
 namespace Grav\Plugin;
 
-use Grav\Common\Config\Config;
-use Grav\Common\Data\Data;
+                              
+                          
 use Grav\Common\Page\Collection;
+use Grav\Common\Plugin;
+use Grav\Common\Uri;
 use Grav\Common\Page\Page;
 use Grav\Common\Page\Types;
-use Grav\Common\Plugin;
+                       
 use Grav\Common\Taxonomy;
-use Grav\Common\Uri;
+                    
 use Grav\Common\Utils;
+use Grav\Common\Data\Data;
+use Grav\Common\Config\Config;
 use RocketTheme\Toolbox\Event\Event;
 
 class SimplesearchPlugin extends Plugin
@@ -111,32 +115,34 @@ class SimplesearchPlugin extends Plugin
         }
 
         // Explode query into multiple strings. Drop empty values
-        $this->query = array_filter(array_filter(explode(',', $query), 'trim'), 'strlen');
+        // $this->query = array_filter(array_filter(explode(',', $query), 'trim'), 'strlen');
+        $this->query = trim($query);
 
         /** @var Taxonomy $taxonomy_map */
         $taxonomy_map = $this->grav['taxonomy'];
         $taxonomies = [];
         $find_taxonomy = [];
 
-        $filters = (array)$this->config->get('plugins.simplesearch.filters');
+        $filters = (array) $this->config->get('plugins.simplesearch.filters');
         $operator = $this->config->get('plugins.simplesearch.filter_combinator', 'and');
         $new_approach = false;
 
-        // if @none found, skip processing taxonomies
-        $should_process = true;
-        if (is_array($filters)) {
-            $the_filter = reset($filters);
+                                                     
+                               
+                                 
+                                          
 
-            if (is_array($the_filter)) {
-                if (in_array(reset($the_filter), ['@none', 'none@'])) {
-                    $should_process = false;
-                }
-            }
-        }
+                                        
+                                                                                                                             
+                                            
+                 
+             
+         
 
-        if (!$should_process || !$filters || $query === false || (count($filters) == 1 && !reset($filters))) {
+        if (!$filters || $query === false || (count($filters) == 1 && !reset($filters))) {
             /** @var \Grav\Common\Page\Pages $pages */
             $pages = $this->grav['pages'];
+
             $this->collection = $pages->all();
         } else {
 
@@ -155,7 +161,7 @@ class SimplesearchPlugin extends Plugin
                 if ($key === '@self' || $key === 'self@') {
                     $new_approach = true;
                 } elseif ($key === '@taxonomy' || $key === 'taxonomy@') {
-                    $taxonomies = $filter === false ? false : array_merge($taxonomies, (array)$filter);
+                    $taxonomies = $filter === false ? false : array_merge($taxonomies, (array) $filter);
                 } else {
                     $find_taxonomy[$key] = $filter;
                 }
@@ -175,30 +181,66 @@ class SimplesearchPlugin extends Plugin
         $this->collection->published()->routable();
 
         //Check if user has permission to view page
-        if ($this->grav['config']->get('plugins.login.enabled')) {
+        if($this->grav['config']->get('plugins.login.enabled')) {
             $this->collection = $this->checkForPermissions($this->collection);
         }
         $extras = [];
 
         if ($query) {
             foreach ($this->collection as $cpage) {
-                foreach ($this->query as $query) {
-                    $query = trim($query);
+                
+                                          
 
-                    if ($this->notFound($query, $cpage, $taxonomies)) {
-                        $this->collection->remove($cpage);
-                        continue;
-                    }
+                $query = $this->query;
+                                                          
+                                 
+                     
 
-                    if ($cpage->modular()) {
-                        $this->collection->remove($cpage);
-                        $parent = $cpage->parent();
-                        $extras[$parent->path()] = ['slug' => $parent->slug()];
-                    }
-
+                                            
+                $result = $this->found($query, $cpage, $taxonomies);
+                if ($result > 0) {
+                    $cpage->result = $result;
+                    continue;
                 }
+
+                if ($cpage->modular()) {
+                    $parent = $cpage->parent();
+                    $extras[$parent->path()] = ['slug' => $parent->slug()];
+                }
+
+                $this->collection->remove($cpage);
             }
         }
+
+        // if ($query) {
+        //     foreach ($this->collection as $cpage) {
+        //         foreach ($this->query as $query) {
+        //             $query = trim($query);
+
+        //             if ($this->notFound($query, $cpage, $taxonomies)) {
+        //                 $this->collection->remove($cpage);
+        //                 continue;
+        //             }
+
+        //             if ($cpage->modular()) {
+        //                 $this->collection->remove($cpage);
+        //                 $parent = $cpage->parent();
+        //                 $extras[$parent->path()] = ['slug' => $parent->slug()];
+        //             }
+
+        //         }
+        //     }
+        // }
+
+        // usort($this->collection, "cmp");
+
+        // echo "--------------------";
+        // echo count($this->collection);
+        // foreach ($this->collection as $cpage) {
+        //     echo $cpage->result;
+        // }
+        
+        // exit();
 
         if (!empty($extras)) {
             $this->collection->append($extras);
@@ -231,13 +273,23 @@ class SimplesearchPlugin extends Plugin
         }
     }
 
+    // Comparing function for sorting with result
+    function compare($first, $second)
+    {
+        if ($first.result == $second.result) {
+            return 0;
+        }
+        return ($first.result < $second.result) ? -1 : 1;
+    }
+
+
     /**
      * Filter the pages, and return only the pages the user has access to.
      * Implementation based on Login Plugin authorizePage() function.
      */
     public function checkForPermissions($collection)
     {
-        $user = $this->grav['user'];
+        //$user = $this->grav['user'];
         $returnCollection = new Collection();
         foreach ($collection as $page) {
 
@@ -282,57 +334,27 @@ class SimplesearchPlugin extends Plugin
     }
 
     /**
-     * @param $query
-     * @param Page $page
-     * @param $taxonomies
-     * @return bool
+     * Set needed variables to display the search results.
+                        
+                         
+                   
      */
-    private function notFound($query, $page, $taxonomies)
+    public function onTwigSiteVariables()
     {
-        $searchable_types = ['title', 'content', 'taxonomy'];
-        $results = true;
-        $search_content = $this->config->get('plugins.simplesearch.search_content');
+        $twig = $this->grav['twig'];
 
-        foreach ($searchable_types as $type) {
-            if ($type === 'title') {
-                $result = $this->matchText(strip_tags($page->title()), $query) === false;
-            } elseif ($type === 'taxonomy') {
-                if ($taxonomies === false) {
-                    continue;
-                }
-                $page_taxonomies = $page->taxonomy();
-                $taxonomy_match = false;
-                foreach ((array)$page_taxonomies as $taxonomy => $values) {
-                    // if taxonomies filter set, make sure taxonomy filter is valid
-                    if (!is_array($values) || (is_array($taxonomies) && !empty($taxonomies) && !in_array($taxonomy, $taxonomies))) {
-                        continue;
-                    }
-
-                    $taxonomy_values = implode('|', $values);
-                    if ($this->matchText($taxonomy_values, $query) !== false) {
-                        $taxonomy_match = true;
-                        break;
-                    }
-                }
-                $result = !$taxonomy_match;
-            } else {
-                if ($search_content == 'raw') {
-                    $content = $page->rawMarkdown();
-                } else {
-                    $content = $page->content();
-                }
-                $result = $this->matchText(strip_tags($content), $query) === false;
-            }
-            $results = $results && $result;
-            if ($results === false) {
-                break;
-            }
+        if ($this->query) {
+            // $twig->twig_vars['query'] = implode(', ', $this->query);
+            $twig->twig_vars['query'] = $this->query;
+            $twig->twig_vars['search_results'] = $this->collection;
         }
-        return $results;
+
+        if ($this->config->get('plugins.simplesearch.built_in_css')) {
+            $this->grav['assets']->add('plugin://simplesearch/css/simplesearch.css');
+        }
     }
 
-    private function matchText($haystack, $needle)
-    {
+    private function matchText($haystack, $needle) {
         if ($this->config->get('plugins.simplesearch.ignore_accented_characters')) {
             setlocale(LC_ALL, 'en_US');
             try {
@@ -343,28 +365,124 @@ class SimplesearchPlugin extends Plugin
             setlocale(LC_ALL, '');
             return $result;
         } else {
-            return mb_stripos($haystack, $needle);
+            $result = mb_stripos($haystack, $needle);
+            return $result;
         }
     }
 
-    /**
-     * Set needed variables to display the search results.
-     */
-    public function onTwigSiteVariables()
+    private function found($queries, $page, $taxonomies)
     {
-        $twig = $this->grav['twig'];
+        $searchable_types = ['title', 'content', 'taxonomy'];
+        $results = 0;
+        $query_array = explode(' ', $queries);
+        $query_count = count($query_array);
 
-        if ($this->query) {
-            $twig->twig_vars['query'] = implode(', ', $this->query);
-            $twig->twig_vars['search_results'] = $this->collection;
+        foreach ($searchable_types as $type) {
+            $result = 0;
+
+            if ($type === 'title') {
+                $times = 0;
+
+                foreach ($query_array as $query) {
+                    if ($this->matchText(strip_tags($page->title()), $query) !== false)
+                    {
+                        $times = $times + 1;
+                    }
+                }
+                
+                if ($this->matchText(strip_tags($page->title()), $queries) !== false)
+                {
+                    $result = 6;
+                }
+                else if ($times == $query_count)
+                {
+                    $result = 5;
+                }
+                else if ($times > 0)
+                {
+                    $result = 2;
+                }
+            }
+            else if ($type === 'taxonomy') {
+
+            }
+            else {
+                $times = 0;
+
+                foreach ($query_array as $query) {
+                    if ($this->matchText(strip_tags($page->content()), $query) !== false)
+                    {
+                        $times = $times + 1;
+                    }
+                }
+                
+                if ($this->matchText(strip_tags($page->content()), $queries) !== false)
+                {
+                    $result = 4;
+                }
+                else if ($times == $query_count)
+                {
+                    $result = 3;
+                }
+                else if ($times > 0)
+                {
+                    $result = 1;
+                }
+            }
+
+            if ($result > $results) {
+                $results = $result;
+            }
         }
 
-        if ($this->config->get('plugins.simplesearch.built_in_css')) {
-            $this->grav['assets']->add('plugin://simplesearch/css/simplesearch.css');
-        }
+        $content1 = $page->content();
+        $index1 = stripos($content1, "<p>");
+        $index2 = stripos($content1, "</p>");
+        $summary1 = substr($content1, $index1, $index2-$index1);
 
-        if ($this->config->get('plugins.simplesearch.built_in_js')) {
-            $this->grav['assets']->addJs('plugin://simplesearch/js/simplesearch.js', ['group' => 'bottom']);
-        }
+        $page->setSummary($summary1);
+
+        return $results;
     }
+
+    private function notFound($query, $page, $taxonomies)
+    {
+        $searchable_types = ['title', 'content', 'taxonomy'];
+        $results = true;
+                                                                                                                
+
+        foreach ($searchable_types as $type) {
+            if ($type === 'title') {
+                $result = $this->matchText(strip_tags($page->title()), $query) === false;
+            } elseif ($type === 'taxonomy') {
+                if ($taxonomies === false) {
+                    continue;
+                }
+                $page_taxonomies = $page->taxonomy();
+                $taxonomy_match = false;
+                foreach ((array) $page_taxonomies as $taxonomy => $values) {
+                    // if taxonomies filter set, make sure taxonomy filter is valid
+                    if (is_array($taxonomies) && !empty($taxonomies) && !in_array($taxonomy, $taxonomies)) {
+                        continue;
+                    }
+
+                    $taxonomy_values = implode('|',$values);
+                    if ($this->matchText($taxonomy_values, $query) !== false) {
+                        $taxonomy_match = true;
+                        break;
+                    }
+                }
+                $result = !$taxonomy_match;
+            } else {
+                 
+                $result = $this->matchText(strip_tags($page->content()), $query) === false;
+            }
+            $results = $results && $result;
+            if ($results === false ) {
+                break;
+            }
+        }
+        return $results;
+    }
+     
 }
