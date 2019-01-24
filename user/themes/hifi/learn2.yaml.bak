@@ -7,5 +7,5 @@ alexa_domain: highfidelity.comshow_all_pages: false                             
 home_url:  http://docs.highfidelity.com                                         # http://getgrav.org
 github:
     position: top                                   # top | bottom | off
-    tree: https://github.com/highfidelity/hifi-docs-grav-content/blob/master/
-    commits: https://github.com/highfidelity/hifi-docs-grav-content/blob/master/
+    tree: https://github.com/getgrav/grav-skeleton-rtfm-site/blob/develop/
+    commits: https://github.com/getgrav/grav-skeleton-rtfm-site/commits/develop/

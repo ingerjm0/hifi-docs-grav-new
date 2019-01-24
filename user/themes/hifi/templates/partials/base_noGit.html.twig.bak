@@ -1,5 +1,4 @@
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
-{% set github_link_position = github_link_position is defined ? github_link_position : theme_config.github.position %}
 <!DOCTYPE html>
 <html lang="{{ grav.language.getLanguage ?: 'en' }}">
 <head>
@@ -38,12 +37,6 @@
         {{ assets.js() }}
     {% endblock %}
 
-    {% block alexa_certification %}
-        {% if theme_config.alexa_certified_account and theme_config.alexa_domain %}
-        {% include 'partials/alexa_certified.html.twig' %}
-        {% endif %}
-    {% endblock %}  
-  
     {% endblock %}
 </head>
 <body class="searchbox-hidden {{ page.header.body_classes }}" data-url="{{ page.route }}">
@@ -52,28 +45,25 @@
         <div id="header-wrapper">
             <div id="header">
                 <a id="logo" href="{{ theme_config.home_url ?: base_url_absolute }}">{% include 'partials/logo.html.twig' %}</a>
+									   
                 {% include 'partials/simplesearch_searchbox.html.twig' %}
+                </div>
             </div>
         </div>
+
         {% include 'partials/sidebar.html.twig' %}
+        
     </nav>
     {% endblock %}
 
     {% block body %}
     <section id="body">
         <div id="overlay"></div>
-
         <div class="padding highlightable">
             <a href="#" id="sidebar-toggle" data-sidebar-toggle><i class="fa fa-2x fa-bars"></i></a>
 
-            {% block topbar %}{% if  github_link_position == 'top' or config.plugins.breadcrumbs.enabled %}
+            {% block topbar %}{% if theme_config.github.position == 'top' or config.plugins.breadcrumbs.enabled %}
             <div id="top-bar">
-                {% if  github_link_position == 'top' %}
-                <div id="top-github-link">
-                {% include 'partials/github_link.html.twig' %}
-                </div>
-                {% endif %}
-
                 {% if config.plugins.breadcrumbs.enabled %}
                 {% include 'partials/breadcrumbs.html.twig' %}
                 {% endif %}
@@ -83,7 +73,7 @@
             {% block content %}{% endblock %}
 
             {% block footer %}
-                {% if  github_link_position == 'bottom' %}
+                {% if theme_config.github.position == 'bottom' %}
                 {% include 'partials/github_note.html.twig' %}
                 {% endif %}
             {% endblock %}
@@ -97,6 +87,5 @@
         {% include 'partials/analytics.html.twig' %}
         {% endif %}
     {% endblock %}
-	<script type='text/javascript' src='{{ url('plugin://simplesearch/js/simplesearch.js') }}'></script>	
- </body>
+</body>
 </html>

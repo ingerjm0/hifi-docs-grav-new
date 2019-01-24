@@ -37,6 +37,11 @@
         {{ assets.js() }}
     {% endblock %}
 
+    {% block alexa_certification %}
+        {% if theme_config.alexa_certified_account and theme_config.alexa_domain %}
+        {% include 'partials/alexa_certified.html.twig' %}
+        {% endif %}
+    {% endblock %}    
     {% endblock %}
 </head>
 <body class="searchbox-hidden {{ page.header.body_classes }}" data-url="{{ page.route }}">
