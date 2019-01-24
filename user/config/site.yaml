@@ -1,7 +1,7 @@
 title: 'High Fidelity Documentation'
 default_lang: en
 author:
-  name: 'Jenna Ingersoll'
+  name: 'Jenna'
   email: jenna@highfidelity.io
 taxonomies:
   - category
@@ -16,8 +16,8 @@ summary:
   size: 300
   delimiter: '==='
 redirects:
-  /get-started/what-is-high-fidelity/how-it-works: /home
-  /get-started/what-is-high-fidelity: /home
+  /get-started/what-is-high-fidelity/how-it-works: /explore/get-started/architecture
+  /get-started/what-is-high-fidelity: /explore/get-started/architecture
   /get-started/requirements: /explore/get-started/install
   /get-started/installation/client-install: /explore/get-started/install
   /get-started/installation/client-and-sandbox-install: /explore/get-started/install
