@@ -8,6 +8,7 @@ search_content: raw
 template: simplesearch_results
 filters:
     category:
+        - '@none'
 filter_combinator: and
 ignore_accented_characters: false
 order:
