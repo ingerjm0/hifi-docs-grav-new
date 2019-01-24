@@ -11,3 +11,4 @@ process:
 
 {{ 'PLUGIN_ERROR.ERROR_MESSAGE'|t }}
 
+We have recently restructured our docs, and the page you're looking for no longer exists. To return to the High Fidelity documentation, go to [docs.highfidelity.com](https://docs.highfidelity.com).
